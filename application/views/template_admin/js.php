@@ -8,6 +8,8 @@
 </footer>
 </div><!-- ./wrapper -->
   <!-- CK Editor -->
+<script src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/plugins/datatables/dataTables.bootstrap.min.js') ?>" type="text/javascript"></script>
+<script src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/plugins/datatables/jquery.dataTables.js') ?>" type="text/javascript"></script>
  
 <!-- jQuery 2.1.3 -->
 <script src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/plugins/jQuery/jQuery-2.1.3.min.js') ?>"></script>
@@ -20,4 +22,18 @@
 <!-- AdminLTE App -->
 <script src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/dist/js/app.min.js') ?>" type="text/javascript"></script>
 
- 
+  <script>
+      $(function () {
+        $("#example1").DataTable({
+
+        });
+        $('#example2').DataTable({
+          "paging": true,
+          "lengthChange": false,
+          "searching": false,
+          "ordering": true,
+          "info": true,
+          "autoWidth": true
+        });
+      });
+    </script>

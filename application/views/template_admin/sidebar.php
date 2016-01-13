@@ -41,8 +41,8 @@
                 </a>
             </li>    
              <li>
-                <a href="<?php echo site_url('admin/member') ?>">
-                    <i class="fa fa-calendar"></i> <span>Gallery</span>
+                <a href="<?php echo site_url('admin/profil') ?>">
+                    <i class="fa fa-calendar"></i> <span>Profil JST</span>
                 </a>
             </li>   
             <li>
@@ -58,10 +58,10 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="<?php echo site_url('admin/tambah_berita/ListBerita') ?>"><i class="fa fa-circle-o"></i> List Berita</a></li>
-                    <li><a href="<?php echo site_url('admin/tambah_berita/ListBerita2') ?>"><i class="fa fa-circle-o"></i> List Berita2</a></li>
-                    <li><a href="<?php echo site_url('admin/tambah_berita') ?>"><i class="fa fa-circle-o"></i> Tambah Berita</a></li>
-                    <li><a href="<?php echo site_url('admin/tambah_kategori_berita') ?>"><i class="fa fa-circle-o"></i> Tambah Kategori Berita</a></li>
+                    <li><a href="<?php echo site_url('admin/berita') ?>"><i class="fa fa-circle-o"></i> List Berita</a></li>
+                    <li><a href="<?php echo site_url('admin/berita/ListBerita2') ?>"><i class="fa fa-circle-o"></i> List Berita2</a></li>
+                    <li><a href="<?php echo site_url('admin/berita/tambah_berita') ?>"><i class="fa fa-circle-o"></i> Tambah Berita</a></li>
+                    <li><a href="<?php echo site_url('admin/berita/tambah_kategori_berita') ?>"><i class="fa fa-circle-o"></i> Tambah Kategori Berita</a></li>
                 </ul>
             </li>
             <li class="treeview">

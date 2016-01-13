@@ -18,8 +18,18 @@ class Jst_admin extends CI_Controller {
 			$this->load->view('admin/login');
 		}
 	}
-public function cek_login() {
-		$data = array('username' => $this->input->post('username', TRUE),
+
+	public function cek_login() {
+		$this->load->library('form_validation');
+		$this->load->helper('security');
+		$this->form_validation->set_rules('username','Username','trim|required|xss_clean');
+		$this->form_validation->set_rules('password','Password','trim|required|xss_clean');
+		if ($this->form_validation->run() == FALSE) {
+			$this->load->view('admin/login');
+		}
+		else
+		{	
+			$data = array('username' => $this->input->post('username', TRUE),
 						'password' => md5($this->input->post('password', TRUE))
 			);
 		
@@ -40,8 +50,14 @@ public function cek_login() {
 			}		
 		}
 		else {
-			echo "<script>alert('Gagal login: Cek username, password!');history.go(-1);</script>";
+			echo '<script type="text/javascript">'; 
+			echo 'alert("Gagal login, Silahkan cek kembali username dan password anda");'; 
+			echo 'window.location.href = "cek_login";';
+			echo '</script>';
 		}
+			
+		}
+		
 	}
 
 }

@@ -23,11 +23,16 @@
     </head>
     <body class="login-page">
         <div class="login-box">
+
+
+
+
             <div class="login-logo">
                <img src="<?php echo base_url('assets/images/gambarTeksWarnaBGTerang.png') ?>" width="200px" height="90px">
             </div><!-- /.login-logo -->
             <div class="login-box-body">
                 <p class="login-box-msg">Masukkan username dan password</p>
+                <?php echo validation_errors() ?>
                 <?php echo form_open("jst_admin/cek_login"); ?>
                     <div class="form-group has-feedback">
                         <input type="text" class="form-control" name="username" placeholder="username"/>

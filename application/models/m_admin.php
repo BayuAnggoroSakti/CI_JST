@@ -18,6 +18,58 @@
 		  }
 	}
 
+	function cek_id_profil($id_profil)
+	{
+		 $ambil = $this->db->query("SELECT * from detail_profil_perusahaan dpp, profil_perusahaan pp where dpp.id_profil = pp.id_profil and dpp.id_profil = '$id_profil'");
+		  if ($ambil->num_rows() > 0) {
+		  foreach ($ambil->result() as $data) 
+		  {
+		   	$hasil[] = $data;
+		   }
+		  	return $hasil;
+		  }
+		
+	}
+	 function detail_profil() 
+	{
+		  $ambil = $this->db->query("SELECT * from detail_profil_perusahaan dpp, profil_perusahaan pp where dpp.id_profil = pp.id_profil");
+		  if ($ambil->num_rows() > 0) {
+		  foreach ($ambil->result() as $data) 
+		  {
+		   	$hasil[] = $data;
+		   }
+		  	return $hasil;
+		  }
+	}
+
+   function tambah_kategori_profil()
+    {
+    	$insert_kat = array(
+    		'nama_profil' => $this->input->post('nama_profil'), 
+    		);
+    	$insert = $this->db->insert('profil_perusahaan',$insert_kat);
+    	return $insert;
+    }
+
+  function tambah_isi_profil()
+    {
+    	$tgl = date('Y-m-d H:i:s');
+    	$insert_kat = array(
+    		'id_profil' => $this->input->post('id_profil'), 
+    		'deskripsi' => $this->input->post('deskripsi'),
+    		'tanggal' => $tgl
+    		);
+    	$insert = $this->db->insert('detail_profil_perusahaan',$insert_kat);
+    	return $insert;
+    }
+
+	function kategori_profil() 
+	{
+		$Kat = $this->db->from('profil_perusahaan')
+						->get();
+		return $Kat->result_array();
+	}
+
 	 function list_slider() 
 	{
 		  $ambil = $this->db->query('SELECT * from slider');
@@ -103,12 +155,37 @@
     	$this->db->where('id_berita', $id);
         $this->db->delete('berita');
     }
-
+      function hapus_profil($id)
+    {
+    	
+    	$this->db->where('id_dp', $id);
+        $this->db->delete('detail_profil_perusahaan');
+    }
+    function hapus_katBer($id)
+    {
+    	
+    	$this->db->where('id_katBer', $id);
+        $this->db->delete('kategori_berita');
+    }
+    
+	function edit_katBer($id) {
+        $this->db->where('id_katBer', $id);
+        $query = $this->db->get('kategori_berita');
+        return $query;
+    }
 	function edit($id) {
         $this->db->where('id_berita', $id);
         $query = $this->db->get('berita');
         return $query;
     }
+    function edit_profil($id) {
+      /*  $this->db->where('id_profil', $id);
+        $query = $this->db->get('detail_profil_perusahaan');
+        */
+        $ambil = $this->db->query("SELECT * from detail_profil_perusahaan dpp, profil_perusahaan pp where dpp.id_profil = pp.id_profil and dpp.id_dp = '$id'");
+        return $ambil;
+    }
+    
     function detail_berita($id) {
         $this->db->where('id_berita', $id);
         $query = $this->db->get('berita');
