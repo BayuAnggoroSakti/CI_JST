@@ -153,13 +153,21 @@
     {
     	
     	$this->db->where('id_berita', $id);
-        $this->db->delete('berita');
+        $this->db->update('berita');
     }
+    
       function hapus_profil($id)
     {
     	
     	$this->db->where('id_dp', $id);
         $this->db->delete('detail_profil_perusahaan');
+    }
+
+         function hapus_materi($id)
+    {
+    	
+    	$this->db->where('id_materi', $id);
+        $this->db->delete('materi');
     }
     function hapus_katBer($id)
     {
@@ -178,11 +186,24 @@
         $query = $this->db->get('berita');
         return $query;
     }
+    function proses_edit_materi($id) {
+        $this->db->where('id_materi', $id);
+        $query = $this->db->get('materi');
+        return $query;
+    }
     function edit_profil($id) {
       /*  $this->db->where('id_profil', $id);
         $query = $this->db->get('detail_profil_perusahaan');
         */
         $ambil = $this->db->query("SELECT * from detail_profil_perusahaan dpp, profil_perusahaan pp where dpp.id_profil = pp.id_profil and dpp.id_dp = '$id'");
+        return $ambil;
+    }
+
+    function edit_materi($id) {
+      /*  $this->db->where('id_profil', $id);
+        $query = $this->db->get('detail_profil_perusahaan');
+        */
+        $ambil = $this->db->query("SELECT * from materi where id_materi = '$id'");
         return $ambil;
     }
     
@@ -195,6 +216,11 @@
 	function get_insert($data) {
 			$this->db->insert('berita', $data);
 	}
+
+	function get_insert_materi($data) {
+			$this->db->insert('materi', $data);
+	}
+	
 
 	function tambah_komentar($data) {
 			$this->db->insert('komentar', $data);

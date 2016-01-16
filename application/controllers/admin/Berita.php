@@ -18,7 +18,57 @@ class Berita extends CI_Controller {
 		$this->load->helper('text');
 	}
 
-
+	public function ajax_tabel()
+    {
+        if (!$this->input->is_ajax_request()) {
+            exit('No direct script access allowed');
+        } else {
+//            panggil dulu library datatablesnya
+            
+            $this->load->library('datatables_ssp');
+            
+//            atur nama tablenya disini
+            $table = 'berita';
+ 
+            // Table's primary key
+            $primaryKey = 'id_berita';
+ 
+            // Array of database columns which should be read and sent back to DataTables.
+            // The `db` parameter represents the column name in the database, while the `dt`
+            // parameter represents the DataTables column identifier. In this case simple
+            // indexes
+ 
+            $columns = array(
+                array('db' => 'id_berita', 'dt' => 'DT_RowId'),
+                array('db' => 'judul_berita', 'dt' => 'judul_berita'),
+                array('db' => 'isi_berita', 'dt' => 'isi_berita'),
+                array('db' => 'id_berita', 'dt' => 'id_berita'),
+                array('db' => 'tanggal_berita', 'dt' => 'tanggal_berita'),
+                array('db' => 'gambar', 'dt' => 'gambar'),
+                array('db' => 'status_terbit', 'dt' => 'status_terbit'),
+                array(
+                    'db' => 'id_berita',
+                    'dt' => 'aksi',
+                    'formatter' => function( $d ) {
+                        return '<a href="' . site_url('admin/berita/editBerita/' . $d) . '">Edit</a> | <a href="' . site_url('admin/berita/hapus_berita/' . $d) . '">Delete</a>';
+                    }
+                ),
+            );
+ 
+            // SQL server connection information
+            $sql_details = array(
+                'user' => 'root',
+                'pass' => '',
+                'db' => 'jst',
+                'host' => 'localhost'
+            );
+ 
+            echo json_encode(
+                    Datatables_ssp::simple($_GET, $sql_details, $table, $primaryKey, $columns)
+            );
+        }
+    }
+ 
 
 	public function tambah_berita()
 	{
@@ -44,9 +94,10 @@ class Berita extends CI_Controller {
         redirect('admin/tambah_berita/ListBerita');
     }
 */
-    public function prosesedit_berita(){
+   public function prosesedit_berita($id){
     	$data['username'] = $this->session->userdata('username');
     	if($this->input->post('uploud')){
+
 				 $config['upload_path']    = "./assets/images/";
 				 
 				 $config['allowed_types']  = 'gif|jpg|png|jpeg';
@@ -69,8 +120,13 @@ class Berita extends CI_Controller {
 		        $this->db->where('id_berita', $id);
 		        $this->db->update('berita', $data);
 				redirect(base_url().'admin/berita');
-				} else{
+				}
+				 else{
 					$tgl = date('Y-m-d H:i:s');
+					$berita = $this->m_admin->edit($id);
+	    			$base_url = './assets/images/';
+					unlink($base_url.'/'.$berita->row('gambar'));
+				
 					$data = array(
 							'judul_berita' => $this->input->post('judul_berita'),
 				            'isi_berita' => $this->input->post('isi_berita'),
@@ -94,10 +150,18 @@ class Berita extends CI_Controller {
 
      function hapus_berita($id)
     {
+    	/*$data['username'] = $this->session->userdata('username');
+    	$berita = $this->m_admin->hapus_berita($id);*/
     	$data['username'] = $this->session->userdata('username');
-    	$berita = $this->m_admin->hapus_berita($id);
-    
-    	redirect('admin/berita');
+		$data = array(
+					'status_terbit' => 'n'
+				);
+
+		$this->db->where('id_berita', $id);
+		$this->db->update('berita', $data);
+
+
+    	redirect('admin/berita/ListBerita2');
 
     }
     function hapus_katBer($id)
@@ -121,7 +185,6 @@ class Berita extends CI_Controller {
 
     public function edit_katBer($id) {
 	 	$data['username'] = $this->session->userdata('username');
-        $this->load->model('m_admin');
         $kat_berita = $this->m_admin->edit_katBer($id);
         $data['data_get'] = $this->m_admin->list_katberita();
         $this->load->vars('b', $kat_berita);

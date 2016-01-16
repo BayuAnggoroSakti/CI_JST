@@ -17,9 +17,7 @@
         <link href="<?php echo base_url('assets/admin/AdminLTE-2.0.5/dist/css/skins/_all-skins.min.css') ?>" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url('assets/admin/AdminLTE-2.0.5/plugins/ckeditor/ckeditor.js') ?>" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url('assets/admin/AdminLTE-2.0.5/plugins/datatables/dataTables.bootstrap.css') ?>" rel="stylesheet" type="text/css" />
-         <link href="<?php echo base_url('assets/admin/AdminLTE-2.0.5/plugins/datatables/dataTables.bootstrap.css') ?>" rel="stylesheet" type="text/css" />
-          <link href="<?php echo base_url('assets/admin/AdminLTE-2.0.5/plugins/datatables/jquery.dataTables.css') ?>" rel="stylesheet" type="text/css" />
-
+      
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">

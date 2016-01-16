@@ -33,8 +33,11 @@ $this->load->view('template_admin/sidebar');
                 <div class="box-header with-border">
                   <h3 class="box-title">Tambahkan Berita</h3>
                 </div><!-- /.box-header -->
+                <?php
+                  $id = $b->row('id_berita');
+                ?>
                 <!-- form start -->
-                <form action="<?php echo base_url(); ?>admin/berita/prosesedit_berita" enctype="multipart/form-data" onsubmit="return validasi_input(this)" method="post" enctype="multipart/form-data" class="form-horizontal">
+                <form action="<?php echo base_url('admin/berita/prosesedit_berita').'/'.$id; ?>" enctype="multipart/form-data" onsubmit="return validasi_input(this)" method="post" enctype="multipart/form-data" class="form-horizontal">
                   <div class="box-body">
 
                   <input type="hidden" name="id_berita" value="<?php echo $b->row('id_berita');?>">

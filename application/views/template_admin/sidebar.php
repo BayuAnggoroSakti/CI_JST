@@ -71,7 +71,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="#"><i class="fa fa-circle-o"></i> List Materi</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Tambah Materi</a></li>
+                    <li><a href="<?php echo site_url('admin/materi/tambah_materi') ?>"><i class="fa fa-circle-o"></i> Tambah Materi</a></li>
                 </ul>
             </li>
              <li class="treeview">
