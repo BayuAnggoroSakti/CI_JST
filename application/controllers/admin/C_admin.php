@@ -4,7 +4,7 @@ class C_admin extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
-		if ($this->session->userdata('username')=="") {
+		if (!$this->session->userdata('logged_in')) {
 			redirect('jst_admin');
 		}
 		$this->load->helper('text');
@@ -12,6 +12,8 @@ class C_admin extends CI_Controller {
 	public function index() {
 		$data['data_get'] = $this->m_user->view();
 		$data['username'] = $this->session->userdata('username');
+		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
+		$data['level'] = $this->session->userdata('level');
 		$this->load->view('admin/index', $data);
 	}
 
@@ -24,12 +26,28 @@ class C_admin extends CI_Controller {
 
 	public function slider() {
 		$data['username'] = $this->session->userdata('username');
+		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
+		$data['level'] = $this->session->userdata('level');
 		$data['data_get'] = $this->m_admin->list_slider();
 		$this->load->view('admin/slider', $data);
 	}
 
+	public function hapus_slider($id) {
+		$data['username'] = $this->session->userdata('username');
+		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
+		$data['level'] = $this->session->userdata('level');
+		$b = $this->m_admin->list_slider1($id);
+		$base_url = './assets/images/';
+		unlink($base_url.'/'.$b->row('gambar'));
+        $this->m_admin->hapus_slider($id);
+     
+        redirect(base_url().'admin/c_admin/slider');
+	}
+
 	public function tambah_slide() {
 		$data['username'] = $this->session->userdata('username');
+		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
+		$data['level'] = $this->session->userdata('level');
 		$this->load->view('admin/tambah_slider',$data);
 	}
 

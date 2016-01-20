@@ -13,7 +13,7 @@ $this->load->view('template_admin/sidebar');
         return (false); } 
     return (true); } 
     </script>
-    <script src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/dist/js/jquery-1.11.0.js')?>"></script>
+  <script src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/dist/js/jquery-1.11.0.js')?>"></script>
   <script src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/plugins/ckeditor/ckeditor.js') ?>"></script>
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -43,8 +43,8 @@ $this->load->view('template_admin/sidebar');
                       <label for="inputPassword3" class="col-sm-2 control-label">Tambahkan Gambar</label>
                       <div class="col-sm-10">
                         <img id="thumb_image" height="200px" width="200px" src="<?=base_url()?>assets/images/no_pict.png" /><br /><br />
-                                    <span id="thumb_delete" class="glyphicon glyphicon-trash" style="cursor: pointer;">
-                                  </div>
+                        <span id="thumb_delete" class="glyphicon glyphicon-trash" style="cursor: pointer;">
+                      </div>
                     </div>
 
                     <div class="form-group">
@@ -99,6 +99,7 @@ $this->load->view('template_admin/sidebar');
                 </form>
               </div><!-- /.box -->
 <script>
+  var staf = "<?php base_url('assets/images/no_pict.png') ?>";
     function validate_file(obj){
         var file_name = $(obj).val().replace('C:\\fakepath\\', '');
         var file_name_attr = file_name.split('.');
@@ -131,7 +132,8 @@ $this->load->view('template_admin/sidebar');
             }
         }
         else{
-            $('#thumb_image').attr('src','jst/assets/images/no_pict.png');
+            //$('#thumb_image').attr('src','jst/assets/images/no_pict.png');
+            $('#thumb_image').attr('src',staf);
         }
     }
     
@@ -139,7 +141,8 @@ $this->load->view('template_admin/sidebar');
         $('#thumb_delete').fadeOut();
         
         $('#thumb_delete').click(function(){
-            $('#thumb_image').attr('src','jst/assets/images/no_pict.png');
+            //$('#thumb_image').attr('src','jst/assets/images/no_pict.png');
+            $('#thumb_image').attr('src',staf);
             var obj = $('#alkes_img');
             
             obj.wrap('<form>').closest('form').get(0).reset();

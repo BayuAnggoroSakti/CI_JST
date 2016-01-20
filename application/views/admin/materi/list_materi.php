@@ -13,13 +13,13 @@ $this->load->view('template_admin/sidebar');
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        List Berita
+        List Materi
       
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Berita</a></li>
-        <li class="active">List Berita</li>
+        <li><a href="#">Materi</a></li>
+        <li class="active">List Materi</li>
     </ol>
 </section>
 
@@ -29,7 +29,11 @@ $this->load->view('template_admin/sidebar');
     <!-- Default box -->
    <div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">Data Table With Full Features</h3>
+                   <div class="row">
+                    <div class="col-md-2">
+                      <a href="<?php echo site_url('admin/materi/tambah_materi') ?>"><button class="btn btn-block btn-info btn-lg">Tambah Materi</button></a>
+                    </div>
+                  </div>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                    <table class="table table-bordered table-striped table-hover" id="mytable">

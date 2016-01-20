@@ -29,7 +29,11 @@ $this->load->view('template_admin/sidebar');
     <!-- Default box -->
    <div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">Data Table With Full Features</h3>
+                   <div class="row">
+                    <div class="col-md-2">
+                      <a href="<?php echo site_url('admin/berita/tambah_berita') ?>"><button class="btn btn-block btn-info btn-lg">Tambah Berita</button></a>
+                    </div>
+                  </div>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                    <table class="table table-bordered table-striped table-hover" id="mytable">

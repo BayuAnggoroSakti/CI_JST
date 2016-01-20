@@ -8,7 +8,7 @@
                 <img src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/dist/img/bayu.jpg') ?>" class="img-circle" alt="User Image" />
             </div>
             <div class="pull-left info">
-                <p><?php echo $username;?></p>
+                <p><?php echo $nama_lengkap;?></p>
 
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
@@ -70,8 +70,28 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> List Materi</a></li>
+                    <li><a href="<?php echo site_url('admin/materi') ?>"><i class="fa fa-circle-o"></i> List Materi</a></li>
                     <li><a href="<?php echo site_url('admin/materi/tambah_materi') ?>"><i class="fa fa-circle-o"></i> Tambah Materi</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-meh-o"></i> <span>Staf Pengajar</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="<?php echo site_url('admin/staf') ?>"><i class="fa fa-circle-o"></i> List Pengajar</a></li>
+                    <li><a href="<?php echo site_url('admin/staf/tambah_staf') ?>"><i class="fa fa-circle-o"></i> Tambah Pengajar</a></li>
+                </ul>
+            </li>
+              <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-globe"></i> <span>Pelatihan</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="<?php echo site_url('admin/pelatihan') ?>"><i class="fa fa-circle-o"></i> List Pelatihan</a></li>
+                    <li><a href="<?php echo site_url('admin/staf/tambah_staf') ?>"><i class="fa fa-circle-o"></i> Tambah Pengajar</a></li>
                 </ul>
             </li>
              <li class="treeview">

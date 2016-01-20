@@ -63,7 +63,7 @@ $this->load->view('template_admin/sidebar');
                 </div><!-- /.box-header -->
                 <?php $id = $b->row('id_materi'); ?>
                 <!-- form start -->
-                <form action="<?php echo base_url('admin/materi/act_edit').'/'.$id; ?>" method="post" enctype="multipart/form-data" class="form-horizontal" onsubmit="return Checkfiles();">
+                <form action="<?php echo base_url('admin/materi/proses_edit_staf'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal" onsubmit="return Checkfiles();">
                   <div class="box-body">
                     <div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">Nama Materi</label>

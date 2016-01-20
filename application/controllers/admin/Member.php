@@ -14,6 +14,8 @@ class Member extends CI_Controller {
 	{
 		$data['data_get'] = $this->m_user->view();
 		$data['username'] = $this->session->userdata('username');
+		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
+		$data['level'] = $this->session->userdata('level');
 		$this->load->view('admin/member',$data);
 	}
 }

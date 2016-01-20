@@ -100,15 +100,15 @@
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/dist/img/bayu.jpg') ?>" class="user-image" alt="User Image"/>
-                                <span class="hidden-xs"><?php echo $username ?></span>
+                                <span class="hidden-xs"><?php echo $nama_lengkap ?></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
                                     <img src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/dist/img/bayu.jpg') ?>" class="img-circle" alt="User Image" />
                                     <p>
-                                        Alexander Pierce - Web Developer
-                                        <small>Member since Nov. 2012</small>
+                                        <?php echo $nama_lengkap ?> <br>
+                                        <b><?php echo strtoupper($level);?></b>
                                     </p>
                                 </li>
                                 <!-- Menu Body -->

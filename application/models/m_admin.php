@@ -17,7 +17,17 @@
 		  	return $hasil;
 		  }
 	}
-
+  function program_kerja()
+    {
+        $ambil = $this->db->query('SELECT * from program_kerja');
+          if ($ambil->num_rows() > 0) {
+          foreach ($ambil->result() as $data) 
+          {
+            $hasil[] = $data;
+           }
+            return $hasil;
+          }
+    }
 	function cek_id_profil($id_profil)
 	{
 		 $ambil = $this->db->query("SELECT * from detail_profil_perusahaan dpp, profil_perusahaan pp where dpp.id_profil = pp.id_profil and dpp.id_profil = '$id_profil'");
@@ -155,6 +165,13 @@
     	$this->db->where('id_berita', $id);
         $this->db->update('berita');
     }
+
+     function hapus_slider($id)
+    {
+    	
+    	$this->db->where('id_slider', $id);
+        $this->db->delete('slider');
+    }
     
       function hapus_profil($id)
     {
@@ -196,6 +213,13 @@
         $query = $this->db->get('detail_profil_perusahaan');
         */
         $ambil = $this->db->query("SELECT * from detail_profil_perusahaan dpp, profil_perusahaan pp where dpp.id_profil = pp.id_profil and dpp.id_dp = '$id'");
+        return $ambil;
+    }
+     function list_slider1($id) {
+      /*  $this->db->where('id_profil', $id);
+        $query = $this->db->get('detail_profil_perusahaan');
+        */
+        $ambil = $this->db->query("SELECT * from slider where id_slider = '$id'");
         return $ambil;
     }
 

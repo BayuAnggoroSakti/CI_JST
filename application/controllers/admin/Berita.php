@@ -74,6 +74,8 @@ class Berita extends CI_Controller {
 	{
 		$data['Kat'] = $this->m_admin->Kategori();
 		$data['username'] = $this->session->userdata('username');
+		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
+		$data['level'] = $this->session->userdata('level');
 		$this->load->view('admin/berita/tambah_berita',$data);
 	}
 	public function status_terbit($value)
@@ -96,6 +98,8 @@ class Berita extends CI_Controller {
 */
    public function prosesedit_berita($id){
     	$data['username'] = $this->session->userdata('username');
+    	$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
+		$data['level'] = $this->session->userdata('level');
     	if($this->input->post('uploud')){
 
 				 $config['upload_path']    = "./assets/images/";
@@ -153,6 +157,8 @@ class Berita extends CI_Controller {
     	/*$data['username'] = $this->session->userdata('username');
     	$berita = $this->m_admin->hapus_berita($id);*/
     	$data['username'] = $this->session->userdata('username');
+    	$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
+		$data['level'] = $this->session->userdata('level');
 		$data = array(
 					'status_terbit' => 'n'
 				);
@@ -167,6 +173,8 @@ class Berita extends CI_Controller {
     function hapus_katBer($id)
     {
     	$data['username'] = $this->session->userdata('username');
+    	$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
+		$data['level'] = $this->session->userdata('level');
     	
     	$berita = $this->m_admin->hapus_katBer($id);
     
@@ -176,6 +184,8 @@ class Berita extends CI_Controller {
     
 	 public function editBerita($id) {
 	 	$data['username'] = $this->session->userdata('username');
+	 	$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
+		$data['level'] = $this->session->userdata('level');
         $this->load->model('m_admin');
         $berita = $this->m_admin->edit($id);
         $this->load->vars('b', $berita);
@@ -185,6 +195,8 @@ class Berita extends CI_Controller {
 
     public function edit_katBer($id) {
 	 	$data['username'] = $this->session->userdata('username');
+	 	$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
+		$data['level'] = $this->session->userdata('level');
         $kat_berita = $this->m_admin->edit_katBer($id);
         $data['data_get'] = $this->m_admin->list_katberita();
         $this->load->vars('b', $kat_berita);
@@ -193,6 +205,8 @@ class Berita extends CI_Controller {
     }
      public function proses_edit_katBer(){
     	$data['username'] = $this->session->userdata('username');
+    	$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
+		$data['level'] = $this->session->userdata('level');
 			$data = array(
 							'nama_katBer' => $this->input->post('nama_katBer')
 					);
@@ -207,12 +221,16 @@ class Berita extends CI_Controller {
 	{
 		$data['data_get'] = $this->m_admin->list_katberita();
 		$data['username'] = $this->session->userdata('username');
+		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
+		$data['level'] = $this->session->userdata('level');
 		//$this->status_terbit($value);
 		$this->load->view('admin/berita/tambah_kategori_berita',$data);
 	}
 	public function p_tambah_kategori_berita()
 	{
 		$data['username'] = $this->session->userdata('username');
+		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
+		$data['level'] = $this->session->userdata('level');
         $this->m_admin->tambah_kategori_berita();
         redirect('admin/berita/tambah_kategori_berita');
 	}
@@ -220,6 +238,8 @@ class Berita extends CI_Controller {
 	{
 		$data['data_get'] = $this->m_admin->list_berita();
 		$data['username'] = $this->session->userdata('username');
+		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
+		$data['level'] = $this->session->userdata('level');
 		//$this->status_terbit($value);
 		$this->load->view('admin/berita/list_berita',$data);
 
@@ -229,6 +249,8 @@ class Berita extends CI_Controller {
 	{
 		$data['data_get'] = $this->m_admin->list_berita();
 		$data['username'] = $this->session->userdata('username');
+		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
+		$data['level'] = $this->session->userdata('level');
 		//$this->status_terbit($value);
 		$this->load->view('admin/berita/list_berita2',$data);
 

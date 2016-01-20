@@ -12,16 +12,22 @@ class Materi extends CI_Controller {
 	public function index() {
 		$data['new'] = $this->m_admin->detail_profil();
 		$data['username'] = $this->session->userdata('username');
+		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
+		$data['level'] = $this->session->userdata('level');
 		$this->load->view('admin/materi/list_materi', $data);
 	}
 
 	public function tambah_materi() {
 		$data['username'] = $this->session->userdata('username');
+		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
+		$data['level'] = $this->session->userdata('level');
 		$this->load->view('admin/materi/tambah_materi', $data);
 	}
 
 	public function act_edit($id){
     	$data['username'] = $this->session->userdata('username');
+    	$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
+		$data['level'] = $this->session->userdata('level');
     	$nama_materi = $this->input->post('nama_materi');
 		$jenis = $this->input->post('jenis');
     	if($this->input->post('uploud')){
@@ -184,37 +190,17 @@ class Materi extends CI_Controller {
             );
         }
     }
-	public function proses_tambah_profil() {
-		
-		$this->m_admin->tambah_kategori_profil();
-		redirect('admin/profil/index');
-	}
-
-  	public function proses_edit_profil(){
-    		$data['username'] = $this->session->userdata('username');
-			$data = array(
-							'deskripsi' => $this->input->post('deskripsi')
-					);
-				$id = $this->input->post('id_dp');
-		        $this->db->where('id_dp', $id);
-		        $this->db->update('detail_profil_perusahaan', $data);
-				redirect(base_url().'admin/profil/index');
-		}
+	
 	public function edit_materi($id)
 	{
 		$data['username'] = $this->session->userdata('username');
+		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
+		$data['level'] = $this->session->userdata('level');
         $materi = $this->m_admin->edit_materi($id);
 
         $this->load->vars('b', $materi);
         //echo $b->row('nama_materi');
         $this->load->view('admin/materi/edit_materi',$data);
-	}
-	public function hapus_profil($id)
-	{
-		$data['username'] = $this->session->userdata('username');
-        $profil = $this->m_admin->hapus_profil($id);
-     
-        redirect(base_url().'admin/profil/index');
 	}
 
 	public function hapus_materi($id)
@@ -234,10 +220,6 @@ class Materi extends CI_Controller {
         $materi = $this->m_admin->hapus_materi($id);
         redirect(base_url().'admin/materi');
 	}
-	
-	
-
-	
 
 
 }
