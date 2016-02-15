@@ -11,7 +11,40 @@ class M_pelatihan extends CI_Model {
         parent::__construct();
         $this->load->database();
     }
- 
+
+    function list_gallery()
+    {
+        $ambil = $this->db->query('select distinct p.nama_pelatihan as nama, g.judul as url from gallery g, pelatihan p where g.id_pelatihan = p.id_pelatihan group by p.nama_pelatihan');
+          if ($ambil->num_rows() > 0) {
+          foreach ($ambil->result() as $data) 
+          {
+            $hasil[] = $data;
+           }
+            return $hasil;
+          }
+    }
+     function pelatihan_guru()
+    {
+        $ambil = $this->db->query('select distinct p.id_pelatihan as id, p.nama_pelatihan as nama, g.judul as url, pk.nama_programKerja as nama_program from gallery g, pelatihan p, program_kerja pk where g.id_pelatihan = p.id_pelatihan and pk.id_programKerja = p.id_programKerja and pk.nama_programKerja like "%guru%" group by p.nama_pelatihan');
+          if ($ambil->num_rows() > 0) {
+          foreach ($ambil->result() as $data) 
+          {
+            $hasil[] = $data;
+           }
+            return $hasil;
+          }
+    }
+    function pelatihan_siswa()
+    {
+        $ambil = $this->db->query('select distinct p.id_pelatihan as id, p.nama_pelatihan as nama, g.judul as url, pk.nama_programKerja as nama_program from gallery g, pelatihan p, program_kerja pk where g.id_pelatihan = p.id_pelatihan and pk.id_programKerja = p.id_programKerja and pk.nama_programKerja like "%siswa%" group by p.nama_pelatihan');
+          if ($ambil->num_rows() > 0) {
+          foreach ($ambil->result() as $data) 
+          {
+            $hasil[] = $data;
+           }
+            return $hasil;
+          }
+    }
     private function _get_datatables_query()
     {
          

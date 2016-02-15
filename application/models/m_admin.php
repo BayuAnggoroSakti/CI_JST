@@ -17,6 +17,17 @@
 		  	return $hasil;
 		  }
 	}
+	 function recent_berita() 
+	{
+		  $ambil = $this->db->query('SELECT id_berita,judul_berita, isi_berita, tanggal_berita, status_terbit, kb.nama_katber as kategori, gambar, u.nama_lengkap as nama_lengkap FROM user u, berita b, kategori_berita kb where b.id_kateBer = kb.id_katBer and b.id_user = u.id_user order by tanggal_berita desc limit 4');
+		  if ($ambil->num_rows() > 0) {
+		  foreach ($ambil->result() as $data) 
+		  {
+		   	$hasil[] = $data;
+		   }
+		  	return $hasil;
+		  }
+	}
   function program_kerja()
     {
         $ambil = $this->db->query('SELECT * from program_kerja');
@@ -40,9 +51,20 @@
 		  }
 		
 	}
+	 function detail_profilByName($nama) 
+	{
+		 $query = $this->db->query("SELECT * from profil_perusahaan where nama_profil = '$nama'");
+        return $query;
+	}
+	 function detail_programByID($id) 
+	{
+		 $query = $this->db->query("SELECT distinct p.nama_pelatihan as nama, p.biaya as biaya, p.lokasi as lokasi, p.fasilitas as fasilitas, p.keterangan as keterangan, g.judul as url, pk.nama_programKerja as nama_program from gallery g, pelatihan p, program_kerja pk where g.id_pelatihan = p.id_pelatihan and pk.id_programKerja = p.id_programKerja and p.id_pelatihan = '$id'");
+        return $query;
+	}
+
 	 function detail_profil() 
 	{
-		  $ambil = $this->db->query("SELECT * from detail_profil_perusahaan dpp, profil_perusahaan pp where dpp.id_profil = pp.id_profil");
+		  $ambil = $this->db->query("SELECT * from profil_perusahaan");
 		  if ($ambil->num_rows() > 0) {
 		  foreach ($ambil->result() as $data) 
 		  {
@@ -52,10 +74,23 @@
 		  }
 	}
 
-   function tambah_kategori_profil()
+ 	function materi() 
+	{
+		  $ambil = $this->db->query("SELECT * from materi");
+		  if ($ambil->num_rows() > 0) {
+		  foreach ($ambil->result() as $data) 
+		  {
+		   	$hasil[] = $data;
+		   }
+		  	return $hasil;
+		  }
+	}
+
+   function tambah_profil()
     {
     	$insert_kat = array(
     		'nama_profil' => $this->input->post('nama_profil'), 
+    		'deskripsi' => $this->input->post('deskripsi')
     		);
     	$insert = $this->db->insert('profil_perusahaan',$insert_kat);
     	return $insert;
@@ -137,6 +172,43 @@
 		
 	}
 
+	//Pagination Berita
+	function lihat_berita($num,$offset){
+		if ($offset == 0) {
+			$offset = NULL;
+		}
+		else
+		{
+			$offset = ','.$offset;
+		}
+	//return $query = $this->db->query('SELECT id_beritaA,judul_berita, isi_berita, tanggal_berita, status_terbit, kb.nama_katber as kategori, gambar, u.nama_lengkap as nama_lengkap FROM user u, berita b, kategori_berita kb where b.id_kateBer = kb.id_katBer and b.id_user = u.id_user order by tanggal_berita desc LIMIT $',$num,$offset)->result();
+	 $query = $this->db->query("SELECT id_berita,judul_berita, isi_berita, tanggal_berita, status_terbit, kb.nama_katber as kategori, gambar, u.nama_lengkap as nama_lengkap FROM user u, berita b, kategori_berita kb where b.id_kateBer = kb.id_katBer and b.id_user = u.id_user order by tanggal_berita desc LIMIT $num $offset");
+ 	 //$query = $this->db->get('berita b, user u, kategori_berita kb where',$num, $offset);
+ 	 return $query->result();
+	}
+ 
+ 	function lihat_materi($num,$offset){
+ 		$query = $this->db->get('materi',$num,$offset);
+	 return $query->result();
+	}
+ 
+	function jumlah_berita(){
+		return $this->db->get('berita')->num_rows();
+	}
+
+	function staf() 
+	{
+		  $ambil = $this->db->query('SELECT * FROM staf_pengajar');
+		  if ($ambil->num_rows() > 0) {
+		  foreach ($ambil->result() as $data) 
+		  {
+		   	$hasil[] = $data;
+		   }
+		  	return $hasil;
+		  }
+		
+	}
+
 	 function prosesedit_berita() {
         $update_berita = array(
             'judul_berita' => $this->input->post('judul_berita'),
@@ -176,8 +248,8 @@
       function hapus_profil($id)
     {
     	
-    	$this->db->where('id_dp', $id);
-        $this->db->delete('detail_profil_perusahaan');
+    	$this->db->where('id_profil', $id);
+        $this->db->delete('profil_perusahaan');
     }
 
          function hapus_materi($id)
@@ -212,7 +284,7 @@
       /*  $this->db->where('id_profil', $id);
         $query = $this->db->get('detail_profil_perusahaan');
         */
-        $ambil = $this->db->query("SELECT * from detail_profil_perusahaan dpp, profil_perusahaan pp where dpp.id_profil = pp.id_profil and dpp.id_dp = '$id'");
+        $ambil = $this->db->query("SELECT * from profil_perusahaan where id_profil = '$id'");
         return $ambil;
     }
      function list_slider1($id) {

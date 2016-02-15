@@ -1,3 +1,4 @@
+
 <header class="clearfix">
 			<!-- Static navbar -->
 			<div class="navbar navbar-default navbar-fixed-top" style="">
@@ -7,14 +8,26 @@
 							<span><i class="fa fa-phone"></i>1234 - 5678 - 9012</span>
 							<span><i class="fa fa-envelope-o"></i>support@convertible.com</span>
 						</p>
-						<ul class="social-icons">
-							<li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-							<li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-							<li><a class="rss" href="#"><i class="fa fa-rss"></i></a></li>
-							<li><a class="google" href="#"><i class="fa fa-google-plus"></i></a></li>
-							<li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
-							<li><a class="pinterest" href="#"><i class="fa fa-pinterest"></i></a></li>
-						</ul>
+						<?php
+							if ($this->session->userdata('level') == 'member') {?>
+								<ul align="right">
+									<li><a href="<?php echo site_url('home/login') ?>"> <i class="fa fa-sign-in"></i> Selamat Datang,  <?php echo $this->session->userdata('nama_lengkap'); ?></a></li>
+								</ul>
+						<?php
+							}
+							else
+							{ ?>
+
+								<ul class="social-icons">
+									<li><a href="<?php echo site_url('home/login') ?>"> <i class="fa fa-sign-in"></i> Login Member </a></li>
+									<li>|</li>
+									<li><a href=""> <i class="fa fa-edit"></i> Register </a></li>
+								
+								</ul>
+						<?php		
+							}
+						 ?>
+						
 					</div>
 				</div>
 				<div class="container" >
@@ -24,43 +37,34 @@
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<a class="navbar-brand" href="#"><img alt="" src="<?php echo base_url('assets/images/gambarTeksWarnaBGTerang.png') ?>" width="200" height="70"></a>
+						<a class="navbar-brand" href="<?php site_url('home/index') ?>"><img alt="" src="<?php echo base_url('assets/images/gambarTeksWarnaBGTerang.png') ?>" width="160" height="50"></a>
 					</div>
 					<div class="navbar-collapse collapse">
 						<ul class="nav navbar-nav navbar-right">
 
-						<li class="drop"><a class="active" href="index.html">Home</a>
+						<li><a class="<?php if ( $this->uri->uri_string() == 'home/index' ) { echo "active";} else { echo "";} ?>" href="<?php echo site_url('home/index'); ?>">Home</a>
 								
 							</li>
-							<li class="drop"><a href="#">Profil</a>
+							<li class="drop "><a href="#">Profil</a>
 								<ul class="drop-down">
-									<li><a href="sejarah.html">Sejarah</a></li>
-									<li><a href="visi&misi.html">Visi & Misi</a></li>
-									<li><a href="staf.html">Staf Pengajar</a></li>
+								<?php foreach ($menu as $data) { 
+									$nama = $data->nama_profil;
+									$profil = str_replace(" ", "_", $nama)
+									?>
+									<li><a href="<?php echo site_url('home/detail_profil/').'/'.$profil; ?>"><?php echo $data->nama_profil ?></a></li>
+								<?php
+								}
+								 ?>
+									
+									<li><a <?php if ( $this->uri->uri_string() == 'home/staf' ) { echo "class='active'";} else { echo "";} ?> href="<?php echo site_url('home/staf'); ?>">Staf Pengajar</a></li>
 								</ul>
 							</li>
-							<li class="drop"><a href="blog-right-sidebar.html">Program Kerja</a>
-								<ul class="drop-down">
-									<li class="drop"><a href="#">Guru</a>
-										<ul class="drop-down level3">
-											<li><a href="#">Level 3</a></li>
-											<li><a href="#">Level 3</a></li>
-											<li><a href="#">Level 3</a></li>
-										</ul>
-									</li>	
-									<li class="drop"><a href="#">Siswa</a>
-										<ul class="drop-down level3">
-											<li><a href="#">Level 3</a></li>
-											<li><a href="#">Level 3</a></li>
-											<li><a href="#">Level 3</a></li>
-										</ul>
-									</li>
-									</ul>
+							<li><a <?php if ( $this->uri->uri_string() == 'home/program_kerja' ) { echo "class='active'";} else { echo "";} ?> href="<?php echo site_url('home/program_kerja') ?>">Program Kerja</a>
 							</li>
-							<li class="drop"><a href="portfolio-4col.html">Gallery Kegiatan</a>
+							<li><a <?php if ( $this->uri->uri_string() == 'home/gallery' ) { echo "class='active'";} else { echo "";} ?> href="<?php echo site_url('home/gallery') ?>">Gallery Kegiatan</a>
 							</li>
-							<li><a href="shop.html">Download</a></li>
-								<li><a href="contact.html">Hubungi Kami</a></li>
+							<li><a  <?php if ( $this->uri->uri_string() == 'home/download' ) { echo "class='active'";} else { echo "";} ?> href="<?php echo site_url('home/download'); ?>">Download</a></li>
+							<li ><a <?php if ( $this->uri->uri_string() == 'home/hubungi_kami' ) { echo "class='active'";} else { echo "";} ?> href="<?php echo site_url('home/hubungi_kami'); ?>">Hubungi Kami</a></li>
 						</ul>
 					</div>
 				</div>

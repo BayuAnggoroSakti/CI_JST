@@ -59,9 +59,7 @@ $this->load->view('template_admin/sidebar');
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Alamat</label>
                       <div class="col-sm-10">
-                        <textarea  class="form-control" name="alamat" rows="3" placeholder="Alamat Anda">
-                          <?php echo $b->row('nama_lengkap'); ?>
-                        </textarea>
+                        <textarea  class="form-control" name="alamat" rows="3" placeholder="Alamat Anda"><?php echo $b->row('alamat'); ?></textarea>
                         <?php echo form_error('alamat'); ?>
                       </div>
                     </div>

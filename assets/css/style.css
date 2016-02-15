@@ -22,6 +22,7 @@
 /*-------------------------------------------------------*/
 /* 1. Isotope filtering
 /*-------------------------------------------------------*/
+
 .isotope-item {
     z-index: 2;
 }
@@ -49,9 +50,8 @@
 /* =  Header
 /*-------------------------------------------------*/
 
-
 .navbar {
-	margin-bottom: 0;
+    margin-bottom: 0;
     background: #fff;
     box-shadow: none;
     -webkit-box-shadow: none;
@@ -71,7 +71,7 @@ header.active .navbar {
 
 .top-line {
     padding: 12px 0;
-    background: #FFCC80;
+    background: #ffcc00;
     border-bottom: 1px solid #e4e4e4;
     overflow: hidden;
     transition: all 0.17s ease-in-out;
@@ -92,17 +92,17 @@ header.active .top-line {
 
 .top-line p span {
     display: inline-block;
-    color: #253135;
+    color: white;
     font-size: 13px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Arial Black", Gadget, sans-serif;
     border-left: 1px solid #dddddd;
     line-height: 16px;
     margin-right: 13px;  
 }
 
 .top-line p span i {
-    color: #0077f9;
-    font-size: 14px;
+    color: white;
+    font-size: 20px;
     vertical-align: middle;
     display: inline-block;
     padding: 0 10px;
@@ -120,6 +120,8 @@ ul.social-icons li {
 ul.social-icons li a {
     display: inline-block;
     margin-bottom: -2px;
+    color:white;
+    font-family: "Arial Black", Gadget, sans-serif;
     transition: all 0.17s ease-in-out;
     -moz-transition: all 0.17s ease-in-out;
     -webkit-transition: all 0.17s ease-in-out;
@@ -127,8 +129,8 @@ ul.social-icons li a {
 }
 
 ul.social-icons li a i {
-    font-size: 17px;
-    color: #0077f9;
+    font-size: 20px;
+    color: white;
 }
 
 ul.social-icons li a:hover {
@@ -169,7 +171,7 @@ header.active .navbar-brand {
     position: absolute;
     content: '\f107';
     font-family: 'FontAwesome';
-    color: red;
+    color: #cecece;
     font-size: 13px;
     right: 0px;
     top: 50%;
@@ -182,9 +184,9 @@ header.active .navbar-brand {
 
 .navbar-default .navbar-nav > li > a {
     position: relative;
-    color: #7d7d7d;
-    font-size: 14px;
-    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    color: black;
+    font-family: 'Lato', Arial, Verdana;
     font-weight: 300;
     padding: 44px 0;
     text-transform: uppercase;
@@ -203,6 +205,8 @@ header.active .navbar-brand {
 
 .navbar-default .navbar-nav > li > a.active {
     color: #727272;
+    font-family: 'Lato', Arial, Verdana;
+    font-size: 15px;
     border-top: 5px solid #727272;
 }
 
@@ -270,7 +274,7 @@ ul.drop-down li a {
     padding: 10px 12px;
     text-decoration: none;
     text-transform: capitalize;
-    background: #FFEA00;
+    background: #ffeb3b;
     font-weight: 300;
     opacity: 1;
     border-top: 1px solid rgba(0,0,0,0.3);
@@ -361,7 +365,7 @@ h3 {
 
 h4 {
     color: #000000;
-    font-size: 18px;
+    font-size: 19px;
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
     margin: 0;
@@ -369,16 +373,16 @@ h4 {
 
 h5 {
     color: #000000;
-    font-size: 15px;
+    font-size: 16px;
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
     margin: 0;
 }
 
 p {
-    color: #9a9a9a;
+    color: #000000;
     font-size: 13px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Lato', Arial, Verdana;
     font-weight: 300;
     margin: 0;
     line-height: 18px;
@@ -390,7 +394,7 @@ a.main-button {
     font-family: 'Open Sans', sans-serif;
     font-weight: 700;
     padding: 12px 35px;
-    background: #7ea4f5;
+    background: #ffeb3b;
     text-decoration: none;
     border-radius: 4px;
     -webkit-border-radius: 4px;
@@ -441,7 +445,7 @@ body {
 }
 
 .modern_medium_light {
-    background: #0b7af0;
+    background: #ffeb3b;
     border-radius: 26px;
     -webkit-border-radius: 26px;
     -moz-border-radius: 26px;
@@ -518,7 +522,7 @@ body {
     float: left;
     width: 66px;
     height: 66px;
-    background: #0076f9;
+    background: #ffce00;
     border-radius: 50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
@@ -539,7 +543,7 @@ body {
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -o-border-radius: 50%;
-    border: 1px solid #0076f9;
+    border: 1px solid #fdf248;
     left: 0px;
     top: 0px;
     transition: all 0.17s ease-in-out;
@@ -564,7 +568,7 @@ body {
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -o-border-radius: 50%;
-    border: 3px solid #0076f9;
+    border: 3px solid #ffdb00;
     left: -7px;
     top: -7px;
     transition: all 0.17s ease-in-out;
@@ -641,7 +645,7 @@ body {
 .carousel-control.left {
     right: 28px;
     left: auto;
-    background: rgba(0,118,249,0.3);
+    background: white;
 }
 
 .carousel-control.left:before {
@@ -656,7 +660,7 @@ body {
 
 .carousel-control.right {
     right: 0;
-    background: rgba(0,118,249,0.3);
+    background: white;
 }
 
 .carousel-control.right:before {
@@ -670,12 +674,12 @@ body {
 }
 
 .carousel-control.left:hover {
-    background: rgb(0,118,249);
+    background: yellow;
     opacity: 1;
 }
 
 .carousel-control.right:hover {
-    background: rgb(0,118,249);
+    background: yellow;
     opacity: 1;
 }
 
@@ -716,7 +720,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,118,249,0.8);
+    background: #ffdb00;
     transition: all 0.17s ease-in-out;
     -moz-transition: all 0.17s ease-in-out;
     -webkit-transition: all 0.17s ease-in-out;
@@ -766,7 +770,7 @@ body {
     content: '';
     width: 50px;
     height: 50px;
-    background: url('../images/zoom-after.png') center center no-repeat;
+    background: blue center center no-repeat;
     transition: all 0.17s ease-in-out;
     -moz-transition: all 0.17s ease-in-out;
     -webkit-transition: all 0.17s ease-in-out;
@@ -784,13 +788,13 @@ body {
 .hover-box a.zoom {
     right: 50%;
     margin-right: 5px;
-    background: url('../images/zoom.png') center center no-repeat;
+    background: yellow  center center no-repeat;
 }
 
 .hover-box a.page {
     left: 50%;
     margin-left: 5px;
-    background: url('../images/page.png') center center no-repeat;
+    background: red center center no-repeat;
 }
 
 .partners {
@@ -892,15 +896,15 @@ body {
 }
 
 .owl-theme .owl-controls .owl-buttons div:hover {
-    border: 1px solid #0076f9;
-    background: #0076f9;
+    border: 1px solid #ffeb3b;
+    background: #ffeb3b;
 }
 
 .owl-theme .owl-controls .owl-buttons div:before {
     font-family: 'FontAwesome';
     position: absolute;
     font-size: 32px;
-    color: #0076f9;
+    color: #ffeb3b;
     width: 100%;
     left: 0;
     text-align: center;
@@ -1028,7 +1032,7 @@ a.read-more:hover i {
     padding: 10px;
     margin-left: -100%;
     text-decoration: none;
-    background: #117bf1
+    background: #ffdb00
 }
 
 .hover-item ul li a i {
@@ -1075,7 +1079,7 @@ a.read-more:hover i {
 }
 
 .why-convertible-box h1 i {
-    color: #0076f9;
+    color: #ffeb3b;
     margin-left: 10px;
 }
 
@@ -1084,7 +1088,7 @@ a.read-more:hover i {
 }
 
 .why-convertible-box p a {
-    color: #0076f9;
+    color: #ffeb3b;
     font-weight: 700;
 }
 
@@ -1096,14 +1100,14 @@ a.read-more:hover i {
 
 .tag-list li a {
     display: inline-block;
-    color: #0076f9;
+    color: #ffeb3b;
     font-size: 12px;
     font-family: 'Open Sans', sans-serif;
     border-radius: 9px;
     -webkit-border-radius: 9px;
     -moz-border-radius: 9px;
     -o-border-radius: 9px;
-    border: 1px solid #0076f9;
+    border: 1px solid #ffeb3b;
     padding: 5px 10px;
     background: #fff;
     text-decoration: none;
@@ -1114,7 +1118,7 @@ a.read-more:hover i {
 }
 
 .tag-list li a i {
-    color: #0076f9;
+    color: #ffeb3b;
     font-size: 17px;
     margin-right: 4px;
     vertical-align: middle;
@@ -1137,7 +1141,7 @@ a.read-more:hover i {
     height: 2px;
     bottom: 0;
     left: 0;
-    background: url('../images/border-bottom.png') center center no-repeat;
+    background: red center center no-repeat;
 }
 
 ul.device-list {
@@ -1161,7 +1165,7 @@ ul.device-list li:after {
     content: '\f064';
     top: 134px;
     left: -38px;
-    color: #0076f9;
+    color: #ffeb3b;
     font-size: 18px;
 }
 
@@ -1253,7 +1257,7 @@ ul.device-list li.device4 {
 
 .staff-box {
     padding: 50px 0;
-    border-bottom: 1px solid #dedede;
+    border-bottom: 1px solid #f09a36;
 }
 
 .staff-post {
@@ -1262,7 +1266,7 @@ ul.device-list li.device4 {
 }
 
 .staff-post-content {
-    background: #0076f9;
+    background: #003664;
     padding: 20px 23px;
     border-top-right-radius: 4px;
     -webkit-border-top-right-radius: 4px;
@@ -1624,7 +1628,7 @@ ul.product-list li a:hover i {
 
 .accord-title {
     padding: 16px 14px;
-    border: 1px solid #dbdbdb;
+    border: 1px solid black;
     position: relative;
 }
 
@@ -1646,8 +1650,8 @@ a.accord-link {
     height: 100%;
     top: 0;
     right: 0;
-    border-left: 1px solid #dbdbdb;
-    background: url('../images/plus.png') center center no-repeat;
+    border-left: 1px solid black;
+    background: yellow center center no-repeat;
     transition: all 0.2s ease-in-out;
     -moz-transition: all 0.2s ease-in-out;
     -webkit-transition: all 0.2s ease-in-out;
@@ -1655,17 +1659,17 @@ a.accord-link {
 }
 
 .accord-elem.active a.accord-link {
-    background: url('../images/minus.png') center center no-repeat;
+    background: red center center no-repeat;
 }
 
 a.accord-link.opened {
-    background: url('../images/minus.png') center center no-repeat;
+    background: blue center center no-repeat;
 }
 
 .accord-content {
     display: none;
     padding: 22px;
-    border: 1px solid #dbdbdb;
+    border: 1px solid black;
     border-top: none;
     overflow: hidden;
 }
@@ -1699,13 +1703,13 @@ a.accord-link.opened {
 .tab-content-box {
     text-align: center;
     padding: 60px;
-    border: 1px solid #dbdbdb;    
+    border: 1px solid black;    
 }
 
 .tab-box {
     text-align: center;
     padding: 65px 0 83px;
-    border: 1px solid #dbdbdb;
+    border: 1px solid black;
     min-height: 365px;   
 }
 
@@ -1718,7 +1722,7 @@ a.accord-link.opened {
 }
 
 ul.tab-links {
-    border: 1px solid #dbdbdb; 
+    border: 1px solid black; 
     border-top: none;
     overflow: hidden;
     margin-bottom: 40px;
@@ -1728,7 +1732,7 @@ ul.tab-links li {
     float: left;
     width: 33.33%;
     text-align: center;
-    border-left: 1px solid #dbdbdb; 
+    border-left: 1px solid black; 
 }
 
 ul.tab-links li:first-child {
@@ -1849,12 +1853,12 @@ ul.page-tree li a {
 ul.filter {
     margin-bottom: 30px;
     overflow: hidden;
-    border: 1px solid #dbdbdb;
+    border: 1px solid black;
 }
 
 ul.filter li {
     float: left;
-    border-right: 1px solid #dbdbdb;
+    border-right: 1px solid black;
 }
 
 ul.filter li a {
@@ -1877,7 +1881,7 @@ ul.filter li a {
 ul.filter li a.active,
 ul.filter li a:hover {
     color: #fff;
-    background: #0076f9;
+    background: #f09a36;
 }
 
 ul.filter li a.active:after,
@@ -1888,7 +1892,7 @@ ul.filter li a:hover:after {
     left: -1px;
     bottom: -1px;
     right: -1px;
-    border: 1px solid #0076f9;
+    border: 1px solid #f09a36;
     z-index: 2;
     transition: all 0.17s ease-in-out;
     -moz-transition: all 0.17s ease-in-out;
@@ -1965,7 +1969,7 @@ ul.pagination-list li a {
 
 ul.pagination-list li a.active,
 ul.pagination-list li a:hover {
-    background: #007aff;
+    background: #f09a36;
     color: #fff;
 }
 
@@ -1997,7 +2001,7 @@ ul.pagination-list li a:hover {
 }
 
 .search-widget input[type="search"]:focus {
-    border: 1px solid #007aff;
+    border: 1px solid #f09a36;
 }
 
 .search-widget button {
@@ -2011,7 +2015,7 @@ ul.pagination-list li a:hover {
 }
 
 .search-widget button i {
-    color: #007aff;
+    color: #f09a36;
     font-size: 18px;
 }
 
@@ -2031,7 +2035,7 @@ ul.pagination-list li a:hover {
 
 .tabs-widget ul.tab-links li a:hover {
     background: #fff;
-    color: #007aff;
+    color: #f09a36;
 }
 
 .tabs-widget {
@@ -2118,10 +2122,7 @@ ul.pagination-list li a:hover {
     width: 100%;
     margin-top: -30px;
     margin-bottom: 50px;
-    filter: grayscale(1);
-    -webkit-filter: grayscale(1);
-    -ms-filter: grayscale(1);
-    -o-filter: grayscale(1);
+
 }
 
 .contact-information {
@@ -2351,7 +2352,7 @@ ul.contact-information-list li i {
     color: #ffffff;
     font-size: 11px;
     font-family: 'Open Sans', sans-serif;
-    background: #0076f9;
+    background: #ffdb00;
     text-decoration: none;
     padding: 3px 8px;
     border-radius: 5px;
@@ -2920,7 +2921,7 @@ ul.tweets li {
 
 ul.tweets li p {
     margin-bottom: 0px;
-    color: #797979;
+    color: red;
 }
 
 ul.tweets li p a {

@@ -22,15 +22,18 @@
         <![endif]-->
     </head>
     <body class="login-page">
-        <div class="login-box">
 
+        <div class="login-box">
 
 
 
             <div class="login-logo">
                <img src="<?php echo base_url('assets/images/gambarTeksWarnaBGTerang.png') ?>" width="200px" height="90px">
             </div><!-- /.login-logo -->
+<div class="panel panel-default top150">
+            <div class="panel-heading"><h4 style="margin: 5px"><i class="glyphicon glyphicon-user"></i> Silakan login</h4></div>
             <div class="login-box-body">
+
                 <p class="login-box-msg">Masukkan username dan password</p>
                 <?php echo form_open("jst_admin/cek_login"); ?>
                     <div class="form-group has-feedback">  
@@ -50,7 +53,8 @@
                         </div><!-- /.col -->
                     </div>
                 <?php echo form_close(); ?>
-
+</div>
+</div>
               
 
             </div><!-- /.login-box-body -->

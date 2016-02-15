@@ -1,0 +1,148 @@
+html
+{
+	margin:0;
+	padding: 0;
+}
+body
+{
+	margin:0;
+	padding:0;
+}
+.iklan__card
+{
+	width:175px;
+	height: 225px;
+	box-shadow: 0px 1px 5px rgba(0,0,0,.4);
+	margin: 101px;
+	transition:all .25s ease-in-out;
+	-moz-transition:all .25s ease-in-out;
+	-o-transition:all .25s ease-in-out;
+	-webkit-transition:all .25s ease-in-out;
+	cursor: pointer;
+}
+.iklan__card-header
+{
+	width: 100%;
+	height: 175px;
+	overflow: hidden;
+}
+
+.iklan__card-header img
+{
+	width: 100%;
+	overflow: hidden;
+}
+
+.iklan__card-content
+{
+	width: 100%;
+	height:50px;
+	transition:all .25s ease-in-out;
+	-moz-transition:all .25s ease-in-out;
+	-o-transition:all .25s ease-in-out;
+	-webkit-transition:all .25s ease-in-out;
+	text-align: center;
+	padding: 10px;
+	z-index:1;
+}
+.iklan__card-price
+{
+	
+	border-top: 1px solid #E0E0E0;
+	display: block;
+	text-align: center;
+	margin-right: auto;
+	margin-left: auto;
+	transition:all .25s ease-in-out;
+	-moz-transition:all .25s ease-in-out;
+	-o-transition:all .25s ease-in-out;
+	-webkit-transition:all .25s ease-in-out;
+	opacity: 0;
+}
+
+
+.iklan__card:hover 
+{
+	height: 250px;
+}
+
+.iklan__card:hover .iklan__card-price
+{
+	opacity: 1;
+}
+
+
+.owl-buttons
+{
+	text-align: center;
+}
+.owl-pagination
+{
+	text-align: center;
+}
+
+.carousel-iklan
+{
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.right-sewa
+{
+	float: right;
+	margin: 10px;
+}
+.add-sewa
+{
+	list-style: none;
+}
+
+.add-sewa li
+{
+	list-style: none;
+}
+
+.brand
+{
+	float: left;
+	margin-top: 5px;
+	margin-left: 5px;
+}
+.nav li a:hover
+{
+	color: #fff;
+}
+.margin-atas
+{
+	margin-top: -30px;
+}
+
+.my-login-form
+{
+	padding: 10px;
+}
+.logmod__form
+{
+	padding: 10px;
+}
+
+.sign-input
+{
+	border:1px solid #ccc;
+}
+.sign-add-on
+{
+	border-radius: 0px;
+}
+
+.iklan-register img
+{
+	margin:auto;
+	display: block;
+	padding-top: 75px;
+}
+.profile-content
+{
+	padding-top: 65px;
+}

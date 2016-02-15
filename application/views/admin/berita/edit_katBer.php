@@ -32,7 +32,7 @@ $this->load->view('template_admin/sidebar');
                   <div class="box-body">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Nama Kategori Berita</label>
-                      <input type="text" name="nama_katBer" class="form-control" id="exampleInputEmail1" placeholder="Masukkan nama kategori berita" value="<?php echo $b->row('nama_katBer');?>">
+                      <input type="text" required name="nama_katBer" class="form-control" id="exampleInputEmail1" placeholder="Masukkan nama kategori berita" value="<?php echo $b->row('nama_katBer');?>">
                     </div>
                    
                   </div><!-- /.box-body -->

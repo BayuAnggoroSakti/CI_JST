@@ -10,8 +10,9 @@ class Materi extends CI_Controller {
 		$this->load->helper('text');
 	}
 	public function index() {
-		$data['new'] = $this->m_admin->detail_profil();
+		//$data['new'] = $this->m_admin->detail_profil();
 		$data['username'] = $this->session->userdata('username');
+		$data['title'] = "List Materi || Jogja Science Training";
 		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
 		$data['level'] = $this->session->userdata('level');
 		$this->load->view('admin/materi/list_materi', $data);
@@ -20,6 +21,7 @@ class Materi extends CI_Controller {
 	public function tambah_materi() {
 		$data['username'] = $this->session->userdata('username');
 		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
+		$data['title'] = "Tambah Materi || Jogja Science Training";
 		$data['level'] = $this->session->userdata('level');
 		$this->load->view('admin/materi/tambah_materi', $data);
 	}
@@ -197,6 +199,7 @@ class Materi extends CI_Controller {
 		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
 		$data['level'] = $this->session->userdata('level');
         $materi = $this->m_admin->edit_materi($id);
+        $data['title'] = "Edit Materi || Jogja Science Training";
 
         $this->load->vars('b', $materi);
         //echo $b->row('nama_materi');

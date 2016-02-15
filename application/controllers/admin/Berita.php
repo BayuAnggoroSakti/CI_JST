@@ -44,13 +44,15 @@ class Berita extends CI_Controller {
                 array('db' => 'isi_berita', 'dt' => 'isi_berita'),
                 array('db' => 'id_berita', 'dt' => 'id_berita'),
                 array('db' => 'tanggal_berita', 'dt' => 'tanggal_berita'),
-                array('db' => 'gambar', 'dt' => 'gambar'),
+                array('db' => 'gambar', 'dt' => 'gambar', 'formatter' => function( $d ){
+                	  return '<img width="150px" height="100px" src="'.base_url('assets/images/')."/".$d.'">';
+                }),
                 array('db' => 'status_terbit', 'dt' => 'status_terbit'),
                 array(
                     'db' => 'id_berita',
                     'dt' => 'aksi',
                     'formatter' => function( $d ) {
-                        return '<a href="' . site_url('admin/berita/editBerita/' . $d) . '">Edit</a> | <a href="' . site_url('admin/berita/hapus_berita/' . $d) . '">Delete</a>';
+                        return '<a href="' . site_url('admin/berita/editBerita/' . $d) . '">Edit</a> | <a  href="' . site_url('admin/berita/hapus_berita/' . $d) . '">Delete</a>';
                     }
                 ),
             );
@@ -75,6 +77,7 @@ class Berita extends CI_Controller {
 		$data['Kat'] = $this->m_admin->Kategori();
 		$data['username'] = $this->session->userdata('username');
 		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
+		$data['title'] = "Tambah Berita || Jogja Science Training";
 		$data['level'] = $this->session->userdata('level');
 		$this->load->view('admin/berita/tambah_berita',$data);
 	}
@@ -186,6 +189,7 @@ class Berita extends CI_Controller {
 	 	$data['username'] = $this->session->userdata('username');
 	 	$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
 		$data['level'] = $this->session->userdata('level');
+		$data['title'] = "Edit Berita || Jogja Science Training";
         $this->load->model('m_admin');
         $berita = $this->m_admin->edit($id);
         $this->load->vars('b', $berita);
@@ -197,6 +201,7 @@ class Berita extends CI_Controller {
 	 	$data['username'] = $this->session->userdata('username');
 	 	$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
 		$data['level'] = $this->session->userdata('level');
+		$data['title'] = "Edit Kategori Berita || Jogja Science Training";
         $kat_berita = $this->m_admin->edit_katBer($id);
         $data['data_get'] = $this->m_admin->list_katberita();
         $this->load->vars('b', $kat_berita);
@@ -221,6 +226,7 @@ class Berita extends CI_Controller {
 	{
 		$data['data_get'] = $this->m_admin->list_katberita();
 		$data['username'] = $this->session->userdata('username');
+		$data['title'] = "Tambah Kategori Berita || Jogja Science Training";
 		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
 		$data['level'] = $this->session->userdata('level');
 		//$this->status_terbit($value);
@@ -240,8 +246,9 @@ class Berita extends CI_Controller {
 		$data['username'] = $this->session->userdata('username');
 		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
 		$data['level'] = $this->session->userdata('level');
+		$data['title'] = "List Berita || Jogja Science Training";
 		//$this->status_terbit($value);
-		$this->load->view('admin/berita/list_berita',$data);
+		$this->load->view('admin/berita/list_berita2',$data);
 
 	}
 
@@ -249,6 +256,7 @@ class Berita extends CI_Controller {
 	{
 		$data['data_get'] = $this->m_admin->list_berita();
 		$data['username'] = $this->session->userdata('username');
+		$data['title'] = "List Berita || Jogja Science Training";
 		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
 		$data['level'] = $this->session->userdata('level');
 		//$this->status_terbit($value);

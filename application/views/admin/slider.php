@@ -47,11 +47,6 @@ $this->load->view('template_admin/sidebar');
       <tbody>
     
      <?php
-  if ($data_get == NULL) {
-  ?>
-  <div class="alert alert-info" role="alert">Data masih kosong, tolong di isi!</div>
-  <?php
-  } else {
   	$gambar = base_url('assets/images/');
  $i=1; foreach ($data_get as $row) {
   	
@@ -69,7 +64,7 @@ $this->load->view('template_admin/sidebar');
 
       }
        $i++;
-  }
+  
       ?> 
         </tr>
       </tbody>

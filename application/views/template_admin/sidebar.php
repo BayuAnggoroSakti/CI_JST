@@ -14,14 +14,7 @@
             </div>
         </div>
         <!-- search form -->
-        <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Search..."/>
-                <span class="input-group-btn">
-                    <button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
-                </span>
-            </div>
-        </form>
+
         <!-- /.search form -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
@@ -46,8 +39,13 @@
                 </a>
             </li>   
             <li>
-                <a href="<?php echo site_url('admin/member') ?>">
-                    <i class="fa fa-th"></i> <span>Member</span> <small class="label pull-right bg-green">Semua</small>
+                <a href="<?php echo site_url('admin/user') ?>">
+                    <i class="fa fa-user"></i> <span>User</span> 
+                </a>
+            </li>  
+             <li>
+                <a href="<?php echo site_url('admin/gallery') ?>">
+                    <i class="fa fa-image"></i> <span>Gallery</span> 
                 </a>
             </li>         
              
@@ -59,7 +57,6 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="<?php echo site_url('admin/berita') ?>"><i class="fa fa-circle-o"></i> List Berita</a></li>
-                    <li><a href="<?php echo site_url('admin/berita/ListBerita2') ?>"><i class="fa fa-circle-o"></i> List Berita2</a></li>
                     <li><a href="<?php echo site_url('admin/berita/tambah_berita') ?>"><i class="fa fa-circle-o"></i> Tambah Berita</a></li>
                     <li><a href="<?php echo site_url('admin/berita/tambah_kategori_berita') ?>"><i class="fa fa-circle-o"></i> Tambah Kategori Berita</a></li>
                 </ul>
@@ -91,7 +88,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="<?php echo site_url('admin/pelatihan') ?>"><i class="fa fa-circle-o"></i> List Pelatihan</a></li>
-                    <li><a href="<?php echo site_url('admin/staf/tambah_staf') ?>"><i class="fa fa-circle-o"></i> Tambah Pengajar</a></li>
+                    <li><a href="<?php echo site_url('admin/pelatihan/progam_kerja') ?>"><i class="fa fa-circle-o"></i>Program Kerja</a></li>
                 </ul>
             </li>
              <li class="treeview">
@@ -101,8 +98,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="#"><i class="fa fa-circle-o"></i> List Try Out</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Tambah Try Out</a></li>
-                   <li><a href="#"><i class="fa fa-circle-o"></i> Tambah Kategori</a></li>
+                    <li><a href="<?php echo site_url('admin/try_out/kategori_to') ?>"><i class="fa fa-circle-o"></i> Kategori Try Out</a></li>
                 </ul>
             </li>
              <li class="treeview">
@@ -111,8 +107,8 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> List Soal</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Tambah Soal</a></li>
+                    <li><a href="<?php echo site_url('admin/soal/index') ?>"><i class="fa fa-circle-o"></i> List Soal</a></li>
+                    <li><a href="<?php echo site_url('admin/soal/tambah_soal') ?>"><i class="fa fa-circle-o"></i> Tambah Soal</a></li>
                  
                 </ul>
             </li>

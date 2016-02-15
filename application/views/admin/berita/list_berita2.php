@@ -43,6 +43,7 @@ $this->load->view('template_admin/sidebar');
                             <th>ID</th>
                             <th>Judul Berita</th>
                             <th>Tanggal Berita</th>
+                             <th>Gambar</th>
                             <th>Status Terbit</th>
                             <th>Action</th>
                         </tr>
@@ -84,8 +85,9 @@ $this->load->view('template_admin/sidebar');
                         {"data": "id_berita"},
                         {"data": "judul_berita"},
                         {"data": "tanggal_berita"},
+                         {"data": "gambar"},
                         {"data": "status_terbit"},
-                        
+
                         {
                             "class": "text-center",
                             "data": "aksi"
@@ -101,6 +103,30 @@ $this->load->view('template_admin/sidebar');
                     }
                 });
             });
+
+function delete_berita(id)
+{
+    if(confirm('Are you sure delete this data?'))
+    {
+        // ajax delete data to database
+        $.ajax({
+            url : "<?php echo site_url('admin/berita/hapus_berita')?>/"+id,
+            type: "POST",
+            dataType: "JSON",
+            success: function(data)
+            {
+                //if success reload ajax table
+                $('#modal_form').modal('hide');
+                reload_table();
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                alert('Error deleting data');
+            }
+        });
+ 
+    }
+}
         </script>
 
 <?php 

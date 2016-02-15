@@ -32,7 +32,7 @@ $this->load->view('template_admin/sidebar');
     </ol>
 <div class="box box-info">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Tambahkan Berita</h3>
+                  <h3 class="box-title">Edit Berita</h3>
                 </div><!-- /.box-header -->
                 <?php
                   $id = $b->row('id_berita');

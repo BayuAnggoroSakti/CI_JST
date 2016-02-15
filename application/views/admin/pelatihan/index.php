@@ -5,6 +5,10 @@ $this->load->view('template_admin/head');
 $this->load->view('template_admin/topbar');
 $this->load->view('template_admin/sidebar');
 ?>
+ <link href="<?php echo base_url('assets/tags/jquery.tagsinput.css') ?>" rel="stylesheet" type="text/css" />
+
+
+
  <section class="content-header">
     <h1>
         List Pelatihan
@@ -24,7 +28,7 @@ $this->load->view('template_admin/sidebar');
                 <div class="box-header">
                    <div class="row">
                         <div class="col-md-2">
-                            <button class="btn btn-block btn-success btn-lg" onclick="add_person()"><i class="glyphicon glyphicon-plus"></i> Pelatihan</button> 
+                            <button class="btn btn-block btn-info btn-lg" onclick="add_person()"><i class="glyphicon glyphicon-plus"></i> Tambah</button> 
                         </div>
                            <div class="col-md-2">
                              <button class="btn btn-block btn-default btn-lg" onclick="reload_table()"><i class="glyphicon glyphicon-refresh"></i> Reload</button>
@@ -36,6 +40,7 @@ $this->load->view('template_admin/sidebar');
                    <table class="table table-bordered table-striped table-hover" width="100%" id="table">
                     <thead>
                         <tr>
+                            <th>No</th>
                             <th>Nama Pelatihan</th>
                             <th>Biaya</th>
                             <th>Lokasi</th>
@@ -52,10 +57,28 @@ $this->load->view('template_admin/sidebar');
  <script src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/plugins/jQuery/jquery-2.2.0.min.js') ?>"></script>
  <script src="<?php echo base_url('assets/assets/datatables/jquery.dataTables.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/assets/datatables/dataTables.bootstrap.js') ?>"></script>
+ <script src="<?php echo base_url('assets/tags/jquery.tagsinput.js')?>"></script>
 
  
 <script type="text/javascript">
  
+        function onAddTag(tag) {
+            alert("Tambahkan Fasilitas: " + tag);
+        }
+        function onRemoveTag(tag) {
+            alert("Removed a tag: " + tag);
+        }
+
+        function onChangeTag(input,tag) {
+            alert("Changed a tag: " + tag);
+        }
+
+        $(function() {
+
+            $('#tags_1').tagsInput({width:'auto'});
+        });
+
+
 var save_method; //for save method string
 var table;
  
@@ -114,12 +137,8 @@ $(document).ready(function() {
  
 function add_person()
 {
-    save_method = 'add';
-    $('#form')[0].reset(); // reset form on modals
-    $('.form-group').removeClass('has-error'); // clear error class
-    $('.help-block').empty(); // clear error string
-    $('#modal_form').modal('show'); // show bootstrap modal
-    $('.modal-title').text('Add Pelatihan'); // Set Title to Bootstrap modal title
+     var base = "<?php echo base_url(); ?>";
+    window.location = base+"/admin/pelatihan/tambah_pelatihan/";
 }
  
 function edit_pelatihan(id)
@@ -187,6 +206,8 @@ function save()
             {
                 $('#modal_form').modal('hide');
                 reload_table();
+                /*var base = "<?php echo base_url(); ?>";
+                window.location = base+"/admin/pelatihan/tambah_pelatihan/"+id;*/
             }
             else
             {
@@ -301,7 +322,7 @@ function delete_pelatihan(id)
                          <div class="form-group">
                             <label class="control-label col-md-3">Fasilitas</label>
                             <div class="col-md-9">
-                                <input name="fasilitas" placeholder="contoh : Modul, Penginapan, dll" class="form-control" type="text">
+                                <input name="fasilitas" id="tags_1" placeholder="contoh : Modul, Penginapan, dll" class="form-control tags"  type="text">
                                 <span class="help-block"></span>
                             </div>
                         </div>

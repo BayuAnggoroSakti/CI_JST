@@ -13,6 +13,7 @@ class Staf extends CI_Controller {
 	public function index() {
 		$data['username'] = $this->session->userdata('username');
 		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
+		$data['title'] = "List Staf Pengajar || Jogja Science Training";
 		$data['level'] = $this->session->userdata('level');
 		$this->load->view('admin/staf/index', $data);
 	}
@@ -71,6 +72,7 @@ class Staf extends CI_Controller {
 		$data['username'] = $this->session->userdata('username');
 		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
 		$data['level'] = $this->session->userdata('level');
+		$data['title'] = "Tambah Staf Pengajar || Jogja Science Training";
 		$data['error'] = 'tidak';
 		$this->load->view('admin/staf/tambah_staf', $data);
 	}
@@ -80,6 +82,7 @@ class Staf extends CI_Controller {
 		$data['username'] = $this->session->userdata('username');
 		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
 		$data['level'] = $this->session->userdata('level');
+		$data['title'] = "Edit Staf Pengajar || Jogja Science Training";
 		$data['error'] = 'tidak';
 		$staf = $this->m_staf->edit_staf($id);
 		$this->load->vars('b', $staf);

@@ -18,13 +18,13 @@ $this->load->view('template_admin/sidebar');
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        Kategori Berita
-        <small>Form Tambah Kategori Berita</small>
+        Profil JST
+        <small>Form Edit Profil</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Berita</a></li>
-        <li class="active">Tambahkan kategori berita</li>
+        <li><a href="#">Profil</a></li>
+        <li class="active">Edit Profil</li>
     </ol>
   <div class="row">
             <!-- left column -->
@@ -37,12 +37,12 @@ $this->load->view('template_admin/sidebar');
                 <!-- form start -->
                 <form role="form" enctype="multipart/form-data" method="post" action="<?php echo base_url('admin/profil/proses_edit_profil'); ?>" onsubmit="return validasi_input(this)">
               
-                   <input type="hidden" name="id_dp" value="<?php echo $b->row('id_dp');?>">
+                   <input type="hidden" name="id_profil" value="<?php echo $b->row('id_profil');?>">
                   <div class="box-body">
                    <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Nama Profil</label>
                       <div class="col-sm-10">
-                      <input type="text" disabled class="form-control" name="nama" value="<?php echo $b->row('nama_profil'); ?>" />
+                      <input type="text" class="form-control" name="nama" value="<?php echo $b->row('nama_profil'); ?>" />
                    
                       </div>
                     </div>

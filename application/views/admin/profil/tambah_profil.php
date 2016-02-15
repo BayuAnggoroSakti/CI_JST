@@ -29,8 +29,21 @@ $this->load->view('template_admin/sidebar');
                     <div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">Nama Profil</label>
                       <div class="col-sm-10">
-                        <input type="text" name="nama_profil" class="form-control" id="judul" placeholder="Judul Berita" required/>
+                        <input type="text" name="nama_profil" class="form-control" id="judul" placeholder="Nama Profil" required/>
                       </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputEmail3" class="col-sm-2 control-label">Deskripsi</label>
+                      <div class="col-sm-10">
+                        <textarea id="editor1" name="deskripsi" rows="10" cols="80" required>
+                              
+                            </textarea>
+                            <script>
+                                // Replace the <textarea id="editor1"> with a CKEditor
+                                // instance, using default configuration.
+                                CKEDITOR.replace( 'editor1' );
+                            </script>
+                    </div>
                     </div>
                   
                     <input style="margin-left:185px" type="submit" name="submit" class="btn btn-info">

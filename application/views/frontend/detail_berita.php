@@ -8,11 +8,11 @@ $this->load->view('template_frontend/header');
 			<!-- Page Banner -->
 			<div class="page-banner">
 				<div class="container">
-					<h2>Fresh News</h2>
+					<h2>Berita</h2>
 					<ul class="page-tree">
 						<li><a href="#">Home</a></li>
-						<li><a href="#">Blog</a></li>
-						<li><a href="#">Killing the author quiz but no let up on the review process</a></li>
+						<li><a href="#">Berita</a></li>
+						<li class="active"><a href="#"><?php echo $b->row('judul_berita');?></a></li>
 					</ul>		
 				</div>
 			</div>
@@ -55,7 +55,7 @@ $this->load->view('template_frontend/header');
 								?>	
 								<li>
 										<div class="comment-box">
-											<img alt="" src="images/avatar1.png">
+											<img alt="" src="<?php echo base_url('assets/images/comment_guest.png') ?>">
 											<div class="comment-content">
 												<h6><?php echo $row->nama; ?> <span><?php echo $row->tanggal; ?></span></h6>
 												<p><?php echo $row->isi_komentar; ?></p>
@@ -119,7 +119,7 @@ $this->load->view('template_frontend/header');
 													?>
 												<li>
 													<img alt="" src="<?php echo $gambar.'/'.$komentar->gambar; ?>">
-													<h6><a href="<?php echo base_url();?>home/detail_berita/<?php echo $row->id_berita; ?>"><?php echo $komentar->judul_berita; ?></a></h6>
+													<h6><a href="<?php echo base_url();?>home/detail_berita/<?php echo $komentar->id_berita; ?>"><?php echo $komentar->judul_berita; ?></a></h6>
 												</li>
 											<?php		
 												}
@@ -128,18 +128,17 @@ $this->load->view('template_frontend/header');
 										</div>
 										<div class="tab-content">
 											<ul class="post-recent">
+												<?php
+												$gambar = base_url('assets/images/');
+												foreach ($data_get_recent as $berita) {
+													?>
 												<li>
-													<img alt="" src="images/post-img2.png">
-													<h6><a href="#">Lorem Ipsum. Proin gravida nibh vel velit auctor </a></h6>
+													<img alt="" src="<?php echo $gambar.'/'.$berita->gambar; ?>">
+													<h6><a href="<?php echo base_url();?>home/detail_berita/<?php echo $berita->id_berita; ?>"><?php echo $berita->judul_berita; ?></a></h6>
 												</li>
-												<li>
-													<img alt="" src="images/post-img3.png">
-													<h6><a href="#">Sollicitudin, lorem quis bibendum auctor, nisi elit</a></h6>
-												</li>
-												<li>
-													<img alt="" src="images/post-img.png">
-													<h6><a href="#">Aliquet. Aenean sollicitudin, lorem quis bibendum auctor</a></h6>
-												</li>
+											<?php		
+												}
+											?>
 											</ul>
 										</div>
 										<div class="tab-content">

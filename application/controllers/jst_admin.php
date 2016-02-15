@@ -3,18 +3,10 @@
 class Jst_admin extends CI_Controller {
 
 	public function index() {	
-			$data = array('username' => $this->input->post('username', TRUE),
-						'password' => md5($this->input->post('password', TRUE))
-			);
-	
-		$hasil = $this->m_user->cek_user($data);
-		if ($this->session->userdata('level')=='admin') {
-				redirect('admin/c_admin');
-			}
-		elseif ($this->session->userdata('level')=='member') {
-				redirect('member/c_member');
-			}	
-		else {
+		if ($this->session->userdata('level')=="admin") {
+			redirect('admin/c_admin');
+		}
+		elseif ($this->session->userdata('username')=="") {
 			$this->load->view('admin/login');
 		}
 	}

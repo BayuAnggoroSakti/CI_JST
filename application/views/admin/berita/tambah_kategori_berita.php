@@ -31,7 +31,7 @@ $this->load->view('template_admin/sidebar');
                   <div class="box-body">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Nama Kategori Berita</label>
-                      <input type="text" name="nama_katBer" class="form-control" id="exampleInputEmail1" placeholder="Masukkan nama kategori berita">
+                      <input type="text" required name="nama_katBer" class="form-control" id="exampleInputEmail1" placeholder="Masukkan nama kategori berita">
                     </div>
                    
                   </div><!-- /.box-body -->

@@ -12,6 +12,7 @@ class C_admin extends CI_Controller {
 	public function index() {
 		$data['data_get'] = $this->m_user->view();
 		$data['username'] = $this->session->userdata('username');
+		$data['title'] = "Dashboard || Jogja Science Training";
 		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
 		$data['level'] = $this->session->userdata('level');
 		$this->load->view('admin/index', $data);
@@ -28,6 +29,7 @@ class C_admin extends CI_Controller {
 		$data['username'] = $this->session->userdata('username');
 		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
 		$data['level'] = $this->session->userdata('level');
+		$data['title'] = "Slider Website";
 		$data['data_get'] = $this->m_admin->list_slider();
 		$this->load->view('admin/slider', $data);
 	}

@@ -13,6 +13,7 @@ class Profil extends CI_Controller {
 		$data['new'] = $this->m_admin->detail_profil();
 		$data['username'] = $this->session->userdata('username');
 		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
+		$data['title'] = "Profil || Jogja Science Training";
 		$data['level'] = $this->session->userdata('level');
 		$this->load->view('admin/profil/index', $data);
 	}
@@ -20,13 +21,14 @@ class Profil extends CI_Controller {
 	public function tambah_profil() {
 		$data['username'] = $this->session->userdata('username');
 		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
+		$data['title'] = "Tambah Profil || Jogja Science Training";
 		$data['level'] = $this->session->userdata('level');
 		$this->load->view('admin/profil/tambah_profil', $data);
 	}
 
 	public function proses_tambah_profil() {
 		
-		$this->m_admin->tambah_kategori_profil();
+		$this->m_admin->tambah_profil();
 		redirect('admin/profil/index');
 	}
 
@@ -35,11 +37,12 @@ class Profil extends CI_Controller {
     		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
 			$data['level'] = $this->session->userdata('level');
 			$data = array(
+							'nama_profil' => $this->input->post('nama'),
 							'deskripsi' => $this->input->post('deskripsi')
 					);
-				$id = $this->input->post('id_dp');
-		        $this->db->where('id_dp', $id);
-		        $this->db->update('detail_profil_perusahaan', $data);
+				$id = $this->input->post('id_profil');
+		        $this->db->where('id_profil', $id);
+		        $this->db->update('profil_perusahaan', $data);
 				redirect(base_url().'admin/profil/index');
 		}
 	public function edit_profil($id)
@@ -47,6 +50,7 @@ class Profil extends CI_Controller {
 		$data['username'] = $this->session->userdata('username');
 		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
 		$data['level'] = $this->session->userdata('level');
+		$data['title'] = "Edit Profil || Jogja Science Training";
         $profil = $this->m_admin->edit_profil($id);
         $this->load->vars('b', $profil);
      
@@ -64,6 +68,7 @@ class Profil extends CI_Controller {
 	public function isi_profil() {
 		$data['username'] = $this->session->userdata('username');
 		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
+		$data['title'] = "Isian Profil || Jogja Science Training";
 		$data['level'] = $this->session->userdata('level');
 		$data['data'] = "";
 		//$data['kat_prof'] = $this->m_admin->kategori_profil();

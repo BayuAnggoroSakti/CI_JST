@@ -14,8 +14,8 @@ $this->load->view('template_admin/sidebar');
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Berita</a></li>
-        <li class="active">List Berita</li>
+        <li><a href="#">Profil</a></li>
+        <li class="active">List Profil</li>
     </ol>
 </section>
 
@@ -29,14 +29,12 @@ $this->load->view('template_admin/sidebar');
                     <div class="col-md-2">
                       <a href="<?php echo site_url('admin/profil/tambah_profil') ?>"><button class="btn btn-block btn-info btn-lg">Tambah Profil</button></a>
                     </div>
-                    <div class="col-md-2">
-                      <a href="<?php echo site_url('admin/profil/isi_profil') ?>"><button class="btn btn-block btn-success btn-lg">Isi Profil</button></a>
-                    </div>
+                   
                   </div>
                 
         </div>
         <div class="box-body">
-            <table class="table table-striped">
+            <table class="table table-striped table-hover">
       <thead>
         <tr>
           <th width="80px">No</th>
@@ -56,12 +54,14 @@ $this->load->view('template_admin/sidebar');
     	 {
     	 			$i=1;
     	 	foreach ($new as $row) {
+          $strip = strip_tags($row->deskripsi);
+          $pecah = substr($strip, 0, 150);
     	 
     	 		?>
     	 		<tr> 
     	 		<td> <?php echo $i++;?></td>
     	 		<td> <?php echo $row->nama_profil;?></td>
-    	 		<td> <?php echo $row->deskripsi;?></td>
+    	 		<td> <?php echo $pecah.'. . .';?></td>
     	 		<td> 
     	 		<div class="btn-group">
                       <button type="button" class="btn btn-info">Action</button>
@@ -70,8 +70,8 @@ $this->load->view('template_admin/sidebar');
                         <span class="sr-only">Toggle Dropdown</span>
                       </button>
                       <ul class="dropdown-menu" role="menu">
-                        <li><a href="<?php echo site_url('admin/profil/edit_profil/').'/'.$row->id_dp; ?>">Edit</a></li>
-                        <li><a href="<?php echo site_url('admin/profil/hapus_profil/').'/'.$row->id_dp; ?>"onclick="return confirm('Yakin Menghapus Profil ini ?')" >Hapus</a></li>
+                        <li><a href="<?php echo site_url('admin/profil/edit_profil/').'/'.$row->id_profil; ?>">Edit</a></li>
+                        <li><a href="<?php echo site_url('admin/profil/hapus_profil/').'/'.$row->id_profil; ?>"onclick="return confirm('Yakin Menghapus Profil ini ?')" >Hapus</a></li>
        
                       </ul>
                     </div></td>
