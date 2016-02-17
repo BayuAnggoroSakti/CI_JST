@@ -26,7 +26,7 @@ class Jst_member extends CI_Controller {
 		$this->form_validation->set_rules('password','Password','required|trim|xss_clean');
 
 		if ($this->form_validation->run() == FALSE) {
-			$this->session->set_flashdata('pesan1','Username dan Password Masih Kosong');
+			$this->session->set_flashdata('pesan1','Username / Password Masih Kosong');
 			redirect(site_url('home/login'));
 		}
 		else

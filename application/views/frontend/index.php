@@ -8,7 +8,6 @@ $this->load->view('template_frontend/slider');
 	<!-- content 
 			================================================== -->
 		<div id="content">
-
 			<!-- welcome-box -->
 			<div class="welcome-box" style="background:#FFEB3B">
 				<div class="container">
@@ -91,7 +90,7 @@ $this->load->view('template_frontend/slider');
 										</ul>
 									</div>
 								</div>
-							          <a href="<?php echo base_url();?>home/detail_berita/<?php echo $row->id_berita; ?>"><h4 class="list-group-item-heading"><span class="glyphicon glyphicon-book" aria-hidden="true"></span><?php echo ' '.$row->judul_berita; ?></h4></a>
+							          <a href="<?php echo base_url();?>home/detail_berita/<?php echo $row->id_berita; ?>"><h4 class="list-group-item-heading"><span class="fa fa-book" aria-hidden="true"></span><?php echo ' '.$row->judul_berita; ?></h4></a>
 							         
 							          <b class="list-group-item-text">Penulis </b><?php echo $row->nama_lengkap; ?><br>
 							          <b class="list-group-item-text">Kategori </b><?php echo $row->kategori; ?><br>

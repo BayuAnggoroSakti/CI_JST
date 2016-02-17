@@ -5,8 +5,7 @@ class Home extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
-		$data['menu'] = $this->m_admin->detail_profil();
-		$this->load->view('template_frontend/header',$data);
+		
 
 		$this->load->model('m_pelatihan');
 		$data['gallery'] = $this->m_pelatihan->list_gallery();
@@ -15,6 +14,8 @@ class Home extends CI_Controller {
 
 	public function index($offset=0)
 	{
+		$data['menu'] = $this->m_admin->detail_profil();
+		$this->load->view('template_frontend/header',$data);
 		$data['gallery'] = $this->m_pelatihan->list_gallery();
 		$data['title'] = "Home | Jogja Science Training";
 		$data['active'] = "active";
@@ -57,6 +58,7 @@ class Home extends CI_Controller {
 
 	public function login()
 	{
+
 		if ($this->session->userdata('level')!="" && $this->session->userdata('level')=="member" ) {
 			redirect('member/home');
 		}
@@ -68,10 +70,12 @@ class Home extends CI_Controller {
 	}
 	function try_out()
 	{
+
 		$this->load->view('frontend/try_out');
 	}
 	function file()
 	{
+
 		 $this->load->helper('download'); //jika sudah diaktifkan di autoload, maka tidak perlu di tulis kembali
  		 
 		 $name = $this->input->post('file');
@@ -86,9 +90,39 @@ class Home extends CI_Controller {
 		 }
 		 
 	}
+	function DateToIndo($date) { // fungsi atau method untuk mengubah tanggal ke format indonesia
+   // variabel BulanIndo merupakan variabel array yang menyimpan nama-nama bulan
+		$BulanIndo = array("Januari", "Februari", "Maret",
+						   "April", "Mei", "Juni",
+						   "Juli", "Agustus", "September",
+						   "Oktober", "November", "Desember");
+	
+		$tahun = substr($date, 0, 4); // memisahkan format tahun menggunakan substring
+		$bulan = substr($date, 5, 2); // memisahkan format bulan menggunakan substring
+		$tgl   = substr($date, 8, 2); // memisahkan format tanggal menggunakan substring
+		
+		$result = $tgl . " " . $BulanIndo[(int)$bulan-1] . " ". $tahun;
+		return($result);
+	}
+
+	public function detail_staf($id)
+	{
+		$data = $this->m_admin->detail_staf($id);
+		$tanggal_lahir = $this->DateToIndo($data->tanggal_lahir);
+		$deskripsi = strip_tags($data->deskripsi);
+	    $data_olah = array('nama_lengkap' => $data->nama_lengkap ,
+	    					'bidang' => $data->bidang,
+	    					'tanggal_lahir' => $tanggal_lahir,
+	    					'alamat' => $data->alamat,
+	    					'deskripsi' => $deskripsi
+	    					);
+        echo json_encode($data_olah);
+	}
 
 	public function download($offset=0)
 	{
+		$data['menu'] = $this->m_admin->detail_profil();
+		$this->load->view('template_frontend/header',$data);
 		//$data['materi'] = $this->m_admin->materi();	
 		$jml = $this->db->get('materi');
 	
@@ -124,6 +158,8 @@ class Home extends CI_Controller {
 	}
 	public function program_kerja()
 	{
+		$data['menu'] = $this->m_admin->detail_profil();
+		$this->load->view('template_frontend/header',$data);
         $data['title'] = "Program Kerja";
         $data['guru'] =$this->m_pelatihan->pelatihan_guru();
         $data['siswa'] =$this->m_pelatihan->pelatihan_siswa();
@@ -132,11 +168,15 @@ class Home extends CI_Controller {
 	}
 	public function hubungi_kami()
 	{
+		$data['menu'] = $this->m_admin->detail_profil();
+		$this->load->view('template_frontend/header',$data);
         $data['title'] = "Hubungi Kami";
 		$this->load->view('frontend/hubungi_kami', $data);
 	}
 	public function staf()
 	{
+		$data['menu'] = $this->m_admin->detail_profil();
+		$this->load->view('template_frontend/header',$data);
 		$data['data_get'] = $this->m_admin->staf();	
 		$data['title'] = "Staf Pengajar / Alumni";
 		$this->load->view('frontend/staf',$data);
@@ -144,6 +184,8 @@ class Home extends CI_Controller {
 
 	public function gallery()
 	{
+		$data['menu'] = $this->m_admin->detail_profil();
+		$this->load->view('template_frontend/header',$data);
 		$this->load->model('m_gallery');
 		$data['data_get'] = $this->m_gallery->list_gallery();	
 		$data['title'] = "Gallery JST";
@@ -156,6 +198,8 @@ class Home extends CI_Controller {
         }
         else
         {	
+        	$data['menu'] = $this->m_admin->detail_profil();
+			$this->load->view('template_frontend/header',$data);
         	$data['data_get_recent'] = $this->m_admin->recent_berita();
 	        $berita = $this->m_admin->detail_berita($id);
 	        $data['data_get'] = $this->m_admin->list_komentar($id);
@@ -174,7 +218,8 @@ class Home extends CI_Controller {
         }
         else
         {
-        	
+        	$data['menu'] = $this->m_admin->detail_profil();
+			$this->load->view('template_frontend/header',$data);
 			$data['data_ambil'] = $this->m_admin->list_slider();
         	$profil = $this->m_admin->detail_profilByName($profil);
         	$this->load->vars('b', $profil);   
@@ -191,6 +236,8 @@ class Home extends CI_Controller {
         }
         else
         {
+        	$data['menu'] = $this->m_admin->detail_profil();
+			$this->load->view('template_frontend/header',$data);
 			$data['data_ambil'] = $this->m_admin->list_slider();
         	$program = $this->m_admin->detail_programByID($id);
         	$this->load->vars('b', $program);   

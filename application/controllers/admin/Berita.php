@@ -6,16 +6,19 @@ class Berita extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 			$this->load->model('m_admin');
-		$this->load->library('pagination');
-		$this->load->helper('form','url');
-		$this->load->library('session');
-		$this->load->helper('text');
-	
-			$this->load->model('m_admin');
-		if ($this->session->userdata('username')=="") {
-			redirect('jst_admin');
-		}
-		$this->load->helper('text');
+			$this->load->library('pagination');
+			$this->load->helper('form','url');
+			$this->load->library('session');
+			$this->load->helper('text');
+		 if ($this->session->userdata('level')=="admin") 
+		 {
+		 	
+		 }
+		 else
+		 {
+		 	redirect('jst_admin');
+		 }
+			
 	}
 
 	public function ajax_tabel()

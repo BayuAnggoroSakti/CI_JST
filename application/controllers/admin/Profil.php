@@ -4,18 +4,24 @@ class Profil extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
-		if ($this->session->userdata('username')=="") {
-			redirect('jst_admin');
-		}
 		$this->load->helper('text');
+		 if ($this->session->userdata('level')=="admin") 
+         {
+            
+         }
+         else
+         {
+            redirect('jst_admin');
+         }
 	}
 	public function index() {
-		$data['new'] = $this->m_admin->detail_profil();
-		$data['username'] = $this->session->userdata('username');
-		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
-		$data['title'] = "Profil || Jogja Science Training";
-		$data['level'] = $this->session->userdata('level');
-		$this->load->view('admin/profil/index', $data);
+		 	$data['new'] = $this->m_admin->detail_profil();
+			$data['username'] = $this->session->userdata('username');
+			$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
+			$data['title'] = "Profil || Jogja Science Training";
+			$data['level'] = $this->session->userdata('level');
+			$this->load->view('admin/profil/index', $data);
+		 	$this->load->view('admin/login');	
 	}
 
 	public function tambah_profil() {

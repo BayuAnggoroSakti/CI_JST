@@ -4,9 +4,14 @@ class Try_out extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
-		if ($this->session->userdata('username')=="") {
-			redirect('jst_admin');
-		}
+		 if ($this->session->userdata('level')=="admin") 
+         {
+            
+         }
+         else
+         {
+            redirect('jst_admin');
+         }
 		$this->load->helper('text');
 		$this->load->model('m_kategori_to','kategori_to');
 	}

@@ -21,31 +21,50 @@ $this->load->view('template_admin/sidebar');
     <!-- Default box -->
     <div class="box">
         <div class="box-header with-border">
-            <div class="row">
+                <div class="row">
+                <div class="col-md-12">
+                    <div class="callout callout-success">
+                    <h4>Gallery Pelatihan Jogja Science Training</h4>
+                    <p>- Silahkan tambah gallery jika ingin menambah sebuah gallery baru di pelatihan tertentu</p>
+                    <p>- Klik menu view jika ingin melihat detail gallery beserta foto - foto yang ada di gallery tersebut</p>
+                    <p>- Perhatian !, menghapus gallery menyebabkan foto - foto yang ada di gallery tersebut akan terhapus</p>
+                  </div>
+                  </div>
+                </div>
+                  <div class="row">
                     <div class="col-md-2">
-                      <a href=""><button class="btn btn-block btn-info btn-lg">Tambah Photo</button></a>
+                      <a href="<?php echo site_url('admin/gallery/tambah_gallery') ?>"><button class="btn btn-block btn-info btn-lg">Tambah Gallery</button></a>
                     </div>
                    
                   </div>
-                
         </div>
         <div class="box-body">
          <table class="table">
             <?php
+            if ($data_get == "") {
+              echo "<center> Maaf, Tidak ada Gallery yang dapat ditampilkan </center>";
+            }
+            else
+            {
             $base = base_url('assets/images/pelatihan');
              foreach ($data_get as $gambar) { ?>
+
                      <div class="img">
+                       <div style="background:#38d7ff;margin-top:-20px">
+                       <h3 align="center" style="padding:15px;color:white"> <?php echo $gambar->judul_gallery ?></h3>
+                       </div>
                       <a target="_blank" href="img_fjords.jpg">
-                        <img src="<?php echo $base.'/'.$gambar->judul?>" alt="Trolltunga Norway" width="300" height="200">
+                        <img src="<?php echo $base.'/'.$gambar->foto?>" alt="Trolltunga Norway" width="300" height="200">
                       </a>
                       <div class="desc">
-                          <button class="btn btn-success" data-toggle="modal" data-target="#myModal">View</button>
+                          <a href="<?php echo site_url('admin/gallery/detail_gallery')."/".$gambar->id_gallery ?>"><button class="btn btn-success">View</button></a>
                           <button class="btn btn-danger">Hapus</button>
                       </div>
                     </div>  
 
             <?php
             }
+          }
 
             ?>
             

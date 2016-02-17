@@ -29,7 +29,7 @@
                 </ul>
             </li>
             <li>
-                <a href="<?php echo site_url('admin/c_admin/slider') ?>">
+                <a href="<?php echo site_url('admin/dashboard/slider') ?>">
                     <i class="fa fa-share"></i> <span>Slider</span>
                 </a>
             </li>    

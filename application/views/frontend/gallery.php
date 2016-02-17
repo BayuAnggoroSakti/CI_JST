@@ -20,14 +20,15 @@ $this->load->view('template_frontend/header');
 			<div class="about-box">
 				<div class="container">
 				<?php 
+				  $base = base_url('assets/images/pelatihan');
 					foreach ($data_get as $gambar) { ?>
-					<div class="img">
+					  <div class="img" style=>
+                    
                       <a target="_blank" href="img_fjords.jpg">
-                     
-                        <img src="<?php echo base_url('assets/images/pelatihan')."/".$gambar->judul ?>" alt="Trolltunga Norway" width="300" height="200">
+                        <img src="<?php echo $base.'/'.$gambar->foto?>" alt="Trolltunga Norway" width="300" height="300">
                       </a>
                       <div class="desc">
-                        <p><?php echo $gambar->deskripsi ?> </p>
+                         <p><?php echo $gambar->judul_gallery ?></p>
                       </div>
                     </div>  
 				<?php

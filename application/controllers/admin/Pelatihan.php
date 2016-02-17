@@ -4,23 +4,40 @@ class Pelatihan extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
-		if ($this->session->userdata('username')=="") {
-			redirect('jst_admin');
-		}
-		$this->load->helper('text');
-	    $this->load->model('m_pelatihan','pelatihan');
+        $this->load->helper('text');
+        $this->load->model('m_pelatihan','pelatihan');
         $this->load->model('m_program_kerja','progam_kerja');
+		 if ($this->session->userdata('level')=="admin") 
+         {
+            
+         }
+         else
+         {
+            redirect('jst_admin');
+         }
+		
     }
  
     public function index()
     {
-        //$this->load->model('m_pelatihan');
-    	$data['username'] = $this->session->userdata('username');
-    	$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
-        $data['title'] = "Pelatihan || Jogja Science Training";
-		$data['level'] = $this->session->userdata('level');
-        $data['data_get'] = $this->m_admin->program_kerja();
-		$this->load->view('admin/pelatihan/index', $data);
+        if ($this->session->userdata('level')=="admin") 
+        {
+            //$this->load->model('m_pelatihan');
+            $data['username'] = $this->session->userdata('username');
+            $data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
+            $data['title'] = "Pelatihan || Jogja Science Training";
+            $data['level'] = $this->session->userdata('level');
+            $data['data_get'] = $this->m_admin->program_kerja();
+            $this->load->view('admin/pelatihan/index', $data);
+            
+            //echo $this->session->userdata('level');
+            //redirect('jst_admin');
+        }
+        else
+        {
+           $this->load->view('admin/login');
+        }
+        
     }
 
      public function act_simpan()
@@ -145,10 +162,22 @@ class Pelatihan extends CI_Controller {
     $files = $_FILES;
     $this->load->library('upload');
     $cpt = count ( $_FILES ['gambar'] ['name'] );
+    $nama_foto = $this->input->post('nama_foto');
+
+    //input ke gallery
     $judul = $this->input->post('judul');
     $deskripsi = $this->input->post('deskripsi');
-    $id = $this->input->post('id_pelatihan');
-    $tgl = date('Y-m-d H:i:s');
+    $id_pelatihan = $this->input->post('id_pelatihan');
+    $tgl = date('Y-m-d');
+    $data_gallery = array(
+                            'id_pelatihan' => $id_pelatihan,
+                            'judul' => $judul,
+                            'deskripsi' => $deskripsi,
+                            'tanggal' => $tgl
+                    );
+    $this->db->insert('gallery', $data_gallery);
+    $query = $this->db->query("SELECT id_gallery from gallery where judul = '$judul' and deskripsi = '$deskripsi' and tanggal = '$tgl' and id_pelatihan = '$id_pelatihan'");  
+      
     for($i = 0; $i < $cpt; $i++) {
 
         $_FILES ['gambar'] ['name'] = $files ['gambar'] ['name'] [$i];
@@ -163,13 +192,12 @@ class Pelatihan extends CI_Controller {
         $this->upload->initialize ( $config );
         $this->upload->do_upload ('gambar');
         $nma= $this->upload->file_name;
-        $data = array(
-                            'id_pelatihan' => $id,
-                            'judul' => $nma,
-                            'deskripsi' => $deskripsi[$i],
-                            'tanggal' => $tgl
+        $data_foto = array(
+                            'id_gallery' => $query->row('id_gallery'),
+                            'alamat_foto' => $nma,
+                            'nama_foto' => $nama_foto[$i],
                     );
-        $this->db->insert('gallery', $data);
+        $this->db->insert('foto', $data_foto);
     }
        redirect(site_url('admin/pelatihan/index'));
 }

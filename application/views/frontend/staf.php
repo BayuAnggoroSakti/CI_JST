@@ -53,9 +53,12 @@ $this->load->view('template_frontend/header');
 								</div>
 								<div class="staff-post-gal">
 									<ul class="staf-social">
-										<li><button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+										<li>
+										 <!-- <a href="javascript:void()" onclick="detail_profil(<?php echo $data->id_staf ?>)"> -->
+											<button onclick="detail_profil(<?php echo $data->id_staf ?>)" type="button" class="btn btn-primary btn-lg">
  												 Informasi Selengkapnya
 											</button>
+										</a>
 										</li>
 										
 									</ul>
@@ -73,54 +76,90 @@ $this->load->view('template_frontend/header');
 				</div>
 			</div>
 
-			<!-- staff-box -->
-			
-			
-			<!-- partners box -->
-			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-					  <div class="modal-dialog" role="document">
-					    <div class="modal-content">
-					      <div class="modal-header">
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					        <h4 class="modal-title" id="myModalLabel">Staf Pengajar / Alumni</h4>
-					      </div>
-     
-      <div class="modal-body">
-        <table cellpadding="10" cellspacing="1">
-        	<tr>
-        		<th>Nama Lengkap</th>
-        		<th> : </th>
-        		<td><?php echo $data->nama_lengkap; ?></td>
-        	</tr>
-        	<tr>
-        		<th>Alamat</th>
-        		<th> : </th>
-        		<td><?php echo $data->alamat; ?></td>
-        	</tr>
-        	<tr>
-        		<th>Tanggal Lahir</th>
-        		<th> : </th>
-        		<td><?php echo DateToIndo($data->tanggal_lahir); ?></td>
-        	</tr>
-        	<tr>
-        		<th>Deskripsi</th>
-        		<th> : </th>
-        		<td><?php 
-        				$strip= strip_tags($data->deskripsi);
-        				echo $strip; 
-        			?>
-        		</td>
-        	</tr>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 		</div>
+
+<script src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/plugins/jQuery/jquery-2.2.0.min.js') ?>"></script> 
+<script type="text/javascript">
+var save_method;
+
+function detail_profil(id)
+{
+    save_method = 'update';
+    $('#form')[0].reset(); // reset form on modals
+    $('.form-group').removeClass('has-error'); // clear error class
+    $('.help-block').empty(); // clear error string
+ 
+    //Ajax Load data from ajax
+    $.ajax({
+        url : "<?php echo site_url('home/detail_staf')?>/" + id,
+        type: "GET",
+        dataType: "JSON",
+        success: function(data)
+        {
+ 
+           
+            $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
+            $('.modal-title').text('Staf Pengajar / Alumni');
+            $('.modal-title2').text(data.bidang);
+            $('.nama_lengkap').text(data.nama_lengkap);
+            $('.alamat').text(data.alamat);
+            $('.tanggal_lahir').text(data.tanggal_lahir);
+            $('.deskripsi').text(data.deskripsi);
+            $('.bidang').text(data.bidang);
+             // Set title to Bootstrap modal title
+ 
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+            alert('Error get data from ajax');
+        }
+    });
+}
+</script>
+<div class="modal fade" id="modal_form" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title" align="center">Person Form</h2>
+            </div>
+            <div class="modal-body form">
+                <form action="#" id="form" class="form-horizontal">
+                    <table cellpadding="10" cellspacing="1">
+		        	<tr>
+		        		<th>Nama Lengkap</th>
+		        		<th> : </th>
+		        		<td class="nama_lengkap"></td>
+		        	</tr>
+		        	<tr>
+		        		<th>Bidang</th>
+		        		<th> : </th>
+		        		<td class="bidang"></td>
+		        	</tr>
+		        	<tr>
+		        		<th>Tanggal Lahir</th>
+		        		<th> : </th>
+		        		<td class="tanggal_lahir"></td>
+		        	</tr>
+		        	<tr>
+		        		<th>Alamat</th>
+		        		<th> : </th>
+		        		<td class="alamat"></td>
+		        	</tr>
+		        	<tr>
+		        		<th>Deskripsi</th>
+		        		<th> : </th>
+		        		<td class="deskripsi"></td>
+		        	</tr>
+		        </table>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 			
 <?php		
 $this->load->view('template_frontend/footer');

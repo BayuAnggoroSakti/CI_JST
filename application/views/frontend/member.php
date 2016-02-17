@@ -3,8 +3,7 @@ $this->load->view('template_frontend/head');
 $this->load->view('template_frontend/header');
 
 ?>
-  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/plugins/jQuery/jquery-2.2.0.min.js') ?>"></script>
 <script>
     $(function() {
     $( "#tabs" ).tabs('show');

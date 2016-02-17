@@ -24,7 +24,7 @@ $this->load->view('template_admin/sidebar');
                   <h3 class="box-title">Tambahkan Slider</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form action="<?php echo base_url('admin/c_admin/slider_simpan'); ?>" onsubmit="return validasi_input(this)" method="post" enctype="multipart/form-data" class="form-horizontal">
+                <form action="<?php echo base_url('admin/dashboard/slider_simpan'); ?>" onsubmit="return validasi_input(this)" method="post" enctype="multipart/form-data" class="form-horizontal">
                   <div class="box-body">
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Silahkan Upload Gambar</label>

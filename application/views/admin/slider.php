@@ -32,7 +32,7 @@ $this->load->view('template_admin/sidebar');
             </div>
         </div>
            <div class="col-md-2">
-      <a href="<?php echo base_url();?>admin/c_admin/tambah_slide"><button class="btn btn-block btn-info btn-lg">Tambah Slide</button></a>
+      <a href="<?php echo base_url();?>admin/dashboard/tambah_slide"><button class="btn btn-block btn-info btn-lg">Tambah Slide</button></a>
       </div>
         <div class="box-body">
             <table class="table table-striped">
@@ -56,7 +56,7 @@ $this->load->view('template_admin/sidebar');
           <td align="center"><img src="<?php echo $gambar.'/'.$row->gambar; ?>" width="100px" height="100px"> </td>
           <td><?php echo $row->deskripsi; ?></td>
           <td>
-          <a href="<?php echo base_url();?>admin/c_admin/hapus_slider/<?php echo $row->id_slider; ?>" onclick="return confirm('Menghapus Berita ini ?')">
+          <a href="<?php echo base_url();?>admin/dashboard/hapus_slider/<?php echo $row->id_slider; ?>" onclick="return confirm('Menghapus Berita ini ?')">
               <button type="button" class="btn btn-danger">Delete</button>
           </a>
           </td>

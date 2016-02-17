@@ -645,7 +645,7 @@ body {
 .carousel-control.left {
     right: 28px;
     left: auto;
-    background: white;
+    background: #ffcc00;
 }
 
 .carousel-control.left:before {
@@ -653,14 +653,14 @@ body {
     content: "\f104";
     position: absolute;
     font-size: 19px;
-    color: #fff;
+    color: white;
     top: -1px;
     left: 8px;
 }
 
 .carousel-control.right {
     right: 0;
-    background: white;
+    background: #ffcc00;
 }
 
 .carousel-control.right:before {
@@ -668,18 +668,18 @@ body {
     content: "\f105";
     position: absolute;
     font-size: 19px;
-    color: #fff;
+    color: white;
     top: -1px;
     left: 10px;
 }
 
 .carousel-control.left:hover {
-    background: yellow;
+    background: black;
     opacity: 1;
 }
 
 .carousel-control.right:hover {
-    background: yellow;
+    background: black;
     opacity: 1;
 }
 

@@ -17,6 +17,16 @@
 		  	return $hasil;
 		  }
 	}
+
+	 public function detail_staf($id)
+    {
+        $this->db->from('staf_pengajar');
+        $this->db->where('id_staf',$id);
+        $query = $this->db->get();
+ 
+        return $query->row();
+    }
+
 	 function recent_berita() 
 	{
 		  $ambil = $this->db->query('SELECT id_berita,judul_berita, isi_berita, tanggal_berita, status_terbit, kb.nama_katber as kategori, gambar, u.nama_lengkap as nama_lengkap FROM user u, berita b, kategori_berita kb where b.id_kateBer = kb.id_katBer and b.id_user = u.id_user order by tanggal_berita desc limit 4');
@@ -341,6 +351,12 @@
 
 	function Kategori() {
 		$Kat = $this->db->from('kategori_berita')
+						->get();
+		return $Kat->result_array();
+	}
+
+	function Pelatihan() {
+		$Kat = $this->db->from('pelatihan')
 						->get();
 		return $Kat->result_array();
 	}

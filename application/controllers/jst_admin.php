@@ -4,9 +4,10 @@ class Jst_admin extends CI_Controller {
 
 	public function index() {	
 		if ($this->session->userdata('level')=="admin") {
-			redirect('admin/c_admin');
+			redirect('admin/dashboard');
 		}
-		elseif ($this->session->userdata('username')=="") {
+		else
+		{
 			$this->load->view('admin/login');
 		}
 	}
@@ -36,7 +37,7 @@ class Jst_admin extends CI_Controller {
 				$this->session->set_userdata($sess_data);
 			}
 			if ($this->session->userdata('level')=='admin') {
-				redirect('admin/c_admin');
+				redirect('admin/dashboard');
 			}
 			elseif ($this->session->userdata('level')=='member') {
 				redirect('member/c_member');
