@@ -73,6 +73,8 @@ $this->load->view('template_admin/sidebar');
  
                 var t = $('#mytable').DataTable({
                     "processing": true,
+                    "sScrollX":       "100%",
+                    "sScrollXInner":  "100%",
                     "serverSide": true,
                     "ajax": "<?php echo site_url('admin/staf/ajax_tabel'); ?>",
                     "columns": [

@@ -4,7 +4,25 @@ $this->load->view('template_frontend/header');
 ?>
 
 <div id="content">
-
+<?php 
+function rupiah($nilai, $pecahan = 0) {
+    return number_format($nilai, $pecahan, ',', '.');
+}
+function DateToIndo($date) { // fungsi atau method untuk mengubah tanggal ke format indonesia
+   // variabel BulanIndo merupakan variabel array yang menyimpan nama-nama bulan
+		$BulanIndo = array("Januari", "Februari", "Maret",
+						   "April", "Mei", "Juni",
+						   "Juli", "Agustus", "September",
+						   "Oktober", "November", "Desember");
+	
+		$tahun = substr($date, 0, 4); // memisahkan format tahun menggunakan substring
+		$bulan = substr($date, 5, 2); // memisahkan format bulan menggunakan substring
+		$tgl   = substr($date, 8, 2); // memisahkan format tanggal menggunakan substring
+		
+		$result = $tgl . " " . $BulanIndo[(int)$bulan-1] . " ". $tahun;
+		return($result);
+	}
+?>
 
 			<!-- Page Banner -->
 			<div class="page-banner">
@@ -22,35 +40,86 @@ $this->load->view('template_frontend/header');
 			<div class="single-project-page">
 				<div class="container">
 					<div class="row">
+					<h2 align="center"><?php echo $b->row('nama')." (".$b->row('nama_program').")" ?></h2>
+					<br>
 					<?php
 						$base = base_url('assets/images/pelatihan');
 					 ?>
-						<div class="col-md-9">
+						<div class="col-md-7">
 							<div class="single-project-content">
 								<img alt="" src="<?php echo $base."/".$b->row('url') ?>">
-								<h2><?php echo $b->row('nama') ?></h2>
-								<p><?php echo $b->row('keterangan') ?></p>
 							</div>
 						</div>
 	
-					<div class="col-md-3 sidebar">
+					<div class="col-md-5 sidebar">
 							<div class="sidebar-widgets">
-								<div class="tags-widget widget">
-									<h5>Tags</h5>
-									<ul class="tag-widget-list">
-										<li><a href="#">web design</a></li>
-										<li><a href="#">coding</a></li>
-										<li><a href="#">wordpress</a></li>
-										<li><a href="#">woo commerce</a></li>
-										<li><a href="#">php</a></li>
-										<li><a href="#">photography</a></li>
-									</ul>
-								</div>
+			
+								<div class="accordion-widget widget">
+									
+									<div class="accordion-box">
 
-								<div class="text-widget widget">
-									<h5>Text Widget</h5>
-									<p>Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non  mauris vitae erat consequat</p>
+										<div class="accord-elem active">
+											<div class="accord-title">
+												<h5><i class="fa fa-question"></i>Lokasi</h5>
+												<a class="accord-link" href="#"></a>
+											</div>
+											<div class="accord-content">
+												<b><?php echo $b->row('lokasi') ?></b>
+											</div>
+										</div>
+
+										<div class="accord-elem">
+											<div class="accord-title">
+												<h5><i class="fa fa-question"></i>Biaya</h5>
+												<a class="accord-link" href="#"></a>
+											</div>
+											<div class="accord-content">
+												<b><?php echo "Rp.".rupiah($b->row('biaya'),2) ?></b>
+											</div>
+										</div>
+
+										<div class="accord-elem">
+											<div class="accord-title">
+												<h5><i class="fa fa-question"></i>Waktu</h5>
+												<a class="accord-link" href="#"></a>
+											</div>
+											<div class="accord-content">
+											<table class="table">
+												<tr>
+													<th>Mulai</th>
+													<th>:</th>
+													<td><?php echo DateToIndo($b->row('waktu_mulai'))?></td>
+												</tr>
+												<tr>
+													<th>Selesai</th>
+													<th>:</th>
+													<td><?php echo DateToIndo($b->row('waktu_selesai'))?></td>
+												</tr>
+											</table>
+												
+											</div>
+										</div>
+										<div class="accord-elem">
+											<div class="accord-title">
+												<h5><i class="fa fa-question"></i>Fasilitas</h5>
+												<a class="accord-link" href="#"></a>
+											</div>
+											<div class="accord-content">
+												<b><?php echo strtoupper($b->row('fasilitas')) ?></b>
+											</div>
+										</div>
+										<div class="accord-elem">
+											<div class="accord-title">
+												<h5><i class="fa fa-question"></i>Keterangan</h5>
+												<a class="accord-link" href="#"></a>
+											</div>
+											<div class="accord-content">
+												<b><?php echo $b->row('keterangan') ?></b>
+											</div>
+										</div>
+									</div>
 								</div>
+								
 
 							</div>
 						</div>

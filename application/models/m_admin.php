@@ -17,11 +17,32 @@
 		  	return $hasil;
 		  }
 	}
-
+	public function my_profile($id)
+	{
+		$this->db->from('user');
+        $this->db->where('id_user',$id);
+        $query = $this->db->get();
+        return $query;
+	}
 	 public function detail_staf($id)
     {
         $this->db->from('staf_pengajar');
         $this->db->where('id_staf',$id);
+        $query = $this->db->get();
+ 
+        return $query->row();
+    }
+
+     public function update_profil($where, $data)
+    {
+        $this->db->update('user', $data, $where);
+        return $this->db->affected_rows();
+    }
+
+     public function get_user_by_id($id)
+    {
+        $this->db->from('user');
+        $this->db->where('id_user',$id);
         $query = $this->db->get();
  
         return $query->row();
@@ -61,6 +82,16 @@
 		  }
 		
 	}
+	function check_pass($table_name, $password_lama, $id){
+		$this->db->where('password',md5($password_lama));
+		$this->db->where('id_user',$id);
+		$query = $this->db->get($table_name);
+		if($query->num_rows() > 0 ){
+			return TRUE;
+		}else{
+			return FALSE;
+		}
+	}
 	 function detail_profilByName($nama) 
 	{
 		 $query = $this->db->query("SELECT * from profil_perusahaan where nama_profil = '$nama'");
@@ -68,7 +99,13 @@
 	}
 	 function detail_programByID($id) 
 	{
-		 $query = $this->db->query("SELECT distinct p.nama_pelatihan as nama, p.biaya as biaya, p.lokasi as lokasi, p.fasilitas as fasilitas, p.keterangan as keterangan, g.judul as url, pk.nama_programKerja as nama_program from gallery g, pelatihan p, program_kerja pk where g.id_pelatihan = p.id_pelatihan and pk.id_programKerja = p.id_programKerja and p.id_pelatihan = '$id'");
+		 $query = $this->db->query("SELECT distinct p.fasilitas as fasilitas, p.waktu_mulai as waktu_mulai, p.waktu_selesai as waktu_selesai,p.nama_pelatihan as nama, p.biaya as biaya, p.lokasi as lokasi, p.fasilitas as fasilitas, p.keterangan as keterangan, f.alamat_foto as url, pk.nama_programKerja as nama_program from gallery g, pelatihan p, program_kerja pk, foto f where g.id_pelatihan = p.id_pelatihan and pk.id_programKerja = p.id_programKerja and g.id_gallery = f.id_gallery and p.id_pelatihan = '$id' group by p.nama_pelatihan");
+        return $query;
+	}
+
+	 function detail_galleryByID($id) 
+	{
+		 $query = $this->db->query("SELECT distinct p.waktu_mulai as waktu_mulai, p.waktu_selesai as waktu_selesai,p.nama_pelatihan as nama, p.biaya as biaya, p.lokasi as lokasi, p.fasilitas as fasilitas, p.keterangan as keterangan, f.alamat_foto as url, pk.nama_programKerja as nama_program from gallery g, pelatihan p, program_kerja pk, foto f where g.id_pelatihan = p.id_pelatihan and pk.id_programKerja = p.id_programKerja and g.id_gallery = f.id_gallery and p.id_pelatihan = '$id' group by p.nama_pelatihan");
         return $query;
 	}
 
@@ -192,7 +229,7 @@
 			$offset = ','.$offset;
 		}
 	//return $query = $this->db->query('SELECT id_beritaA,judul_berita, isi_berita, tanggal_berita, status_terbit, kb.nama_katber as kategori, gambar, u.nama_lengkap as nama_lengkap FROM user u, berita b, kategori_berita kb where b.id_kateBer = kb.id_katBer and b.id_user = u.id_user order by tanggal_berita desc LIMIT $',$num,$offset)->result();
-	 $query = $this->db->query("SELECT id_berita,judul_berita, isi_berita, tanggal_berita, status_terbit, kb.nama_katber as kategori, gambar, u.nama_lengkap as nama_lengkap FROM user u, berita b, kategori_berita kb where b.id_kateBer = kb.id_katBer and b.id_user = u.id_user order by tanggal_berita desc LIMIT $num $offset");
+	 $query = $this->db->query("SELECT id_berita,judul_berita, isi_berita, tanggal_berita, status_terbit, kb.nama_katber as kategori, gambar, u.nama_lengkap as nama_lengkap FROM user u, berita b, kategori_berita kb where b.id_kateBer = kb.id_katBer and b.id_user = u.id_user and status_terbit like '%y%' order by tanggal_berita desc LIMIT $num $offset");
  	 //$query = $this->db->get('berita b, user u, kategori_berita kb where',$num, $offset);
  	 return $query->result();
 	}

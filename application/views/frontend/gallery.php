@@ -16,28 +16,33 @@ $this->load->view('template_frontend/header');
 					</ul>
 				</div>
 			</div>
-
-			<div class="about-box">
+			<div class="portfolio-box with-4-col">
 				<div class="container">
-				<?php 
-				  $base = base_url('assets/images/pelatihan');
-					foreach ($data_get as $gambar) { ?>
-					  <div class="img" style=>
-                    
-                      <a target="_blank" href="img_fjords.jpg">
-                        <img src="<?php echo $base.'/'.$gambar->foto?>" alt="Trolltunga Norway" width="300" height="300">
-                      </a>
-                      <div class="desc">
-                         <p><?php echo $gambar->judul_gallery ?></p>
-                      </div>
-                    </div>  
-				<?php
-					}
-				?>
-					  
-                    
+					<div class="portfolio-container">
+					<?php 
+						foreach ($data_get as $data) { 
+							$nama = $data->nama;
+				
+
+									?>
+						<div class="work-post guru">
+							<div class="work-post-gal">
+								<img alt="" width="200px" height="200px" src="<?php echo base_url('assets/images/pelatihan')."/".$data->foto ?>">
+					
+							</div>
+							<div class="work-post-content">
+								<a href="<?php echo site_url('home/detail_gallery').'/'.$data->id_gallery ?>"><h5><?php echo $data->judul_gallery ?></h5> </a>
+							</div>
+						</div>
+
+					<?php
+						}
+					?>
+								
 				</div>
 			</div>
+
+		
 
 			<!-- staff-box -->
 			

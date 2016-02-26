@@ -87,7 +87,21 @@ class Soal extends CI_Controller {
         $opsi_c = $this->input->post('opsi_c');
         $opsi_d = $this->input->post('opsi_d');
         $opsi_e = $this->input->post('opsi_e');
-        $kunci = $this->input->post('kunci');
+        if ($this->input->post('kunci') == 'opsi_a') {
+           $kunci = $opsi_a;
+        }
+        elseif ($this->input->post('kunci') == 'opsi_b') {
+            $kunci = $opsi_b;
+        }
+        elseif ($this->input->post('kunci') == 'opsi_c') {
+            $kunci = $opsi_c;
+        }
+        elseif ($this->input->post('kunci') == 'opsi_d') {
+            $kunci = $opsi_d;
+        }
+        elseif ($this->input->post('kunci') == 'opsi_e') {
+            $kunci = $opsi_e;
+        }
         $uraian = $this->input->post('uraian');
         $pembahasan = $this->input->post('pembahasan');
         $status = $this->input->post('status');
@@ -150,7 +164,21 @@ class Soal extends CI_Controller {
         $opsi_c = $this->input->post('opsi_c');
         $opsi_d = $this->input->post('opsi_d');
         $opsi_e = $this->input->post('opsi_e');
-        $kunci = $this->input->post('kunci');
+        if ($this->input->post('kunci') == 'opsi_a') {
+           $kunci = $opsi_a;
+        }
+        elseif ($this->input->post('kunci') == 'opsi_b') {
+            $kunci = $opsi_b;
+        }
+        elseif ($this->input->post('kunci') == 'opsi_c') {
+            $kunci = $opsi_c;
+        }
+        elseif ($this->input->post('kunci') == 'opsi_d') {
+            $kunci = $opsi_d;
+        }
+        elseif ($this->input->post('kunci') == 'opsi_e') {
+            $kunci = $opsi_e;
+        }
         $uraian = $this->input->post('uraian');
         $pembahasan = $this->input->post('pembahasan');
         $status = $this->input->post('status');

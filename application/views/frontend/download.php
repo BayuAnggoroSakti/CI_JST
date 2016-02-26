@@ -3,16 +3,16 @@ $this->load->view('template_frontend/head');
 $this->load->view('template_frontend/header');
 
 ?>
-<link href="<?php echo base_url('assets/admin/AdminLTE-2.0.5/bootstrap/css/bootstrap.min.css') ?>" rel="stylesheet" type="text/css" />
+
  
  <div id="content">
 			<!-- Page Banner -->
 			<div class="page-banner">
 				<div class="container">
-					<h2>About Us</h2>
+					<h2>Materi</h2>
 					<ul class="page-tree">
 						<li><a href="#">Home</a></li>
-						<li><a href="#">About</a></li>
+						<li><a href="#">Materi</a></li>
 					</ul>
 				</div>
 			</div>
@@ -86,7 +86,7 @@ $this->load->view('template_frontend/header');
 													{
 														echo '';
 													}
-												?> class="btn btn-warning"><span class="glyphicon glyphicon-save" role="button"></span> Download</button>
+												?> class="btn btn-warning"></span> Download</button>
 												</form>
 												</td>
 											</tr>

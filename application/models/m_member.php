@@ -7,6 +7,7 @@
 			$this->db->where('username', $username);
 			$this->db->where('password', $password);
 			$this->db->where('level', 'member');
+			$this->db->where('status', '1');
 			$query= $this->db->get('user');
 
 			if ($query->num_rows() > 0) {

@@ -4,7 +4,7 @@
 
 		<!-- footer 
 			================================================== -->
-		<footer class="footer-distributed">
+		<footer class="footer-distributed" style="margin-top:-1px">
 
 			<div class="footer-left" style="margin-top:-40px">
 
@@ -36,7 +36,7 @@
 
 				<div>
 					<i class="fa fa-envelope"></i>
-					<p><a href="mailto:support@company.com">support@company.com</a></p>
+					<p><a href="mailto:support@company.com">jogjasciencetraining@gmail.com</a></p>
 				</div>
 
 			</div>

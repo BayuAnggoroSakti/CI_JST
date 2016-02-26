@@ -31,66 +31,29 @@ $this->load->view('template_frontend/header');
 								<p><?php echo $b->row('isi_berita') ?></p>
 							</div>
 
-							<div class="comment-section">
-							<?php
-								foreach ($data_get2 as $row) {
-									?>
-									<h3><?php echo $row->jum." "; ?> Komentar</h3>
-							<?php
+							
+<div id="disqus_thread"></div>
+<script>
+/**
+* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
 
-								}
-							?>
-								
+s.src = '//jogjasciencetrainingcom.disqus.com/embed.js';
 
-								<ul class="comment-tree">
-								<?php
-								if ($data_get == NULL) {
-									
-								}
-								else
-								{
-									foreach ($data_get as $row) {
-								
-								
-								?>	
-								<li>
-										<div class="comment-box">
-											<img alt="" src="<?php echo base_url('assets/images/comment_guest.png') ?>">
-											<div class="comment-content">
-												<h6><?php echo $row->nama; ?> <span><?php echo $row->tanggal; ?></span></h6>
-												<p><?php echo $row->isi_komentar; ?></p>
-												<a class="reply-comment" href="#">reply</a>
-											</div>
-										</div>
-										
-									</li>
-								<?php	
-									}
-								}
-								?>
-								
-								</ul>
-							</div>
-
-							<div class="leave-comment">
-								<h3>Leave a comment</h3>
-								<form class="comment-form" action="<?php echo base_url('home/tambah_komentar'); ?>" method="post">
-									<div class="row">
-
-										<div class="col-md-4">
-											<input type="text" name="nama" placeholder="name"/>	
-											<input type="text" name="email" placeholder="e-mail"/>
-											<input type="hidden" name="id_berita" value="<?php echo $b->row('id_berita'); ?>">	
-										</div>
-
-										<div class="col-md-8">
-											<textarea placeholder="message" name="isi_komentar"></textarea>
-											<input type="submit"  value="Add a Comment"/>
-										</div>
-
-									</div>
-								</form>
-							</div>
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 						</div>
 
 						<div class="col-md-3 sidebar">

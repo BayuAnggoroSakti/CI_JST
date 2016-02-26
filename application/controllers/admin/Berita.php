@@ -20,7 +20,20 @@ class Berita extends CI_Controller {
 		 }
 			
 	}
-
+function DateToIndo($date) { // fungsi atau method untuk mengubah tanggal ke format indonesia
+   // variabel BulanIndo merupakan variabel array yang menyimpan nama-nama bulan
+		$BulanIndo = array("Januari", "Februari", "Maret",
+						   "April", "Mei", "Juni",
+						   "Juli", "Agustus", "September",
+						   "Oktober", "November", "Desember");
+	
+		$tahun = substr($date, 0, 4); // memisahkan format tahun menggunakan substring
+		$bulan = substr($date, 5, 2); // memisahkan format bulan menggunakan substring
+		$tgl   = substr($date, 8, 2); // memisahkan format tanggal menggunakan substring
+		
+		$result = $tgl . " " . $BulanIndo[(int)$bulan-1] . " ". $tahun;
+		return($result);
+	}
 	public function ajax_tabel()
     {
         if (!$this->input->is_ajax_request()) {
@@ -46,11 +59,21 @@ class Berita extends CI_Controller {
                 array('db' => 'judul_berita', 'dt' => 'judul_berita'),
                 array('db' => 'isi_berita', 'dt' => 'isi_berita'),
                 array('db' => 'id_berita', 'dt' => 'id_berita'),
-                array('db' => 'tanggal_berita', 'dt' => 'tanggal_berita'),
+                array('db' => 'tanggal_berita', 'dt' => 'tanggal_berita','formatter' => function( $d ){
+                	  return $this->DateToIndo($d);
+                }),
                 array('db' => 'gambar', 'dt' => 'gambar', 'formatter' => function( $d ){
                 	  return '<img width="150px" height="100px" src="'.base_url('assets/images/')."/".$d.'">';
                 }),
-                array('db' => 'status_terbit', 'dt' => 'status_terbit'),
+                array('db' => 'status_terbit', 'dt' => 'status_terbit', 'formatter' => function( $d ){
+                	if ($d == "y") {
+                		return '<small class="label pull-right bg-green">Terbit</small>';
+                	}
+                	else
+                	{
+                		return '<small class="label pull-right bg-red">Tidak Terbit</small>';
+                	}
+                	}),
                 array(
                     'db' => 'id_berita',
                     'dt' => 'aksi',
@@ -69,7 +92,7 @@ class Berita extends CI_Controller {
             );
  
             echo json_encode(
-                    Datatables_ssp::simple($_GET, $sql_details, $table, $primaryKey, $columns)
+             Datatables_ssp::simple($_GET, $sql_details, $table, $primaryKey, $columns)
             );
         }
     }

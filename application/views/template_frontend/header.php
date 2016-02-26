@@ -5,8 +5,8 @@
 				<div class="top-line">
 					<div class="container" >
 						<p>
-							<span><i class="fa fa-phone"></i>1234 - 5678 - 9012</span>
-							<span><i class="fa fa-envelope-o"></i>support@convertible.com</span>
+							<span><i class="fa fa-phone"></i>0856 - 2886 - 649</span>
+							<span><i class="fa fa-envelope-o"></i>jogjasciencetraining@gmail.com</span>
 						</p>
 						<?php
 							if ($this->session->userdata('level') == 'member') {?>
@@ -21,7 +21,7 @@
 								<ul class="social-icons">
 									<li><a href="<?php echo site_url('home/login') ?>"> <i class="fa fa-sign-in"></i> Login Member </a></li>
 									<li>|</li>
-									<li><a href=""> <i class="fa fa-edit"></i> Register </a></li>
+									<li><a href="<?php echo site_url('home/register') ?>"> <i class="fa fa-edit"></i> Register </a></li>
 								
 								</ul>
 						<?php		

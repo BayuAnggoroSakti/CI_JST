@@ -30,7 +30,7 @@ class Jst_admin extends CI_Controller {
 		if ($hasil->num_rows() == 1) {
 			foreach ($hasil->result() as $sess) {
 				$sess_data['logged_in'] = 'Sudah Loggin';
-				$sess_data['uid'] = $sess->uid;
+				$sess_data['uid'] = $sess->id_user;
 				$sess_data['username'] = $sess->username;
 				$sess_data['nama_lengkap'] = $sess->nama_lengkap;
 				$sess_data['level'] = $sess->level;

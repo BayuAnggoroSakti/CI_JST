@@ -770,7 +770,7 @@ body {
     content: '';
     width: 50px;
     height: 50px;
-    background: blue center center no-repeat;
+    background: url('../images/pelatihan/kaca2.png') center center no-repeat;
     transition: all 0.17s ease-in-out;
     -moz-transition: all 0.17s ease-in-out;
     -webkit-transition: all 0.17s ease-in-out;
@@ -787,9 +787,11 @@ body {
 
 .hover-box a.zoom {
     right: 50%;
-    margin-right: 5px;
-    background: yellow  center center no-repeat;
+    /*margin-right: 5px;*/
+    margin-right: -20px;
+    background: url('../images/pelatihan/kaca.png') center center no-repeat;
 }
+
 
 .hover-box a.page {
     left: 50%;
@@ -1651,7 +1653,7 @@ a.accord-link {
     top: 0;
     right: 0;
     border-left: 1px solid black;
-    background: yellow center center no-repeat;
+    background: url('../images/pelatihan/plus3.png') center center no-repeat;
     transition: all 0.2s ease-in-out;
     -moz-transition: all 0.2s ease-in-out;
     -webkit-transition: all 0.2s ease-in-out;
@@ -1659,7 +1661,7 @@ a.accord-link {
 }
 
 .accord-elem.active a.accord-link {
-    background: red center center no-repeat;
+    background: url('../images/pelatihan/men.png') center center no-repeat;
 }
 
 a.accord-link.opened {

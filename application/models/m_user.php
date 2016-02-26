@@ -112,9 +112,9 @@ class M_user extends CI_Model {
         return $this->db->affected_rows();
     }
  
-    public function delete_by_id($id)
+    public function delete_by_id($where, $data)
     {
-        $this->db->where('id_user', $id);
-        $this->db->delete($this->table);
+        $this->db->update($this->table, $data, $where);
+        return $this->db->affected_rows();
     }
 }

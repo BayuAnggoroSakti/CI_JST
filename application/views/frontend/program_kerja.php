@@ -37,7 +37,7 @@ $this->load->view('template_frontend/header');
 								<img alt="" width="200px" height="200px" src="<?php echo base_url('assets/images/pelatihan')."/".$data->url ?>">
 								<div class="hover-box">
 									<a class="zoom" href="<?php echo base_url('assets/images/pelatihan')."/".$data->url ?>"></a>
-									<a class="page" href="<?php echo site_url('home/detail_program')."/".$data->id ?>"></a>
+									<!-- <a class="page" href="<?php echo site_url('home/detail_program')."/".$data->id ?>"></a> -->
 								</div>
 							</div>
 							<div class="work-post-content">
@@ -59,7 +59,7 @@ $this->load->view('template_frontend/header');
 								<img alt="" width="200px" height="200px" src="<?php echo base_url('assets/images/pelatihan')."/".$data->url ?>">
 								<div class="hover-box">
 									<a class="zoom" href="<?php echo base_url('assets/images/pelatihan')."/".$data->url ?>"></a>
-									<a class="page" href="<?php echo site_url('home/detail_program')."/".$data->id?>"></a>
+									
 								</div>
 							</div>
 							<div class="work-post-content">
@@ -74,15 +74,7 @@ $this->load->view('template_frontend/header');
 
 						
 						
-					</div>
-
-					<ul class="pagination-list">
-						<li><a class="active" href="#">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">5</a></li>
-					</ul>				
+					</div>		
 				</div>
 			</div>
 

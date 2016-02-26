@@ -20,8 +20,7 @@ class Profil extends CI_Controller {
 			$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
 			$data['title'] = "Profil || Jogja Science Training";
 			$data['level'] = $this->session->userdata('level');
-			$this->load->view('admin/profil/index', $data);
-		 	$this->load->view('admin/login');	
+			$this->load->view('admin/profil/index', $data);	
 	}
 
 	public function tambah_profil() {

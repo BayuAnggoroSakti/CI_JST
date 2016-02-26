@@ -41,6 +41,8 @@ $this->load->view('template_admin/sidebar');
                         <tr>
                             <th>No</th>
                             <th>Nama Kategori Try Out</th>
+                            <th>Waktu (Menit)</th>
+                             <th>Jumlah Soal</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -157,6 +159,8 @@ function edit_katTO(id)
  
             $('[name="id_katTO"]').val(data.id_katTO);
             $('[name="nama"]').val(data.nama);
+            $('[name="waktu"]').val(data.waktu);
+            $('[name="jum_soal"]').val(data.jum_soal);
            
             $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
             $('.modal-title').text('Edit Person'); // Set title to Bootstrap modal title
@@ -265,6 +269,20 @@ function delete_katTO(id)
                             <label class="control-label col-md-3">Nama</label>
                             <div class="col-md-9">
                                 <input name="nama" placeholder="Nama Kategori TO" class="form-control" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3">Waktu</label>
+                            <div class="col-md-2">
+                                <input name="waktu" placeholder="Dalam menit" class="form-control" type="number">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3">Jumlah Soal</label>
+                            <div class="col-md-2">
+                                <input name="jum_soal" placeholder="jumlah soal" class="form-control" type="number">
                                 <span class="help-block"></span>
                             </div>
                         </div>

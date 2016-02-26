@@ -19,15 +19,16 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
+            <li>
+                <a href="<?php echo site_url('admin/dashboard') ?>">
+                    <i class="fa fa-dashboard"></i> <span>Dashboard</span> 
                 </a>
-                <ul class="treeview-menu">
-                    <li><a href="<?php echo site_url('dashboard1') ?>"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-                    <li><a href="<?php echo site_url('dashboard2') ?>"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
-                </ul>
             </li>
+              <li>
+                <a href="<?php echo site_url('admin/my_profil') ?>">
+                    <i class="fa fa-user"></i> <span>My Profile</span> 
+                </a>
+            </li>  
             <li>
                 <a href="<?php echo site_url('admin/dashboard/slider') ?>">
                     <i class="fa fa-share"></i> <span>Slider</span>
@@ -40,7 +41,7 @@
             </li>   
             <li>
                 <a href="<?php echo site_url('admin/user') ?>">
-                    <i class="fa fa-user"></i> <span>User</span> 
+                    <i class="fa fa-users"></i> <span>User</span> 
                 </a>
             </li>  
              <li>

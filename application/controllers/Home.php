@@ -8,7 +8,9 @@ class Home extends CI_Controller {
 		
 
 		$this->load->model('m_pelatihan');
-		$data['gallery'] = $this->m_pelatihan->list_gallery();
+		$this->load->model('m_register');
+		$this->load->model('m_captcha');
+		
 		 //$this->load->view('frontend/list_pelatihan',$data);
 	}
 
@@ -16,13 +18,14 @@ class Home extends CI_Controller {
 	{
 		$data['menu'] = $this->m_admin->detail_profil();
 		$this->load->view('template_frontend/header',$data);
-		$data['gallery'] = $this->m_pelatihan->list_gallery();
+		$data['gallery_g'] = $this->m_pelatihan->list_gallery_guru();
+		$data['gallery_s'] = $this->m_pelatihan->list_gallery_siswa();
 		$data['title'] = "Home | Jogja Science Training";
 		$data['active'] = "active";
 		$data['data_get_komentar'] = $this->m_admin->populer_komentar();
 		$data['data_get_recent'] = $this->m_admin->recent_berita();
 		$data['data_ambil'] = $this->m_admin->list_slider();
-		$jml = $this->db->get('berita');
+		$jml = $this->db->where('status_terbit', 'y')->get('berita');
 	
 		   $config['base_url'] = base_url().'home/index';
 		   $config['total_rows'] = $jml->num_rows();
@@ -63,6 +66,7 @@ class Home extends CI_Controller {
 			redirect('member/home');
 		}
 		elseif ($this->session->userdata('level')!="member") {
+			$data['menu'] = $this->m_admin->detail_profil();
 			$data['title'] = "Login Member";
 			$this->load->view('frontend/login',$data);
 		}
@@ -191,6 +195,91 @@ class Home extends CI_Controller {
 		$data['title'] = "Gallery JST";
 		$this->load->view('frontend/gallery',$data);
 	}
+
+	public function register()
+	{
+		if ($this->session->userdata('level')=="member") 
+         {
+            redirect('member/home');
+         }
+		$data['menu'] = $this->m_admin->detail_profil();
+		$this->load->helper('security');
+		$this->load->library('form_validation');
+		$this->load->view('template_frontend/header',$data);	
+		$data['title'] = "Register Member JST";
+		$data['captcha_return'] ='';
+		$data['cap_img'] = $this->m_captcha->make_captcha();
+		
+		if ($this->input->post('submit')) {
+			$this->form_validation->set_rules('nama_lengkap', 'Nama', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('username', 'Username', 'trim|min_length[3]|max_length[20]|required|alpha_dash|min_length[3]|max_length[20]|xss_clean');
+			$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[5]|max_length[35]|matches[passconf] |xss_clean');
+			$this->form_validation->set_rules('passconf', 'Confirm Password', 'trim|required|min_length[5]|max_length[35]|xss_clean');
+			$this->form_validation->set_rules('email', 'Email', 'trim|required|min_length[5]|max_length[35]|valid_email');
+			$this->form_validation->set_rules('alamat', 'Alamat', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('asal_sekolah', 'Asal Sekolah', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('captcha', 'Captcha', 'required');
+			$this->form_validation->set_error_delimiters('<div style="color:red;">', '</div>');
+
+			if ($this->form_validation->run() == FALSE) {
+			$this->load->view('frontend/register',$data);
+			}else {
+				if($this->m_captcha->check_captcha()==TRUE) {
+
+					$nama_lengkap = $this->input->post('nama_lengkap');
+					$username = $this->input->post('username');
+					$password = $this->input->post('password');
+					$email = $this->input->post('email');
+					$alamat = $this->input->post('alamat');
+					$asal_sekolah = $this->input->post('asal_sekolah');
+					//$level = $this->input->get('level');
+					$cek = $this->m_register->check_query('user', $username);
+					if ($cek == false) {
+						$level= 'member';
+						$status= '2';
+						$input_data = array(
+							'nama_lengkap' => $nama_lengkap,
+							'username' => $username,
+							'email' => $email,
+							'password' => md5($password),
+							'alamat' => $alamat,
+							'asal_sekolah' => $asal_sekolah,
+							'status' => $status,
+							'level'=> $level
+							);
+						if($this->m_register->insert('user', $input_data)){
+							//redirect(base_url().'home/login');
+								echo '<script type="text/javascript">'; 
+								echo 'alert("Selamat anda telah berhasil mendaftar sebagai member JST, Mohon menunggu untuk di konfirmasi oleh admin kami, info lebih lanjut silahkan hubungi kami");'; 
+								echo 'window.location.href = "index";';
+								echo '</script>';
+						} else {
+							$data['body'] = "error on query";
+						}
+					} else {
+						$data['captcha_return'] = '<div class="alert alert-danger alert-dismissable">
+			                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+			                    <h4><i class="icon fa fa-info"></i> Peringatan!</h4>
+			                    Username atau email anda sudah ada, Silahkan ubah !
+			                 </div>';
+						$data['body'] = $this->load->view('frontend/register', $data);
+						}
+					} else {
+						$data['captcha_return'] = '<div class="alert alert-danger alert-dismissable">
+			                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+			                    <h4><i class="icon fa fa-info"></i> Peringatan!</h4>
+			                    Captcha tidak sesuai, Silahkan coba lagi !
+			                 </div>';
+						$data['body'] = $this->load->view('frontend/register', $data);
+					}
+				}
+			}
+				else {
+				$this->load->view('frontend/register', $data);
+			}
+	}
+		
+
 	public function detail_berita($id)
 	{   
         if ($id == NULL) {
@@ -238,12 +327,29 @@ class Home extends CI_Controller {
         {
         	$data['menu'] = $this->m_admin->detail_profil();
 			$this->load->view('template_frontend/header',$data);
-			$data['data_ambil'] = $this->m_admin->list_slider();
+        	$program = $this->m_admin->detail_programByID($id);
+	       	$data['title'] = "Detail Program";
+	       	$this->load->vars('b', $program);  
+	        $this->load->view('frontend/detail_program',$data);
+        }
+	}
+
+	public function detail_gallery($id)
+	{   
+        if ($id == NULL) {
+        	redirect('/home/index/'); 
+        }
+        else
+        {
+        	$this->load->model('m_gallery','gallery');
+        	$data['menu'] = $this->m_admin->detail_profil();
+			$this->load->view('template_frontend/header',$data);
         	$program = $this->m_admin->detail_programByID($id);
         	$this->load->vars('b', $program);   
-        	$program = str_replace("_", " ", $program->row('nama_pelatihan'));
-	       	$data['title'] = $program;
-	        $this->load->view('frontend/detail_program',$data);
+        	$data['gallery'] = $this->gallery->detail_gallery($id);
+        	$data['foto'] = $this->gallery->list_foto($id);
+	       	$data['title'] = "Detail Gallery";
+	        $this->load->view('frontend/detail_gallery',$data);
         }
 	}
 

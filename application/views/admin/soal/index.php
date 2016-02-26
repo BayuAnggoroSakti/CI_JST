@@ -29,7 +29,7 @@ $this->load->view('template_admin/sidebar');
                 <div class="box-header">
                    <div class="row">
                         <div class="col-md-2">
-                            <button class="btn btn-block btn-info btn-lg" onclick="add_person()"><i class="glyphicon glyphicon-plus"></i> Tambah</button> 
+                            <a href="<?php echo site_url('admin/soal/tambah_soal') ?>"><button class="btn btn-block btn-info btn-lg"><i class="glyphicon glyphicon-plus"></i> Tambah</button></a>
                         </div>
                            <div class="col-md-2">
                              <button class="btn btn-block btn-default btn-lg" onclick="reload_table()"><i class="glyphicon glyphicon-refresh"></i> Reload</button>
@@ -39,7 +39,7 @@ $this->load->view('template_admin/sidebar');
                 </div><!-- /.box-header -->
                 <div class="box-body">
                    <table class="table table-bordered table-hover" width="100%" id="table">
-                    <thead style="background:#9bff84">
+                    <thead>
                         <tr>
                             <th>No</th>
                             <th>Pertanyaan</th>
@@ -90,7 +90,8 @@ $(document).ready(function() {
         "processing": true, //Feature control the processing indicator.
         "serverSide": true, //Feature control DataTables' server-side processing mode.
         "order": [], //Initial no order.
- 
+        "sScrollX":       "100%",
+        "sScrollXInner":  "100%",
         // Load data for the table's content from an Ajax source
         "ajax": {
             "url": "<?php echo site_url('admin/soal/ajax_list_soal')?>",

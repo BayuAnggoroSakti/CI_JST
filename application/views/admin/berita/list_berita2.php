@@ -57,6 +57,8 @@ $this->load->view('template_admin/sidebar');
   <script src="<?php echo base_url('assets/assets/datatables/jquery.dataTables.js') ?>"></script>
   <script src="<?php echo base_url('assets/assets/datatables/dataTables.bootstrap.js') ?>"></script>
      <script type="text/javascript">
+
+ 
             $(document).ready(function () {
  
                 $.fn.dataTableExt.oApi.fnPagingInfo = function (oSettings)
@@ -75,6 +77,8 @@ $this->load->view('template_admin/sidebar');
                 var t = $('#mytable').DataTable({
                     "processing": true,
                     "serverSide": true,
+                    "sScrollX":       "100%",
+                    "sScrollXInner":  "100%",
                     "ajax": "<?php echo site_url('admin/berita/ajax_tabel'); ?>",
                     "columns": [
                         {
@@ -93,7 +97,7 @@ $this->load->view('template_admin/sidebar');
                             "data": "aksi"
                         }
                     ],
-                    "order": [[1, 'asc']],
+                    "order": [[1, 'desc']],
                     "rowCallback": function (row, data, iDisplayIndex) {
                         var info = this.fnPagingInfo();
                         var page = info.iPage;

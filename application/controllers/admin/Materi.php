@@ -14,6 +14,20 @@ class Materi extends CI_Controller {
          }
 		$this->load->helper('text');
 	}
+	function DateToIndo($date) { // fungsi atau method untuk mengubah tanggal ke format indonesia
+   // variabel BulanIndo merupakan variabel array yang menyimpan nama-nama bulan
+		$BulanIndo = array("Januari", "Februari", "Maret",
+						   "April", "Mei", "Juni",
+						   "Juli", "Agustus", "September",
+						   "Oktober", "November", "Desember");
+	
+		$tahun = substr($date, 0, 4); // memisahkan format tahun menggunakan substring
+		$bulan = substr($date, 5, 2); // memisahkan format bulan menggunakan substring
+		$tgl   = substr($date, 8, 2); // memisahkan format tanggal menggunakan substring
+		
+		$result = $tgl . " " . $BulanIndo[(int)$bulan-1] . " ". $tahun;
+		return($result);
+	}
 	public function index() {
 		//$data['new'] = $this->m_admin->detail_profil();
 		$data['username'] = $this->session->userdata('username');
@@ -174,7 +188,9 @@ class Materi extends CI_Controller {
                 array('db' => 'nama_materi', 'dt' => 'nama_materi'),
                 array('db' => 'jenis', 'dt' => 'jenis'),
                 array('db' => 'type', 'dt' => 'type'),
-                array('db' => 'tanggal', 'dt' => 'tanggal'),
+                array('db' => 'tanggal', 'dt' => 'tanggal','formatter' => function( $d ){
+                	  return $this->DateToIndo($d);
+                }),
                 array(
                     'db' => 'id_materi',
                     'dt' => 'aksi',

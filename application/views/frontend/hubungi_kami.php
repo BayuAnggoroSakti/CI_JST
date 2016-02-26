@@ -3,6 +3,7 @@ $this->load->view('template_frontend/head');
 $this->load->view('template_frontend/header');
 
 ?>
+
 <div id="content">
 
 			<!-- Page Banner -->

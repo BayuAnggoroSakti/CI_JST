@@ -74,6 +74,8 @@ $this->load->view('template_admin/sidebar');
                 var t = $('#mytable').DataTable({
                     "processing": true,
                     "serverSide": true,
+                    "sScrollX":       "100%",
+                     "sScrollXInner":  "100%",
                     "ajax": "<?php echo site_url('admin/materi/ajax_tabel'); ?>",
                     "columns": [
                         {

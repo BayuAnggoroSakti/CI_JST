@@ -12,9 +12,21 @@ class M_pelatihan extends CI_Model {
         $this->load->database();
     }
 
-    function list_gallery()
+    function list_gallery_guru()
     {
-        $ambil = $this->db->query('select distinct p.nama_pelatihan as nama, g.judul as url from gallery g, pelatihan p where g.id_pelatihan = p.id_pelatihan group by p.nama_pelatihan');
+        $ambil = $this->db->query('SELECT f.alamat_foto as url, pk.nama_programKerja as nama_program, p.nama_pelatihan as nama_pelatihan from program_kerja pk, pelatihan p, gallery g, foto f where pk.id_programKerja = p.id_programKerja and p.id_pelatihan = g.id_pelatihan and g.id_gallery = f.id_gallery and pk.nama_programKerja like "%guru%" group by p.nama_pelatihan limit 4');
+          if ($ambil->num_rows() > 0) {
+          foreach ($ambil->result() as $data) 
+          {
+            $hasil[] = $data;
+           }
+            return $hasil;
+          }
+    }
+
+    function list_gallery_siswa()
+    {
+        $ambil = $this->db->query('SELECT f.alamat_foto as url, pk.nama_programKerja as nama_program, p.nama_pelatihan as nama_pelatihan from program_kerja pk, pelatihan p, gallery g, foto f where pk.id_programKerja = p.id_programKerja and p.id_pelatihan = g.id_pelatihan and g.id_gallery = f.id_gallery and pk.nama_programKerja like "%siswa%" group by p.nama_pelatihan limit 4');
           if ($ambil->num_rows() > 0) {
           foreach ($ambil->result() as $data) 
           {
@@ -25,7 +37,7 @@ class M_pelatihan extends CI_Model {
     }
      function pelatihan_guru()
     {
-        $ambil = $this->db->query('select distinct p.id_pelatihan as id, p.nama_pelatihan as nama, g.judul as url, pk.nama_programKerja as nama_program from gallery g, pelatihan p, program_kerja pk where g.id_pelatihan = p.id_pelatihan and pk.id_programKerja = p.id_programKerja and pk.nama_programKerja like "%guru%" group by p.nama_pelatihan');
+        $ambil = $this->db->query('SELECT distinct p.id_pelatihan as id, p.nama_pelatihan as nama,f.alamat_foto as url, pk.nama_programKerja as nama_program from gallery g, pelatihan p, program_kerja pk, foto f where g.id_pelatihan = p.id_pelatihan and pk.id_programKerja = p.id_programKerja and g.id_gallery = f.id_gallery and pk.nama_programKerja like "%guru%" group by p.nama_pelatihan');
           if ($ambil->num_rows() > 0) {
           foreach ($ambil->result() as $data) 
           {
@@ -36,7 +48,7 @@ class M_pelatihan extends CI_Model {
     }
     function pelatihan_siswa()
     {
-        $ambil = $this->db->query('select distinct p.id_pelatihan as id, p.nama_pelatihan as nama, g.judul as url, pk.nama_programKerja as nama_program from gallery g, pelatihan p, program_kerja pk where g.id_pelatihan = p.id_pelatihan and pk.id_programKerja = p.id_programKerja and pk.nama_programKerja like "%siswa%" group by p.nama_pelatihan');
+        $ambil = $this->db->query('SELECT distinct p.id_pelatihan as id, p.nama_pelatihan as nama,f.alamat_foto as url, pk.nama_programKerja as nama_program from gallery g, pelatihan p, program_kerja pk, foto f where g.id_pelatihan = p.id_pelatihan and pk.id_programKerja = p.id_programKerja and g.id_gallery = f.id_gallery and pk.nama_programKerja like "%siswa%" group by p.nama_pelatihan');
           if ($ambil->num_rows() > 0) {
           foreach ($ambil->result() as $data) 
           {

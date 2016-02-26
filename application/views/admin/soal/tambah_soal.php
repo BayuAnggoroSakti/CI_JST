@@ -8,10 +8,18 @@ $this->load->view('template_admin/sidebar');
 ?>
 <script type="text/javascript"> 
   function validasi_input(form){ 
-    if (form.id_kateBer.value =="pilih")
-      { alert("Anda belum memilih Kategori!"); 
+    if (form.kunci.value =="")
+      { alert("Anda belum memilih Kunci!"); 
+        return (false); } 
+         if (form.id_katTO.value =="")
+      { alert("Anda belum memilih kategori!"); 
+        return (false); } 
+         if (form.status.value =="")
+      { alert("Anda belum memilih status!"); 
         return (false); } 
     return (true); }
+
+
     function showDiv() {
    document.getElementById('welcomeDiv').style.display = "block";
 } 
@@ -42,8 +50,9 @@ $this->load->view('template_admin/sidebar');
           
                    <div class="form-group">
                           <label class="col-sm-2 control-label">Kategori</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-4">
                                 <select name="id_katTO" class="form-control">
+                                <option value="">Pilih Kategori</option>
                                     <?php 
                                         foreach ($kategori as $key) {?>
                                         <option value="<?php echo $key->id_katTO; ?>"><?php echo $key->nama; ?></option>
@@ -58,9 +67,7 @@ $this->load->view('template_admin/sidebar');
                       <label for="inputPassword3" class="col-sm-2 control-label">Pertanyaan</label>
                       <div class="col-sm-10">
                          <form>
-                            <textarea id="editor1" name="soal_des" rows="10" cols="80" required>
-                             
-                            </textarea>
+                            <textarea id="editor1" name="soal_des" rows="10" cols="80" required></textarea>
                             <script>
                                 // Replace the <textarea id="editor1"> with a CKEditor
                                 // instance, using default configuration.
@@ -71,52 +78,57 @@ $this->load->view('template_admin/sidebar');
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Bobot</label>
-                      <div class="col-sm-10">
-                          <input type="text" name="bobot" class="form-control" >
+                      <div class="col-sm-1">
+                          <input type="number" name="bobot" class="form-control" required>
                       </div>
                     </div>
                      <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Opsi A</label>
                       <div class="col-sm-10">
-                          <input type="text" name="opsi_a" class="form-control">
+                          <input type="text" name="opsi_a" class="form-control" required>
                       </div>
                     </div>
                      <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Opsi B</label>
                       <div class="col-sm-10">
-                          <input type="text" name="opsi_b" class="form-control" >
+                          <input type="text" name="opsi_b" class="form-control" required>
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Opsi C</label>
                       <div class="col-sm-10">
-                          <input type="text" name="opsi_c" class="form-control" >
+                          <input type="text" name="opsi_c" class="form-control" required>
                       </div>
                     </div>
                      <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Opsi D</label>
                       <div class="col-sm-10">
-                          <input type="text" name="opsi_d" class="form-control" >
+                          <input type="text" name="opsi_d" class="form-control" required>
                       </div>
                     </div>
                      <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Opsi E</label>
                       <div class="col-sm-10">
-                          <input type="text" name="opsi_e" class="form-control" >
+                          <input type="text" name="opsi_e" class="form-control" required>
                       </div>
                     </div>
                      <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Kunci</label>
-                      <div class="col-sm-10">
-                          <input type="text" name="kunci" placeholder="Masukkan kunci jawaban" class="form-control" >
+                      <div class="col-sm-3">
+                         <select name="kunci" class="form-control">
+                           <option value="">Silahkan pilih jawaban</option>
+                           <option value="opsi_a">A</option>
+                           <option value="opsi_b">B</option>
+                           <option value="opsi_c">C</option>
+                           <option value="opsi_d">D</option>
+                           <option value="opsi_e">E</option>
+                         </select>
                       </div>
                     </div>
                      <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Uraian</label>
                       <div class="col-sm-10">
-                            <textarea id="editor2" name="uraian" rows="5" class="form-control" required>
-                              
-                            </textarea>
+                            <textarea id="editor2" name="uraian" rows="5" class="form-control" required></textarea>
                             <script>
                                 // Replace the <textarea id="editor1"> with a CKEditor
                                 // instance, using default configuration.
@@ -127,9 +139,7 @@ $this->load->view('template_admin/sidebar');
                      <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Pembahasan</label>
                       <div class="col-sm-10">
-                            <textarea id="editor3" name="pembahasan" rows="10" cols="80" required>
-                             
-                            </textarea>
+                            <textarea id="editor3" name="pembahasan" rows="10" cols="80" required></textarea>
                             <script>
                                 // Replace the <textarea id="editor1"> with a CKEditor
                                 // instance, using default configuration.
@@ -139,8 +149,9 @@ $this->load->view('template_admin/sidebar');
                     </div>    
                      <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Status</label>
-                      <div class="col-sm-10">
+                      <div class="col-sm-4">
                        <select class="form-control" name="status">
+                          <option value="">Pilih status soal</option>
                           <option value="active">Aktif</option>
                           <option value="not_active">Tidak</option>
                         </select>

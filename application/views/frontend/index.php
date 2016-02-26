@@ -132,7 +132,6 @@ $this->load->view('template_frontend/slider');
 									<ul class="tab-links">
 										<li><a class="tab-link1 active" href="#"> Popular</a></li>
 										<li><a class="tab-link2" href="#"> Recent</a></li>
-										<li><a class="tab-link3" href="#"> Comments</a></li>
 									</ul>
 									<div class="tab-box">
 										<div class="tab-content active">
@@ -166,22 +165,7 @@ $this->load->view('template_frontend/slider');
 											?>
 											</ul>
 										</div>
-										<div class="tab-content">
-											<ul class="post-comments">
-												<li>
-													<img alt="" src="assets/images/post-img2.png">
-													<h6><a href="#">Lorem Ipsum. Proin gravida nibh vel velit auctor </a></h6>
-												</li>
-												<li>
-													<img alt="" src="assets/images/post-img3.png">
-													<h6><a href="#">Sollicitudin, lorem quis bibendum auctor, nisi elit</a></h6>
-												</li>
-												<li>
-													<img alt="" src="assets/images/post-img2.png">
-													<h6><a href="#">Aliquet. Aenean sollicitudin, lorem quis bibendum auctor</a></h6>
-												</li>
-											</ul>
-										</div>
+										
 									</div>
 								</div>
 
@@ -232,6 +216,7 @@ $this->load->view('template_frontend/slider');
 
 
 		</div>
+		
 
 <?php		
 $this->load->view('template_frontend/footer');

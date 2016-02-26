@@ -37,6 +37,7 @@ class Jst_member extends CI_Controller {
 			if ($cekdata) 
 			{
 				foreach ($cekdata as $datalogin) {
+					$id_user = $datalogin['id_user'];
 					$username = $datalogin['username'];
 					$password = $datalogin['password'];
 					$level = $datalogin['level'];
@@ -46,6 +47,7 @@ class Jst_member extends CI_Controller {
 					$asal_sekolah = $datalogin['asal_sekolah'];
 				}
 				$dlogin = array(
+					'id_user' => $id_user,
 					'username' => $username,
 					'password' => $password,
 					'alamat' => $alamat,

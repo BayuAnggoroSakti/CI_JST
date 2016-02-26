@@ -35,7 +35,7 @@ $this->load->view('template_admin/sidebar');
                     
                   </div>
                 </div><!-- /.box-header -->
-                <div class="box-body">
+                <div class="box-body table-responsiv">
                    <table class="table table-bordered table-striped table-hover" width="100%" id="table">
                     <thead>
                         <tr>
@@ -91,7 +91,10 @@ $(document).ready(function() {
         "processing": true, //Feature control the processing indicator.
         "serverSide": true, //Feature control DataTables' server-side processing mode.
         "order": [], //Initial no order.
- 
+        "sScrollX":       "100%",
+        "sScrollXInner":  "100%",
+        //"sScrollY":       "250px",
+        "bScrollCollapse": true,
         // Load data for the table's content from an Ajax source
         "ajax": {
             "url": "<?php echo site_url('admin/user/ajax_list')?>",
@@ -169,7 +172,7 @@ function edit_user(id)
             $('[name="asal_sekolah"]').val(data.asal_sekolah);
        
             $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
-            $('.modal-title').text('Edit Person'); // Set title to Bootstrap modal title
+            $('.modal-title').text('Edit User'); // Set title to Bootstrap modal title
  
         },
         error: function (jqXHR, textStatus, errorThrown)

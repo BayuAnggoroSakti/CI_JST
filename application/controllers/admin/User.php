@@ -21,7 +21,7 @@ class User extends CI_Controller {
         //$this->load->model('m_pelatihan');
     	$data['username'] = $this->session->userdata('username');
     	$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
-        $data['title'] = "Pelatihan || Jogja Science Training";
+        $data['title'] = "User || Jogja Science Training";
 		$data['level'] = $this->session->userdata('level');
         //$data['data_get'] = $this->user->status();
 		$this->load->view('admin/user/index', $data);
@@ -34,6 +34,16 @@ class User extends CI_Controller {
         $data = array();
         $no = $_POST['start'];
         foreach ($list as $user) {
+            if ($user->status==1) {
+               $status = '<small class="label pull-right bg-green">Active</small>';
+            }
+            elseif ($user->status==0) {
+                $status = '<small class="label pull-right bg-red">Not Active</small>';
+            }
+            else
+            {
+                $status = '<small class="label pull-right bg-yellow">Pending</small><br>';
+            }
             $no++;
             $row = array();
             $row[] = $no;
@@ -43,11 +53,21 @@ class User extends CI_Controller {
             $row[] = $user->email;
             $row[] = $user->alamat;
             $row[] = $user->asal_sekolah;
-            $row[] = $user->status;
+            $row[] = $status;
  
             //add html for action
-            $row[] = '<a class="btn btn-sm btn-primary" href="javascript:void()" title="Edit" onclick="edit_user('."'".$user->id_user."'".')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
-                  <a class="btn btn-sm btn-danger" href="javascript:void()" title="Hapus" onclick="delete_user('."'".$user->id_user."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+            $row[] = ' <div class="btn-group">
+                      <button type="button" class="btn btn-default">Action</button>
+                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                      </button>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="javascript:void()" title="Edit" onclick="edit_user('."'".$user->id_user."'".')"> Edit</a></li>
+                        <li><a href="javascript:void()" title="Hapus" onclick="delete_user('."'".$user->id_user."'".')"> Delete</a></li>
+                      </ul>
+                    </div>
+                  ';
          
             $data[] = $row;
         }
@@ -106,13 +126,22 @@ class User extends CI_Controller {
         $this->user->update(array('id_user' => $this->input->post('id_user')), $data);
         echo json_encode(array("status" => TRUE));
     }
- 
+
     public function ajax_delete($id)
+    {
+        $data = array(
+                'status' => 0,
+            );
+        $this->user->delete_by_id(array('id_user' => $id), $data);
+        echo json_encode(array("status" => TRUE));
+    }
+ 
+/*    public function ajax_delete($id)
     {
         $this->user->delete_by_id($id);
         echo json_encode(array("status" => TRUE));
     }
- 
+ */
  
     private function _validate()
     {

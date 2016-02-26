@@ -2,7 +2,7 @@
 $this->load->view('template_frontend/head');
 $this->load->view('template_frontend/header');
 ?>
-<link href="<?php echo base_url('assets/admin/AdminLTE-2.0.5/bootstrap/css/bootstrap.min.css') ?>" rel="stylesheet" type="text/css" />
+
 
 	<div id="content">
 
@@ -43,6 +43,7 @@ $this->load->view('template_frontend/header');
 			
 
 		</div>
+		<br>
 <?php		
 $this->load->view('template_frontend/footer');
 $this->load->view('template_frontend/foot');

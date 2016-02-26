@@ -44,11 +44,13 @@ $this->load->view('template_admin/sidebar');
                   <input type="hidden" name="kode_soal" value="<?php echo $b->row('kode_soal');?>">
                    <div class="form-group">
                           <label class="col-sm-2 control-label">Kategori</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-4">
                                 <select name="id_katTO" class="form-control">
                                     <?php 
                                         foreach ($kategori as $key) {?>
-                                        <option value="<?php echo $key->id_katTO; ?>"><?php echo $key->nama; ?></option>
+                                        <option <?php if ($b->row('id_katTO') == $key->id_katTO ) {
+                                          echo "selected";
+                                        } else {echo"";}?> value="<?php echo $key->id_katTO; ?>"><?php echo $key->nama; ?></option>
                                     <?php
                                         }
                                     ?>
@@ -73,8 +75,8 @@ $this->load->view('template_admin/sidebar');
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Bobot</label>
-                      <div class="col-sm-10">
-                          <input type="text" name="bobot" class="form-control" value="<?php echo $b->row('bobot'); ?>">
+                      <div class="col-sm-1">
+                          <input type="number" name="bobot" class="form-control" value="<?php echo $b->row('bobot'); ?>">
                       </div>
                     </div>
                      <div class="form-group">
@@ -109,8 +111,27 @@ $this->load->view('template_admin/sidebar');
                     </div>
                      <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Kunci</label>
-                      <div class="col-sm-10">
-                          <input type="text" name="kunci" placeholder="Masukkan kunci jawaban" class="form-control" value="<?php echo $b->row('kunci'); ?>">
+                      <div class="col-sm-1">
+                   
+                         <select name="kunci" class="form-control">
+                           <option value="">Silahkan pilih jawaban</option>
+                           <option <?php if ($b->row('kunci') == $b->row('opsi_a') ) {
+                             echo "selected";
+                           }else{echo "";} ?> value="opsi_a">A</option>
+                           <option <?php if ($b->row('kunci') == $b->row('opsi_b') ) {
+                             echo "selected";
+                           }else{echo "";} ?> value="opsi_b">B</option>
+                           <option <?php if ($b->row('kunci') == $b->row('opsi_c') ) {
+                             echo "selected";
+                           }else{echo "";} ?> value="opsi_c">C</option>
+                           <option <?php if ($b->row('kunci') == $b->row('opsi_d') ) {
+                             echo "selected";
+                           }else{echo "";} ?> value="opsi_d">D</option>
+                           <option <?php if ($b->row('kunci') == $b->row('opsi_e') ) {
+                             echo "selected";
+                           }else{echo "";} ?> value="opsi_e">E</option>
+                         </select>
+
                       </div>
                     </div>
                      <div class="form-group">
