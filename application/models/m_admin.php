@@ -24,6 +24,22 @@
         $query = $this->db->get();
         return $query;
 	}
+
+	function total($table_name,$where, $pembeda)
+	{
+		$this->db->select("count(*) as total");
+		$this->db->from($table_name);
+        $this->db->where($where,$pembeda);
+        $query = $this->db->get();
+        return $query;
+	}
+	function total2($table_name)
+	{
+		$this->db->select("count(*) as total");
+		$this->db->from($table_name);
+        $query = $this->db->get();
+        return $query;
+	}
 	 public function detail_staf($id)
     {
         $this->db->from('staf_pengajar');

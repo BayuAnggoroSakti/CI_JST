@@ -18,6 +18,10 @@ class Dashboard extends CI_Controller {
 		$data['data_get'] = $this->m_user->view();
 		$data['username'] = $this->session->userdata('username');
 		$data['title'] = "Dashboard || Jogja Science Training";
+		$data['member'] = $this->m_admin->total('user','level','member');
+		$data['tryout'] = $this->m_admin->total2('tryout');
+		$data['materi'] = $this->m_admin->total2('materi');
+		$data['soal'] = $this->m_admin->total2('soal');
 		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
 		$data['level'] = $this->session->userdata('level');
 		$this->load->view('admin/index', $data);

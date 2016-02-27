@@ -16,13 +16,28 @@ class Try_out extends CI_Controller {
          }
 		
 	}
-
+	public function persiapan()
+	{
+		if ($this->input->post('submit')) {
+			$data['title'] = "Tryout";
+			$id_katTO = $this->input->post('kategori_to');
+			$data['kategori_to'] = $this->m_tryout->kategori_to($id_katTO);
+			$data['id_katTO'] = $this->input->post('kategori_to');
+			$this->load->view('frontend/persiapan_to',$data);
+		}
+		else
+		{
+			redirect(site_url('member/home'));
+		}
+			
+	}
 	public function index()
 	{
 		if ($this->input->post('submit')) {	
 			$data['title'] = "Tryout";
 			$id_katTO = $this->input->post('kategori_to');
-			$data['soal'] = $this->m_tryout->list_soal($id_katTO);
+			$jum_soal = $this->input->post('jum_soal');
+			$data['soal'] = $this->m_tryout->list_soal($id_katTO,$jum_soal);;
 			$data['kategori_to'] = $this->m_tryout->kategori_to($id_katTO);
 			$tgl = date('Y-m-d H:i:s');
 			$tryout = array(
@@ -45,7 +60,7 @@ class Try_out extends CI_Controller {
 	{
 		$jum = $this->input->post('no');
 
-		if ($this->input->post('submit')) {
+		if ($this->input->post('btnSubmit') || $this->input->post('no')) {
 			for ($i=1; $i<$jum ; $i++) { 
 			if ($this->input->post("opsi".$i) == NULL) {
 				$opsi = "Tidak Jawab";
@@ -125,6 +140,7 @@ class Try_out extends CI_Controller {
 		else
 		{
 			redirect(site_url('try_out/index'));
+
 		}
 	}
 }

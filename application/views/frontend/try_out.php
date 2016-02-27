@@ -16,6 +16,33 @@ $this->load->view('template_frontend/header_tryout');
                                         size : "lg"
                                     });
                                 });
+                                   window.onload = function() {
+// Onload event of Javascript
+// Initializing timer variable60;
+var total = num * 60;
+var x = total;
+var y = document.getElementById("timer");
+// Display count down for 20s
+setInterval(function() {
+if (x <= total && x >= 1) {
+x--;
+y.innerHTML = '' + x + '';
+if (x == 1) {
+x = total;
+}
+}
+}, 1000);
+// Form Submitting after 20s
+var auto_refresh = setInterval(function() {
+submitform();
+}, total*1000);
+// Form submit function
+function submitform() {
+alert('Waktu sudah habis, silahkan melihat hasil Tryout anda');
+document.getElementById("form").submit();
+}
+// To validate form fields before submission
+};
                             </script>
 
 <div id="content">
@@ -33,7 +60,6 @@ $this->load->view('template_frontend/header_tryout');
       <div class="about-box">
         <div class="container">
           <div class="row">
-
             <div class="col-md-6">
               <div class="skills-progress">
                  <div class="alert alert-warning col-md-12">
@@ -68,7 +94,7 @@ $this->load->view('template_frontend/header_tryout');
         <div class="row">
           <div class="col-md-12">
             <div class="alert alert-info">
-            <form role="form" name="_form" method="post" id="frmSoal" action="<?php echo site_url('try_out/submit_jawaban') ?>">
+            <form role="form" method="post" name="form" id="form" action="<?php echo site_url('try_out/submit_jawaban') ?>">
             <?php 
             $no = 1;
             foreach ($soal as $data) {?>
@@ -138,7 +164,7 @@ $this->load->view('template_frontend/header_tryout');
              <input name="id_to" type="hidden" value="<?php echo $id_to->row('id_to'); ?>">
              <input name="kategori_to" type="hidden" value="<?php echo $kategori_to->row('id_katTO') ?>"></input>
              
-            <input type="submit" name="submit" class="btn btn-success" value="Submit"/>
+            <input type="submit" name="btnSubmit" class="btn btn-success" value="Submit"/>
             </form>
             </div>
           </div>

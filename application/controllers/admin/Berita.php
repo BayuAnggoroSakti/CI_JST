@@ -10,6 +10,7 @@ class Berita extends CI_Controller {
 			$this->load->helper('form','url');
 			$this->load->library('session');
 			$this->load->helper('text');
+			$this->load->model('m_trash');
 		 if ($this->session->userdata('level')=="admin") 
 		 {
 		 	
@@ -71,7 +72,7 @@ function DateToIndo($date) { // fungsi atau method untuk mengubah tanggal ke for
                 	}
                 	else
                 	{
-                		return '<small class="label pull-right bg-red">Tidak Terbit</small>';
+                		return '<small class="label pull-left bg-red">Tidak Terbit</small><br><a href="' . site_url('admin/berita/trash') . '">view trash</a>';
                 	}
                 	}),
                 array(
@@ -107,6 +108,51 @@ function DateToIndo($date) { // fungsi atau method untuk mengubah tanggal ke for
 		$data['level'] = $this->session->userdata('level');
 		$this->load->view('admin/berita/tambah_berita',$data);
 	}
+	public function trash()
+	{
+		$data['Kat'] = $this->m_admin->Kategori();
+		$data['username'] = $this->session->userdata('username');
+		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
+		$data['title'] = "Tambah Berita || Jogja Science Training";
+		$data['level'] = $this->session->userdata('level');
+		$this->load->view('admin/berita/trash',$data);
+	}
+
+	 public function ajax_delete_trash($id)
+    {
+    	$gambar = $this->m_trash->gambar($id);
+    	$path = './assets/images';
+    	unlink($path."/".$gambar->row('gambar'));
+        $this->m_trash->delete_by_id($id);
+        echo json_encode(array("status" => TRUE));
+    }
+	public function ajax_list_trash()
+    {
+        $list = $this->m_trash->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $berita) {
+            $no++;
+            $row = array();
+            $row[] = $no;
+            $row[] = $berita->judul_berita;
+            $row[] = $berita->tanggal_berita;
+            $row[] = '<img width="150px" height="100px" src="'.base_url('assets/images/')."/".$berita->gambar.'">';
+            //add html for action
+            $row[] = '<a class="btn btn-sm btn-danger" href="javascript:void()" title="Hapus" onclick="delete_berita('."'".$berita->id_berita."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+         
+            $data[] = $row;
+        }
+ 
+        $output = array(
+                        "draw" => $_POST['draw'],
+                        "recordsTotal" => $this->m_trash->count_all(),
+                        "recordsFiltered" => $this->m_trash->count_filtered(),
+                        "data" => $data,
+                );
+        //output to json format
+        echo json_encode($output);
+    }
 	public function status_terbit($value)
 	{
 		if ($value == 'y') {
@@ -141,11 +187,9 @@ function DateToIndo($date) { // fungsi atau method untuk mengubah tanggal ke for
 				 $this->load->library('upload', $config);
 					
 				if (!$this->upload->do_upload('gambar')) {
-					$tgl = date('Y-m-d H:i:s');
 					$data = array(
 							'judul_berita' => $this->input->post('judul_berita'),
 				            'isi_berita' => $this->input->post('isi_berita'),
-				            'tanggal_berita' => $tgl,
 				            'id_kateBer' => $this->input->post('id_kateBer'),
 				            'status_terbit' => $this->input->post('status_terbit'),
 					);
@@ -155,7 +199,6 @@ function DateToIndo($date) { // fungsi atau method untuk mengubah tanggal ke for
 				redirect(base_url().'admin/berita');
 				}
 				 else{
-					$tgl = date('Y-m-d H:i:s');
 					$berita = $this->m_admin->edit($id);
 	    			$base_url = './assets/images/';
 					unlink($base_url.'/'.$berita->row('gambar'));
@@ -164,7 +207,6 @@ function DateToIndo($date) { // fungsi atau method untuk mengubah tanggal ke for
 							'judul_berita' => $this->input->post('judul_berita'),
 				            'isi_berita' => $this->input->post('isi_berita'),
 				            'gambar' => $this->upload->file_name,
-				            'tanggal_berita' => $tgl,
 				            'id_kateBer' => $this->input->post('id_kateBer'),
 				            'status_terbit' => $this->input->post('status_terbit'),
 					);

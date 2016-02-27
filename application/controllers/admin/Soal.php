@@ -81,7 +81,6 @@ class Soal extends CI_Controller {
         $data['level'] = $this->session->userdata('level');
         $id_katTO = $this->input->post('id_katTO');
         $soal_des = $this->input->post('soal_des');
-        $bobot = $this->input->post('bobot');
         $opsi_a = $this->input->post('opsi_a');
         $opsi_b = $this->input->post('opsi_b');
         $opsi_c = $this->input->post('opsi_c');
@@ -108,7 +107,6 @@ class Soal extends CI_Controller {
         $data = array(
                             'id_katTO' => $id_katTO,
                             'soal_des' => $soal_des,
-                            'bobot' => $bobot,
                             'opsi_a' => $opsi_a,
                             'opsi_b' => $opsi_b,
                             'opsi_c' => $opsi_c,
@@ -128,13 +126,17 @@ class Soal extends CI_Controller {
         $data = array();
         $no = $_POST['start'];
         foreach ($list as $soal) {
+            if ($soal->status == 'active') { 
+                $status = '<small class="label pull-center bg-green">Active</small>';
+            }else{
+                $status = '<small class="label pull-center bg-green">Not Active</small>';
+            }
             $no++;
             $row = array();
             $row[] = $no;
             $row[] = $soal->soal_des;
-            $row[] = $soal->bobot;
             $row[] = $soal->kunci;
-            $row[] = $soal->status;
+            $row[] = $status;
             //add html for action
             $row[] = '<a class="btn btn-sm btn-primary" href="'.site_url('admin/soal/edit_soal/' .$soal->kode_soal).'" title="Edit" onclick="edit_soal('."'".$soal->kode_soal."'".')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
                   <a class="btn btn-sm btn-danger" href="javascript:void()" title="Hapus" onclick="delete_soal('."'".$soal->kode_soal."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';

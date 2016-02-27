@@ -43,7 +43,6 @@ $this->load->view('template_admin/sidebar');
                         <tr>
                             <th>No</th>
                             <th>Pertanyaan</th>
-                            <th>Bobot</th>
                             <th>Kunci</th>
                             <th>Status</th>
                             <th>Action</th>

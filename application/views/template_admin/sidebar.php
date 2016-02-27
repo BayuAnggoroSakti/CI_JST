@@ -60,6 +60,7 @@
                     <li><a href="<?php echo site_url('admin/berita') ?>"><i class="fa fa-circle-o"></i> List Berita</a></li>
                     <li><a href="<?php echo site_url('admin/berita/tambah_berita') ?>"><i class="fa fa-circle-o"></i> Tambah Berita</a></li>
                     <li><a href="<?php echo site_url('admin/berita/tambah_kategori_berita') ?>"><i class="fa fa-circle-o"></i> Tambah Kategori Berita</a></li>
+                    <li><a href="<?php echo site_url('admin/berita/trash') ?>"><i class="fa fa-trash"></i> Trash</a></li>
                 </ul>
             </li>
             <li class="treeview">

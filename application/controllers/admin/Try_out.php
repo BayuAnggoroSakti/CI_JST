@@ -62,9 +62,6 @@ class Try_out extends CI_Controller {
             $data['error_string'][] = 'Waktu is required';
             $data['status'] = FALSE;
         }
- 
-     
- 
         if($data['status'] === FALSE)
         {
             echo json_encode($data);

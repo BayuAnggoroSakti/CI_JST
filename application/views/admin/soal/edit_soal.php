@@ -73,12 +73,6 @@ $this->load->view('template_admin/sidebar');
                         </form>
                       </div>
                     </div>
-                    <div class="form-group">
-                      <label for="inputPassword3" class="col-sm-2 control-label">Bobot</label>
-                      <div class="col-sm-1">
-                          <input type="number" name="bobot" class="form-control" value="<?php echo $b->row('bobot'); ?>">
-                      </div>
-                    </div>
                      <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Opsi A</label>
                       <div class="col-sm-10">

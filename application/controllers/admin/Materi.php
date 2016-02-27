@@ -125,7 +125,7 @@ class Materi extends CI_Controller {
 			 	{
 			 		$config['upload_path']    = "./assets/materi/member";
 			 	}
-				 $config['allowed_types']  = 'pdf|rar|doc|zip';
+				 $config['allowed_types']  = 'pdf|rar|doc|zip|docx|ppt|pptx|xls|xlsx';
 				 $config['max_size']       = '10000';
 				 $config['file_name']      = $nama_materi.'-'.trim(str_replace(" ","",date('dmYHis')));
 				 $this->load->library('upload', $config);
@@ -146,7 +146,7 @@ class Materi extends CI_Controller {
 				} else{
 					$tgl = date('Y-m-d H:i:s');
 					$file = $this->upload->file_name;
-					$type = substr($file, -3);
+					$type = substr($file, -4);
 					$data = array(
 							'nama_materi' => $nama_materi,
 							'jenis' => $jenis,

@@ -2,9 +2,9 @@
 
 	class M_tryout extends CI_Model {
 
-		public function list_soal($id_katTO) 
+		public function list_soal($id_katTO, $limit) 
 		{
-			 $ambil = $this->db->query("SELECT * from soal where id_katTO = '$id_katTO' ");
+			 $ambil = $this->db->query("SELECT * from soal where id_katTO = '$id_katTO' order by rand() limit $limit ");
 		  if ($ambil->num_rows() > 0) {
 		  foreach ($ambil->result() as $data) 
 		  {

@@ -9,6 +9,12 @@ $this->load->view('template_frontend/header');
   $(function() {
     $( "#tabs" ).tabs();
   });
+
+  function validasi_input(form){ 
+    if (form.kategori_to.value =="")
+      { alert("Anda belum memilih kategori Tryout!"); 
+        return (false); } 
+    return (true); }
   </script>
 
 
@@ -103,12 +109,12 @@ $this->load->view('template_frontend/header');
 					   	<div class="col-md-8">
 					   		<div class="form-group">
 						   		<table class="table">
-						   		<form target="_blank" action="<?php echo site_url('try_out') ?>" method="POST">
+						   		<form onsubmit="return validasi_input(this)" action="<?php echo site_url('try_out/persiapan') ?>" method="POST">
 						   			<tr>
 						   				<th>Pilihan Tryout</th>
 						   				<td>
 						   					<select name="kategori_to" class="form-control">
-								   			<option selected>--Silahkan pilih--</option>
+								   			<option value="">--Silahkan pilih--</option>
 								   			<?php 
 								   				foreach ($katTO as $data) { ?>
 								   				<option value="<?php echo $data->id_katTO ?>"><?php echo $data->nama ?></option>
@@ -139,6 +145,11 @@ $this->load->view('template_frontend/header');
 						    <h3 class="panel-title">History</h3>
 						  </div>
 						  <div class="panel-body">
+						  <?php if ($history_to == NULL) { 
+						  	echo "Belum pernah mengikuti Tryout";
+						  } 
+						  else
+						  	{ ?>
 						  	<table class="table">
 						  		<tr>
 						  			<th>No</th>
@@ -163,6 +174,9 @@ $this->load->view('template_frontend/header');
 						  			?>
 						  		
 						  	</table>
+						  	<?php 
+						  }
+						  	?>
 						</div>
 					</div>
 				</div>
