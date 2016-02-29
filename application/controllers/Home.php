@@ -22,8 +22,9 @@ class Home extends CI_Controller {
 		$data['gallery_s'] = $this->m_pelatihan->list_gallery_siswa();
 		$data['title'] = "Home | Jogja Science Training";
 		$data['active'] = "active";
-		$data['data_get_komentar'] = $this->m_admin->populer_komentar();
 		$data['data_get_recent'] = $this->m_admin->recent_berita();
+		$data['data_get_recent_materi'] = $this->m_admin->recent_materi();
+		$data['data_get_kategori'] = $this->m_admin->kategori_berita();
 		$data['data_ambil'] = $this->m_admin->list_slider();
 		$jml = $this->db->where('status_terbit', 'y')->get('berita');
 	
@@ -74,8 +75,12 @@ class Home extends CI_Controller {
 	}
 	function try_out()
 	{
-
-		$this->load->view('frontend/try_out');
+		$data['menu'] = $this->m_admin->detail_profil();
+		$this->load->view('template_frontend/header',$data);
+		$this->load->model('m_soal');
+		$data['katTO'] = $this->m_soal->list_katTO();
+		$data['title'] = "Tryout / Ujian Online";
+		$this->load->view('frontend/tryout_nonMember',$data);
 	}
 	function file()
 	{
@@ -164,7 +169,6 @@ class Home extends CI_Controller {
 	{
 		$data['menu'] = $this->m_admin->detail_profil();
 		$this->load->view('template_frontend/header',$data);
-        $data['title'] = "Program Kerja";
         $data['guru'] =$this->m_pelatihan->pelatihan_guru();
         $data['siswa'] =$this->m_pelatihan->pelatihan_siswa();
         $data['title'] = "Program Kerja JST";
@@ -291,9 +295,10 @@ class Home extends CI_Controller {
 			$this->load->view('template_frontend/header',$data);
         	$data['data_get_recent'] = $this->m_admin->recent_berita();
 	        $berita = $this->m_admin->detail_berita($id);
-	        $data['data_get'] = $this->m_admin->list_komentar($id);
-	        $data['data_get2'] = $this->m_admin->count_komentar($id);
-	        $data['data_get_komentar'] = $this->m_admin->populer_komentar();
+	        $data['data_get_recent'] = $this->m_admin->recent_berita();
+			$data['data_get_recent_materi'] = $this->m_admin->recent_materi();
+			$data['data_get_kategori'] = $this->m_admin->kategori_berita();
+			$data['title'] = "Berita Selengkapnya";
 	        $this->load->vars('b', $berita);  
 	        $this->load->view('frontend/detail_berita',$data);
         }

@@ -32,7 +32,7 @@ $this->load->view('template_admin/sidebar');
                     <div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">Password Lama</label>
                       <div class="col-sm-10">
-                        <input type="text" name="password_lama" class="form-control" id="judul" placeholder="Masukkan password lama anda" required/>
+                        <input type="password" name="password_lama" class="form-control" id="judul" placeholder="Masukkan password lama anda" required/>
                         <?php echo form_error('password_lama'); ?>
                       </div>
                       
@@ -41,14 +41,14 @@ $this->load->view('template_admin/sidebar');
                      <div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">Password Baru</label>
                       <div class="col-sm-10">
-                        <input type="text" name="password_baru" class="form-control" id="judul" placeholder="Masukkan password Baru anda" required/>
+                        <input type="password" name="password_baru" class="form-control" id="judul" placeholder="Masukkan password Baru anda" required/>
                         <?php echo form_error('password_baru'); ?>
                       </div>
                     </div>
                      <div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">Ulangi Password</label>
                       <div class="col-sm-10">
-                        <input type="text" name="passconf" class="form-control" id="judul" placeholder="Ulangi Password" required/>
+                        <input type="password" name="passconf" class="form-control" id="judul" placeholder="Ulangi Password" required/>
                          <?php echo form_error('passconf'); ?>
                       </div>
 

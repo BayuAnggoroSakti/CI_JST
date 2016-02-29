@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  
 class M_kategori_to extends CI_Model {
  	var $table = 'kategori_to';
-    var $column = array('id_katTO','nama'); //set column field database for order and search
+    var $column = array('id_katTO','nama','jum_soal','waktu','status'); //set column field database for order and search
     var $order = array('id_katTO' => 'desc'); // default order
  
     public function __construct()
@@ -97,9 +97,9 @@ class M_kategori_to extends CI_Model {
         return $this->db->affected_rows();
     }
  
-    public function delete_by_id($id)
+    public function delete_by_id($where,$data)
     {
-        $this->db->where('id_katTO', $id);
-        $this->db->delete($this->table);
+        $this->db->update($this->table, $data, $where);
+        return $this->db->affected_rows();
     }
 }

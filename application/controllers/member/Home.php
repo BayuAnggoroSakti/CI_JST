@@ -28,6 +28,7 @@ class Home extends CI_Controller {
 	public function logout() {
 		$this->session->unset_userdata('username');
 		$this->session->unset_userdata('level');
+		$this->session->unset_userdata('nama_lengkap');
 		redirect('home/login');
 	}
 

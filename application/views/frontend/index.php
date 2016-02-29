@@ -130,28 +130,13 @@ $this->load->view('template_frontend/slider');
 
 								<div class="tabs-widget widget">
 									<ul class="tab-links">
-										<li><a class="tab-link1 active" href="#"> Popular</a></li>
-										<li><a class="tab-link2" href="#"> Recent</a></li>
+										<li><a class="tab-link1 active" href="#"> Berita Terbaru</a></li>
+										<li><a class="tab-link2" href="#"> Materi Terbaru</a></li>
+										<li><a class="tab-link3" href="#"> Kategori Berita</a></li>
 									</ul>
 									<div class="tab-box">
 										<div class="tab-content active">
-											<ul class="post-popular">
-											<?php
-												$gambar = base_url('assets/images/');
-												foreach ($data_get_komentar as $komentar) {
-													?>
-												<li>
-													<img alt="" src="<?php echo $gambar.'/'.$komentar->gambar; ?>">
-													<h6><a href="<?php echo base_url();?>home/detail_berita/<?php echo $komentar->id_berita; ?>"><?php echo $komentar->judul_berita; ?></a></h6>
-												</li>
-											<?php		
-												}
-											?>
-												
-											</ul>
-										</div>
-										<div class="tab-content">
-											<ul class="post-recent">
+										<ul class="post-recent">
 												<?php
 												$gambar = base_url('assets/images/');
 												foreach ($data_get_recent as $berita) {
@@ -165,46 +150,39 @@ $this->load->view('template_frontend/slider');
 											?>
 											</ul>
 										</div>
+										<div class="tab-content">
+											<ul class="post-recent">
+												<?php
+												foreach ($data_get_recent_materi as $materi) {
+													?>
+												<li>
+													<img alt="" src="<?php echo base_url('assets/images/favicon/android-icon-36x36.png') ?>">
+													<h6><a href="<?php echo base_url();?>home/download"><?php echo $materi->nama_materi." ".$materi->type; ?></a></h6>
+												</li>
+											<?php		
+												}
+											?>
+											</ul>
+										</div>
+										<div class="tab-content">
+											<ul class="post-recent">
+												<?php
+												foreach ($data_get_kategori as $kategori) {
+													?>
+												<li>
+													<img alt="" src="<?php echo base_url('assets/images/favicon/android-icon-36x36.png') ?>">
+													<h6><a href=""><?php echo $kategori->nama_katBer; ?></a></h6>
+												</li>
+											<?php		
+												}
+											?>
+											</ul>
+										</div>
 										
 									</div>
 								</div>
 
-								<div class="accordion-widget widget">
-									<h5>Accordion</h5>
-									<div class="accordion-box">
-
-										<div class="accord-elem active">
-											<div class="accord-title">
-												<h5><i class="fa fa-question"></i>Marketplace Basics</h5>
-												<a class="accord-link" href="#"></a>
-											</div>
-											<div class="accord-content">
-												<p>Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec</p>
-											</div>
-										</div>
-
-										<div class="accord-elem">
-											<div class="accord-title">
-												<h5><i class="fa fa-question"></i>Author Resources</h5>
-												<a class="accord-link" href="#"></a>
-											</div>
-											<div class="accord-content">
-												<p>Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec</p>
-											</div>
-										</div>
-
-										<div class="accord-elem">
-											<div class="accord-title">
-												<h5><i class="fa fa-question"></i>Theme Requirements</h5>
-												<a class="accord-link" href="#"></a>
-											</div>
-											<div class="accord-content">
-												<p>Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec</p>
-											</div>
-										</div>
-									</div>
-								</div>
-								
+	
 
 							
 							</div>

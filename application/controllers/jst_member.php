@@ -10,7 +10,7 @@ class Jst_member extends CI_Controller {
 			redirect('member/home');
 		}
 		elseif ($this->session->userdata('level')!="member") {
-			$this->load->view('frontend/login');
+			redirect('home/login');
 		}
 	}
 

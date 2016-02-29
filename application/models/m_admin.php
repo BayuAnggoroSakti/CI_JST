@@ -17,6 +17,17 @@
 		  	return $hasil;
 		  }
 	}
+	function kategori_berita() 
+	{
+		  $ambil = $this->db->query('SELECT * from kategori_berita');
+		  if ($ambil->num_rows() > 0) {
+		  foreach ($ambil->result() as $data) 
+		  {
+		   	$hasil[] = $data;
+		   }
+		  	return $hasil;
+		  }
+	}
 	public function my_profile($id)
 	{
 		$this->db->from('user');
@@ -66,7 +77,18 @@
 
 	 function recent_berita() 
 	{
-		  $ambil = $this->db->query('SELECT id_berita,judul_berita, isi_berita, tanggal_berita, status_terbit, kb.nama_katber as kategori, gambar, u.nama_lengkap as nama_lengkap FROM user u, berita b, kategori_berita kb where b.id_kateBer = kb.id_katBer and b.id_user = u.id_user order by tanggal_berita desc limit 4');
+		  $ambil = $this->db->query('SELECT id_berita,judul_berita, isi_berita, tanggal_berita, status_terbit, kb.nama_katber as kategori, gambar, u.nama_lengkap as nama_lengkap FROM user u, berita b, kategori_berita kb where b.id_kateBer = kb.id_katBer and status_terbit = "y" and b.id_user = u.id_user order by tanggal_berita desc limit 4');
+		  if ($ambil->num_rows() > 0) {
+		  foreach ($ambil->result() as $data) 
+		  {
+		   	$hasil[] = $data;
+		   }
+		  	return $hasil;
+		  }
+	}
+	 function recent_materi() 
+	{
+		  $ambil = $this->db->query('SELECT * from materi order by tanggal desc limit 4');
 		  if ($ambil->num_rows() > 0) {
 		  foreach ($ambil->result() as $data) 
 		  {

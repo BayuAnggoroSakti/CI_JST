@@ -5,9 +5,26 @@ $this->load->view('template_frontend/header_tryout');
    <script type="text/javascript" src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/plugins/countdown/lib/jquery-2.0.3.js') ?>"></script>
   <script type="text/javascript" src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/plugins/countdown/jquery.countdownTimer.js') ?>"></script>
     <link href="<?php echo base_url('assets/admin/AdminLTE-2.0.5/plugins/countdown/css/jquery.countdownTimer.css') ?>" rel="stylesheet" type="text/css" />
+   <script type="text/javascript">
+ 
+</script>
+<?php 
+if ($this->session->userdata('level') == 'member') {
+  $waktu = $kategori_to->row('waktu');
+  $jum_soal = $kategori_to->row('jum_soal');
+  $nama_lengkap = $this->session->userdata('nama_lengkap');
+}
+else
+{
+   $waktu = $kategori_to->row('waktu') / 2;
+   $jum_soal = $kategori_to->row('jum_soal') / 2;
+  $nama_lengkap = $nama;
+}
 
+  
+?>
                             <script>
-                            var num = "<?php echo $kategori_to->row('waktu') ?>";
+                            var num = "<?php echo $waktu; ?>";
                             var menit = num.toString();
                                    $(function(){
                                     $('#ms_timer').countdowntimer({
@@ -22,6 +39,8 @@ $this->load->view('template_frontend/header_tryout');
 var total = num * 60;
 var x = total;
 var y = document.getElementById("timer");
+
+
 // Display count down for 20s
 setInterval(function() {
 if (x <= total && x >= 1) {
@@ -41,6 +60,7 @@ function submitform() {
 alert('Waktu sudah habis, silahkan melihat hasil Tryout anda');
 document.getElementById("form").submit();
 }
+
 // To validate form fields before submission
 };
                             </script>
@@ -56,7 +76,6 @@ document.getElementById("form").submit();
           </ul>
         </div>
       </div>
-
       <div class="about-box">
         <div class="container">
           <div class="row">
@@ -64,9 +83,11 @@ document.getElementById("form").submit();
               <div class="skills-progress">
                  <div class="alert alert-warning col-md-12">
                   <table class="table table-bordered" style="margin-bottom: 0px">
-                    <tr><td width="30%">Nama Peserta</td><td width="70%"><?php echo $this->session->userdata('nama_lengkap') ?></td></tr>
+                    <tr><td width="30%">Nama Peserta</td><td width="70%"><?php echo $nama_lengkap ?></td></tr>
                     <tr><td>Kategori</td><td><?php echo $kategori_to->row('nama') ?></td></tr>
-                    <tr><td>Waktu</td><td><?php echo $kategori_to->row('waktu')." Menit" ?></td></tr>
+                     <tr><td>Waktu</td><td><?php echo $waktu." Menit" ?></td></tr>
+                    <tr><td>Jumlah Soal</td><td><?php echo $jum_soal." Soal" ?></td></tr>
+                   
                   </table>
               </div>
             </div>
@@ -75,7 +96,7 @@ document.getElementById("form").submit();
               <div class="skills-progress">
                   <div class="alert alert-warning col-md-12">
                     <table class="table table-bordered" style="margin-bottom: 0px">
-                      <tr><td width="30%">Benar</td><td width="70%">1 (Satu)</td></tr>
+                      <tr><td width="30%">Benar</td><td width="70%">4 (Empat)</td></tr>
                       <tr><td>Salah</td><td>-1 (Minus Satu)</td></tr>
                       <tr><td>Tidak Jawab</td><td>0 (Nol)</td></tr>
                     </table>
@@ -160,11 +181,17 @@ document.getElementById("form").submit();
             }
 
              ?>
+             <?php echo form_hidden($this->security->get_csrf_token_name(), $this->security->get_csrf_hash()); ?>
+
+            <input name="nama_lengkap" type="hidden" value="<?php echo $nama_lengkap; ?>">
+            <input name="jum_soal" type="hidden" value="<?php echo $jum_soal; ?>">
+
              <input name="no" type="hidden" value="<?php echo $no; ?>">
              <input name="id_to" type="hidden" value="<?php echo $id_to->row('id_to'); ?>">
              <input name="kategori_to" type="hidden" value="<?php echo $kategori_to->row('id_katTO') ?>"></input>
              
             <input type="submit" name="btnSubmit" class="btn btn-success" value="Submit"/>
+
             </form>
             </div>
           </div>

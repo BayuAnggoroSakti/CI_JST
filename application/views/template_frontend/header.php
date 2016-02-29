@@ -64,6 +64,7 @@
 							<li><a <?php if ( $this->uri->uri_string() == 'home/gallery' ) { echo "class='active'";} else { echo "";} ?> href="<?php echo site_url('home/gallery') ?>">Gallery Kegiatan</a>
 							</li>
 							<li><a  <?php if ( $this->uri->uri_string() == 'home/download' ) { echo "class='active'";} else { echo "";} ?> href="<?php echo site_url('home/download'); ?>">Download</a></li>
+							<li><a  <?php if ( $this->uri->uri_string() == 'home/try_out' ) { echo "class='active'";} else { echo "";} ?> href="<?php echo site_url('home/try_out'); ?>">Tryout</a></li>
 							<li ><a <?php if ( $this->uri->uri_string() == 'home/hubungi_kami' ) { echo "class='active'";} else { echo "";} ?> href="<?php echo site_url('home/hubungi_kami'); ?>">Hubungi Kami</a></li>
 						</ul>
 					</div>

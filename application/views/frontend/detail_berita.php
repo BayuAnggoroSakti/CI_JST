@@ -69,28 +69,13 @@ s.setAttribute('data-timestamp', +new Date());
 
 								<div class="tabs-widget widget">
 									<ul class="tab-links">
-										<li><a class="tab-link1 active" href="#"> Popular</a></li>
-										<li><a class="tab-link2" href="#"> Recent</a></li>
-										<li><a class="tab-link3" href="#"> Comments</a></li>
+										<li><a class="tab-link1 active" href="#"> Berita Terbaru</a></li>
+										<li><a class="tab-link2" href="#"> Materi Terbaru</a></li>
+										<li><a class="tab-link3" href="#"> Kategori Berita</a></li>
 									</ul>
 									<div class="tab-box">
 										<div class="tab-content active">
-											<ul class="post-popular">
-												<?php
-												$gambar = base_url('assets/images/');
-												foreach ($data_get_komentar as $komentar) {
-													?>
-												<li>
-													<img alt="" src="<?php echo $gambar.'/'.$komentar->gambar; ?>">
-													<h6><a href="<?php echo base_url();?>home/detail_berita/<?php echo $komentar->id_berita; ?>"><?php echo $komentar->judul_berita; ?></a></h6>
-												</li>
-											<?php		
-												}
-											?>
-											</ul>
-										</div>
-										<div class="tab-content">
-											<ul class="post-recent">
+										<ul class="post-recent">
 												<?php
 												$gambar = base_url('assets/images/');
 												foreach ($data_get_recent as $berita) {
@@ -105,77 +90,40 @@ s.setAttribute('data-timestamp', +new Date());
 											</ul>
 										</div>
 										<div class="tab-content">
-											<ul class="post-comments">
+											<ul class="post-recent">
+												<?php
+												foreach ($data_get_recent_materi as $materi) {
+													?>
 												<li>
-													<img alt="" src="images/post-img2.png">
-													<h6><a href="#">Lorem Ipsum. Proin gravida nibh vel velit auctor </a></h6>
+													<img alt="" src="<?php echo base_url('assets/images/favicon/android-icon-36x36.png') ?>">
+													<h6><a href="<?php echo base_url();?>home/download"><?php echo $materi->nama_materi." ".$materi->type; ?></a></h6>
 												</li>
-												<li>
-													<img alt="" src="images/post-img3.png">
-													<h6><a href="#">Sollicitudin, lorem quis bibendum auctor, nisi elit</a></h6>
-												</li>
-												<li>
-													<img alt="" src="images/post-img2.png">
-													<h6><a href="#">Aliquet. Aenean sollicitudin, lorem quis bibendum auctor</a></h6>
-												</li>
+											<?php		
+												}
+											?>
 											</ul>
 										</div>
+										<div class="tab-content">
+											<ul class="post-recent">
+												<?php
+												foreach ($data_get_kategori as $kategori) {
+													?>
+												<li>
+													<img alt="" src="<?php echo base_url('assets/images/favicon/android-icon-36x36.png') ?>">
+													<h6><a href=""><?php echo $kategori->nama_katBer; ?></a></h6>
+												</li>
+											<?php		
+												}
+											?>
+											</ul>
+										</div>
+										
 									</div>
 								</div>
 
-								<div class="accordion-widget widget">
-									<h5>Accordion</h5>
-									<div class="accordion-box">
+	
 
-										<div class="accord-elem active">
-											<div class="accord-title">
-												<h5><i class="fa fa-question"></i>Marketplace Basics</h5>
-												<a class="accord-link" href="#"></a>
-											</div>
-											<div class="accord-content">
-												<p>Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec</p>
-											</div>
-										</div>
-
-										<div class="accord-elem">
-											<div class="accord-title">
-												<h5><i class="fa fa-question"></i>Author Resources</h5>
-												<a class="accord-link" href="#"></a>
-											</div>
-											<div class="accord-content">
-												<p>Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec</p>
-											</div>
-										</div>
-
-										<div class="accord-elem">
-											<div class="accord-title">
-												<h5><i class="fa fa-question"></i>Theme Requirements</h5>
-												<a class="accord-link" href="#"></a>
-											</div>
-											<div class="accord-content">
-												<p>Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec</p>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="tags-widget widget">
-									<h5>Tags</h5>
-									<ul class="tag-widget-list">
-										<li><a href="#">web design</a></li>
-										<li><a href="#">coding</a></li>
-										<li><a href="#">wordpress</a></li>
-										<li><a href="#">woo commerce</a></li>
-										<li><a href="#">php</a></li>
-										<li><a href="#">photography</a></li>
-									</ul>
-								</div>
-
-								<div class="text-widget widget">
-									<h5>Text Widget</h5>
-									<p>Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non  mauris vitae erat consequat</p>
-								</div>
-
+							
 							</div>
 						</div>
 					</div>

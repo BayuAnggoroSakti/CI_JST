@@ -61,7 +61,10 @@ class Soal extends CI_Controller {
 
     public function ajax_delete_soal($id)
     {
-        $this->soal->delete_by_id($id);
+        $data = array(
+                'status' => 'not_active',
+            );
+        $this->soal->delete_by_id(array('kode_soal' => $id), $data);
         echo json_encode(array("status" => TRUE));
     }
 
@@ -129,7 +132,7 @@ class Soal extends CI_Controller {
             if ($soal->status == 'active') { 
                 $status = '<small class="label pull-center bg-green">Active</small>';
             }else{
-                $status = '<small class="label pull-center bg-green">Not Active</small>';
+                $status = '<small class="label pull-center bg-red">Not Active</small>';
             }
             $no++;
             $row = array();
@@ -160,7 +163,6 @@ class Soal extends CI_Controller {
         $data['level'] = $this->session->userdata('level');
         $id_katTO = $this->input->post('id_katTO');
         $soal_des = $this->input->post('soal_des');
-        $bobot = $this->input->post('bobot');
         $opsi_a = $this->input->post('opsi_a');
         $opsi_b = $this->input->post('opsi_b');
         $opsi_c = $this->input->post('opsi_c');
@@ -187,7 +189,6 @@ class Soal extends CI_Controller {
         $data = array(
                             'id_katTO' => $id_katTO,
                             'soal_des' => $soal_des,
-                            'bobot' => $bobot,
                             'opsi_a' => $opsi_a,
                             'opsi_b' => $opsi_b,
                             'opsi_c' => $opsi_c,

@@ -6,14 +6,6 @@ class Try_out extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('m_tryout');
-		 if ($this->session->userdata('level')=="member") 
-         {
-            
-         }
-         else
-         {
-            redirect('home/login');
-         }
 		
 	}
 	public function persiapan()
@@ -21,6 +13,14 @@ class Try_out extends CI_Controller {
 		if ($this->input->post('submit')) {
 			$data['title'] = "Tryout";
 			$id_katTO = $this->input->post('kategori_to');
+			$data['kategori_to'] = $this->m_tryout->kategori_to($id_katTO);
+			$data['id_katTO'] = $this->input->post('kategori_to');
+			$this->load->view('frontend/persiapan_to',$data);
+		}
+		elseif ($this->input->post('submit2')) {
+			$data['title'] = "Tryout";
+			$id_katTO = $this->input->post('kategori_to');
+			$data['nama_lengkap'] = $this->input->post('nama_lengkap');
 			$data['kategori_to'] = $this->m_tryout->kategori_to($id_katTO);
 			$data['id_katTO'] = $this->input->post('kategori_to');
 			$this->load->view('frontend/persiapan_to',$data);
@@ -37,8 +37,11 @@ class Try_out extends CI_Controller {
 			$data['title'] = "Tryout";
 			$id_katTO = $this->input->post('kategori_to');
 			$jum_soal = $this->input->post('jum_soal');
+			$timer = $this->input->post('waktu');
+			$data['waktu'] = $timer;
 			$data['soal'] = $this->m_tryout->list_soal($id_katTO,$jum_soal);;
 			$data['kategori_to'] = $this->m_tryout->kategori_to($id_katTO);
+			$data['jum_soal'] = $jum_soal;
 			$tgl = date('Y-m-d H:i:s');
 			$tryout = array(
 							'id_user' => $this->session->userdata('id_user'),
@@ -47,6 +50,27 @@ class Try_out extends CI_Controller {
 					);
 			$this->m_tryout->insert_tryout($tryout);
 			$data['id_to'] = $this->m_tryout->id_tryout($this->session->userdata('id_user'),$tgl); 
+			$this->load->view('frontend/try_out',$data);
+		}
+		elseif ($this->input->post('submit2')) {
+			$data['title'] = "Tryout";
+			$id_katTO = $this->input->post('kategori_to');
+			$jum_soal = $this->input->post('jum_soal');
+			$soal = $jum_soal/2;
+			$data['nama'] = $this->input->post('nama_lengkap');
+			$timer = $this->input->post('waktu');
+			$data['waktu'] = $timer;
+			$data['soal'] = $this->m_tryout->list_soal($id_katTO,$soal);;
+			$data['kategori_to'] = $this->m_tryout->kategori_to($id_katTO);
+			$data['jum_soal'] = $jum_soal;
+			$tgl = date('Y-m-d H:i:s');
+			$tryout = array(
+							'id_user' => 0,
+							'waktu' => $tgl,
+							'nilai' => 0,
+					);
+			$this->m_tryout->insert_tryout($tryout);
+			$data['id_to'] = $this->m_tryout->id_tryout(0,$tgl); 
 			$this->load->view('frontend/try_out',$data);
 		}
 		else
@@ -104,6 +128,8 @@ class Try_out extends CI_Controller {
 			$id_katTO = $this->input->post('kategori_to');
 			$data['kategori_to'] = $this->m_tryout->kategori_to($this->input->post('kategori_to'));
 			$data['menu'] = $this->m_admin->detail_profil();
+			$data['jum_soal'] = $this->input->post('jum_soal');
+			$data['nama_lengkap'] = $this->input->post('nama_lengkap');
 			$this->load->view('template_frontend/header',$data);
 	        $data['title'] = "Hasil Tryout";
 	        $data['hasil'] = $hasil;

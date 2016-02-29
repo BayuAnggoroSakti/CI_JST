@@ -7,7 +7,13 @@ $this->load->view('template_admin/topbar');
 $this->load->view('template_admin/sidebar');
 ?>
 <script type="text/javascript"> 
+
   function validasi_input(form){ 
+var a = document.getElementById("opsi_a").value;
+var b = document.getElementById("opsi_b").value;
+var c = document.getElementById("opsi_c").value;
+var d = document.getElementById("opsi_d").value;
+var e = document.getElementById("opsi_e").value;
     if (form.kunci.value =="")
       { alert("Anda belum memilih Kunci!"); 
         return (false); } 
@@ -17,6 +23,18 @@ $this->load->view('template_admin/sidebar');
          if (form.status.value =="")
       { alert("Anda belum memilih status!"); 
         return (false); } 
+         if (a == b || a == c || a==d || a==e)
+      { alert("Opsi jawaban tidak boleh sama, silahkan periksa kembali!"); 
+        return (false); }
+         if (b == c || b == d || b==e)
+      { alert("Opsi jawaban tidak boleh sama, silahkan periksa kembali!"); 
+        return (false); }
+         if (c == d || c == e)
+      { alert("Opsi jawaban tidak boleh sama, silahkan periksa kembali!"); 
+        return (false); }
+         if (d == e)
+      { alert("Opsi jawaban tidak boleh sama, silahkan periksa kembali!"); 
+        return (false); }
     return (true); }
 
 
@@ -77,33 +95,33 @@ $this->load->view('template_admin/sidebar');
                       </div>
                     </div>
                      <div class="form-group">
-                      <label for="inputPassword3" class="col-sm-2 control-label">Opsi A</label>
+                      <label for="inputPassword3"  class="col-sm-2 control-label">Opsi A</label>
                       <div class="col-sm-10">
-                          <input type="text" name="opsi_a" class="form-control" required>
+                          <input type="text" name="opsi_a" id="opsi_a" value="" class="form-control" required>
                       </div>
                     </div>
                      <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Opsi B</label>
                       <div class="col-sm-10">
-                          <input type="text" name="opsi_b" class="form-control" required>
+                          <input type="text" name="opsi_b" id="opsi_b" value="" class="form-control" required>
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="inputPassword3" class="col-sm-2 control-label">Opsi C</label>
+                      <label for="inputPassword3"  class="col-sm-2 control-label">Opsi C</label>
                       <div class="col-sm-10">
-                          <input type="text" name="opsi_c" class="form-control" required>
+                          <input type="text" name="opsi_c" id="opsi_c" value="" class="form-control" required>
                       </div>
                     </div>
                      <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Opsi D</label>
                       <div class="col-sm-10">
-                          <input type="text" name="opsi_d" class="form-control" required>
+                          <input type="text" name="opsi_d" id="opsi_d" value="" class="form-control" required>
                       </div>
                     </div>
                      <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Opsi E</label>
                       <div class="col-sm-10">
-                          <input type="text" name="opsi_e" class="form-control" required>
+                          <input type="text" name="opsi_e" id="opsi_e" value="" class="form-control" required>
                       </div>
                     </div>
                      <div class="form-group">

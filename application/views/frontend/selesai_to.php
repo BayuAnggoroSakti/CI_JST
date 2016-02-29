@@ -2,6 +2,7 @@
 $this->load->view('template_frontend/head');
 $this->load->view('template_frontend/header');
 ?>
+
    <script type="text/javascript" src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/plugins/countdown/lib/jquery-2.0.3.js') ?>"></script>
 <div id="content">
       <!-- Page Banner -->
@@ -23,9 +24,9 @@ $this->load->view('template_frontend/header');
               <div class="skills-progress">
                  <div class="alert alert-warning col-md-12">
                   <table class="table table-bordered" style="margin-bottom: 0px">
-                    <tr><td width="30%">Nama Peserta</td><td width="70%"><?php echo $this->session->userdata('nama_lengkap') ?></td></tr>
+                    <tr><td width="30%">Nama Peserta</td><td width="70%"><?php echo $nama_lengkap; ?></td></tr>
                     <tr><td>Kategori</td><td><?php echo $kategori_to->row('nama') ?></td></tr>
-                    <tr><td>Waktu</td><td><?php echo $kategori_to->row('waktu')." Menit" ?></td></tr>
+                    <tr><td>Jumlah Soal</td><td><?php echo $jum_soal; ?></td></tr>
                   </table>
               </div>
             </div>

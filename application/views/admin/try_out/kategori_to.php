@@ -25,6 +25,12 @@ $this->load->view('template_admin/sidebar');
     <!-- Default box -->
    <div class="box">
                 <div class="box-header">
+                <div class="callout callout-info">
+                    <h4>Kategori Tryout</h4>
+                    <p>- Setelah menambahkan kategori, otomatis akan belum aktif</p>
+                    <p>- Jika sudah yakin menambah soal pada setiap kategori, silahkan edit, kemudian aktifkan</p>
+                    <p>- Pastikan mengaktifkan kategori jika sudah dirasa sudah siap</p>
+                  </div>
                    <div class="row">
                         <div class="col-md-2">
                             <button class="btn btn-block btn-info btn-lg" onclick="add_person()"><i class="glyphicon glyphicon-plus"></i> Tambah</button> 
@@ -37,12 +43,13 @@ $this->load->view('template_admin/sidebar');
                 </div><!-- /.box-header -->
                 <div class="box-body">
                    <table class="table table-bordered table-hover" width="100%" id="table">
-                    <thead style="background:#9bff84">
+                    <thead>
                         <tr>
                             <th>No</th>
                             <th>Nama Kategori Try Out</th>
                             <th>Waktu (Menit)</th>
-                             <th>Jumlah Soal</th>
+                            <th>Jumlah Soal</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -161,6 +168,7 @@ function edit_katTO(id)
             $('[name="nama"]').val(data.nama);
             $('[name="waktu"]').val(data.waktu);
             $('[name="jum_soal"]').val(data.jum_soal);
+            $('[name="status"]').val(data.status);
            
             $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
             $('.modal-title').text('Edit Person'); // Set title to Bootstrap modal title
@@ -283,6 +291,16 @@ function delete_katTO(id)
                             <label class="control-label col-md-3">Jumlah Soal</label>
                             <div class="col-md-2">
                                 <input name="jum_soal" placeholder="jumlah soal" class="form-control" type="number">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                         <div class="form-group">
+                            <label class="control-label col-md-3">Status</label>
+                            <div class="col-md-4">
+                                <select name="status" class="form-control">
+                                    <option value="aktif">Aktif</option>
+                                    <option value="tidak">Tidak Aktif</option>
+                                </select>
                                 <span class="help-block"></span>
                             </div>
                         </div>

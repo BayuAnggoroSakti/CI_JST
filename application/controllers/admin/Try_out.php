@@ -32,6 +32,7 @@ class Try_out extends CI_Controller {
                 'nama' => $this->input->post('nama'),
                 'jum_soal' => $this->input->post('jum_soal'),
                 'waktu' => $this->input->post('waktu'),
+                'status' => 'tidak'
             );
         $insert = $this->kategori_to->save($data);
         echo json_encode(array("status" => TRUE));
@@ -56,6 +57,18 @@ class Try_out extends CI_Controller {
             $data['error_string'][] = 'Jumlah Soal is required';
             $data['status'] = FALSE;
         }
+         if($this->input->post('jum_soal') % 2 != 0)
+        {
+            $data['inputerror'][] = 'jum_soal';
+            $data['error_string'][] = 'Jumlah soal harus genap';
+            $data['status'] = FALSE;
+        }
+         if($this->input->post('waktu') % 2 != 0)
+        {
+            $data['inputerror'][] = 'waktu';
+            $data['error_string'][] = 'waktu soal harus genap';
+            $data['status'] = FALSE;
+        }
          if($this->input->post('waktu') == '')
         {
             $data['inputerror'][] = 'waktu';
@@ -71,7 +84,10 @@ class Try_out extends CI_Controller {
 
     public function ajax_delete_katTO($id)
     {
-        $this->kategori_to->delete_by_id($id);
+        $data = array(
+                'status' => 'tidak',
+            );
+        $this->kategori_to->delete_by_id(array('id_katTO' => $id), $data);
         echo json_encode(array("status" => TRUE));
     }
 
@@ -81,12 +97,23 @@ class Try_out extends CI_Controller {
         $data = array();
         $no = $_POST['start'];
         foreach ($list as $kategori_to) {
+            if ($kategori_to->status=='aktif') {
+               $status = '<small class="label pull-right bg-green">Active</small>';
+            }
+            elseif ($kategori_to->status=='tidak') {
+                $status = '<small class="label pull-right bg-red">Not Active</small>';
+            }
+            else
+            {
+                $status = '<small class="label pull-right bg-yellow">Pending</small><br>';
+            }
             $no++;
             $row = array();
             $row[] = $no;
             $row[] = $kategori_to->nama;
             $row[] = $kategori_to->waktu;
             $row[] = $kategori_to->jum_soal;
+            $row[] = $status;
             //add html for action
             $row[] = '<a class="btn btn-sm btn-primary" href="javascript:void()" title="Edit" onclick="edit_katTO('."'".$kategori_to->id_katTO."'".')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
                   <a class="btn btn-sm btn-danger" href="javascript:void()" title="Hapus" onclick="delete_katTO('."'".$kategori_to->id_katTO."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
@@ -117,6 +144,7 @@ class Try_out extends CI_Controller {
                 'nama' => $this->input->post('nama'),
                 'jum_soal' => $this->input->post('jum_soal'),
                 'waktu' => $this->input->post('waktu'),
+                'status' => $this->input->post('status'),
             );
         $this->kategori_to->update(array('id_katTO' => $this->input->post('id_katTO')), $data);
         echo json_encode(array("status" => TRUE));

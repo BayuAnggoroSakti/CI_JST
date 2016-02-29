@@ -23,10 +23,39 @@ $this->load->view('template_frontend/header_tryout');
               <div class="skills-progress">
                  <div class="alert alert-warning col-md-12">
                   <table class="table table-bordered" style="margin-bottom: 0px">
-                    <tr><td width="30%">Nama Peserta</td><td width="70%"><?php echo $this->session->userdata('nama_lengkap') ?></td></tr>
+                    <tr><td width="30%">Nama Peserta</td><td width="70%">
+                    <?php if($this->session->userdata('level') == 'member') 
+                      {
+                        echo $this->session->userdata('nama_lengkap');
+                      }
+                      else
+                      {
+                        echo $nama_lengkap;
+                      }
+                    ?></td></tr>
                     <tr><td>Kategori</td><td><?php echo $kategori_to->row('nama') ?></td></tr>
-                    <tr><td>Waktu</td><td><?php echo $kategori_to->row('waktu')." Menit" ?></td></tr>
-                    <tr><td>Jumlah Soal</td><td><?php echo $kategori_to->row('jum_soal') ?></td></tr>
+                    <tr><td>Waktu</td><td>  
+                    <?php if($this->session->userdata('level') == 'member') 
+                      {
+                        echo $kategori_to->row('waktu');
+                      }
+                      else
+                      {
+                        $setengah = $kategori_to->row('waktu') / 2;
+                        echo $setengah;
+                      }
+                    ?> Menit</td></tr>
+                    <tr><td>Jumlah Soal</td><td> 
+                    <?php if($this->session->userdata('level') == 'member') 
+                      {
+                        echo $kategori_to->row('jum_soal');
+                      }
+                      else
+                      {
+                        $setengah = $kategori_to->row('jum_soal') / 2;
+                        echo $setengah;
+                      }
+                    ?> Soal</td></tr>
                   </table>
               </div>
             </div>
@@ -51,10 +80,23 @@ $this->load->view('template_frontend/header_tryout');
             <div class="form-group" align="center">
                       
                       <div class="col-sm-12">
+                      <?php 
+                        if ($this->session->userdata('level') == "member") { ?>
                           <input type="submit" name="submit" Value="Mulai Tryout" class="btn btn-lg btn-info">
+                      <?php
+                        }
+                        else
+                        { ?>
+                           <input type="hidden" name="nama_lengkap" Value="<?php echo $nama_lengkap; ?>">
+                          <input type="submit" name="submit2" Value="Mulai Tryout" class="btn btn-lg btn-info">
+                      <?php
+                        }
+                      ?>
+                        
                       </div>
                     </div>
-            <input type="hidden" name="kategori_to" value="<?php echo $id_katTO; ?>"> 
+                    <?php echo form_hidden($this->security->get_csrf_token_name(), $this->security->get_csrf_hash()); ?>
+            <input type="hidden" name="kategori_to" value="<?php echo $id_katTO; ?>">
             <input type="hidden" name="jum_soal" value="<?php echo $kategori_to->row('jum_soal') ?>"></input>      
           </form>
           </div>

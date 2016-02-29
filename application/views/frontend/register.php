@@ -93,7 +93,7 @@ $this->load->view('template_frontend/header');
 						<?php echo form_error('captcha'); ?>
 					<br>
 					<input type="submit"  class="btn btn-success" value="Register" name="submit"/>
-					
+					<?php echo form_hidden($this->security->get_csrf_token_name(), $this->security->get_csrf_hash()); ?>
 				</form>
 			</div>
 		</div>
@@ -106,8 +106,8 @@ $this->load->view('template_frontend/header');
 							<li>Jagalah kerahasiaan akun Anda. Jangan memberitahukan password kepada orang lain.</li>
 							<li>Gantilah password secara berkala untuk mengurangi resiko pembajakan akun oleh orang lain.</li>
 							<li>Hindari memakai password yang mudah ditebak, seperti tanggal lahir, nama anda, kata-kata umum, dsb.</li>
-							<li>Projects.co.id tidak pernah meminta username dan password Anda melalui email. Jika ada email seperti itu, jangan di-klik link di dalamnya, karena kemungkinan besar adalah upaya phising.</li>
-							<li>Sebelum login, pastikan dahulu bahwa URL di browser diawali <strong>https://www.projects.co.id</strong>, bukan yang lainnya.</li>				
+							<li>jogjasciencetraining.com tidak pernah meminta username dan password Anda melalui email. Jika ada email seperti itu, jangan di-klik link di dalamnya, karena kemungkinan besar adalah upaya phising.</li>
+							<li>Sebelum login, pastikan dahulu bahwa URL di browser diawali <strong>http://jogjasciencetraining.com</strong>, bukan yang lainnya.</li>				
 						</ul>
 					  </div>
 					</div>

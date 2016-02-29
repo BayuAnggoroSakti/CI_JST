@@ -13,7 +13,7 @@ class M_soal extends CI_Model {
     }
  function list_katTO()
    {
-      $ambil = $this->db->query('SELECT * FROM kategori_to ');
+      $ambil = $this->db->query('SELECT * FROM kategori_to where status = "aktif"');
           if ($ambil->num_rows() > 0) {
           foreach ($ambil->result() as $data) 
           {
@@ -111,9 +111,9 @@ class M_soal extends CI_Model {
         return $this->db->affected_rows();
     }
  
-    public function delete_by_id($id)
+    public function delete_by_id($where, $data)
     {
-        $this->db->where('kode_soal', $id);
-        $this->db->delete($this->table);
+        $this->db->update($this->table, $data, $where);
+        return $this->db->affected_rows();
     }
 }
