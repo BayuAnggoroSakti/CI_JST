@@ -42,9 +42,7 @@ $this->load->view('template_admin/sidebar');
                         <tr>
                             <th>No</th>
                             <th>Nama Pelatihan</th>
-                            <th>Biaya</th>
                             <th>Lokasi</th>
-                            <th>Fasilitas</th>
                             <th>Keterangan</th>
                             <th>Action</th>
                         </tr>
@@ -160,15 +158,13 @@ function edit_pelatihan(id)
  
             $('[name="id_pelatihan"]').val(data.id_pelatihan);
             $('[name="nama_pelatihan"]').val(data.nama_pelatihan);
-            $('[name="biaya"]').val(data.biaya);
             $('[name="id_programKerja"]').val(data.id_programKerja);
             $('[name="lokasi"]').val(data.lokasi);
-            $('[name="fasilitas"]').val(data.fasilitas);
             $('[name="keterangan"]').val(data.keterangan);
             $('[name="waktu_mulai"]').datepicker('update',data.waktu_mulai);
             $('[name="waktu_selesai"]').datepicker('update',data.waktu_selesai);
             $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
-            $('.modal-title').text('Edit Person'); // Set title to Bootstrap modal title
+            $('.modal-title').text('Edit Pelatihan'); // Set title to Bootstrap modal title
  
         },
         error: function (jqXHR, textStatus, errorThrown)
@@ -280,13 +276,6 @@ function delete_pelatihan(id)
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3">Biaya</label>
-                            <div class="col-md-9">
-                                <input name="biaya" placeholder="Biaya Pelatihan" class="form-control" type="number">
-                                <span class="help-block"></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label class="control-label col-md-3">Program Kerja</label>
                             <div class="col-md-9">
                                 <select name="id_programKerja" class="form-control">
@@ -318,13 +307,6 @@ function delete_pelatihan(id)
                             <label class="control-label col-md-3">Waktu Selesai</label>
                             <div class="col-md-9">
                                 <input name="waktu_selesai" placeholder="yyyy-mm-dd" class="form-control datepicker" type="text">
-                                <span class="help-block"></span>
-                            </div>
-                        </div>
-                         <div class="form-group">
-                            <label class="control-label col-md-3">Fasilitas</label>
-                            <div class="col-md-9">
-                                <input name="fasilitas" id="tags_1" placeholder="contoh : Modul, Penginapan, dll" class="form-control tags"  type="text">
                                 <span class="help-block"></span>
                             </div>
                         </div>

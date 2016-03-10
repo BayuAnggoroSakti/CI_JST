@@ -22,12 +22,12 @@ $this->load->view('template_admin/sidebar');
     </ol>
 <div class="box box-info">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Tambahkan Gallery untuk pelatihan <?php echo $data->row('nama_pelatihan') ?> </h3>
+                  <h3 class="box-title">Tambahkan Pelatihan -> tambahkan staf pengajar -> Tambah Gallery untuk pelatihan <?php echo $data->row('nama_pelatihan') ?> </h3>
                  
                   
                 </div><!-- /.box-header -->
                 <!-- form start -->
-               <form action="<?php echo site_url('admin/pelatihan/act_simpan_gallery') ?>" method="post" enctype="multipart/form-data">
+               <form action="<?php echo site_url('admin/pelatihan/act_simpan_gallery') ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
                   <div class="box-body">
                      <input type="text" name="judul" class="form-control" placeholder="Masukkan Judul Gallery">
                      <textarea class="form-control" name="deskripsi" placeholder="Deskripsi Gallery"></textarea> 

@@ -18,8 +18,8 @@ class Home extends CI_Controller {
 	{
 		$data['menu'] = $this->m_admin->detail_profil();
 		$this->load->view('template_frontend/header',$data);
-		$data['gallery_g'] = $this->m_pelatihan->list_gallery_guru();
-		$data['gallery_s'] = $this->m_pelatihan->list_gallery_siswa();
+		$data['pelatihan'] = $this->m_pelatihan->pelatihan();
+		//$data['gallery_s'] = $this->m_pelatihan->list_gallery_siswa();
 		$data['title'] = "Home | Jogja Science Training";
 		$data['active'] = "active";
 		$data['data_get_recent'] = $this->m_admin->recent_berita();
@@ -91,7 +91,10 @@ class Home extends CI_Controller {
 		 $jenis = $this->input->post('jenis');
 		 $data = file_get_contents("assets/materi/$jenis/$name"); // letak file pada aplikasi kita
 		 if ($jenis=='member' && $this->session->userdata('level') == '') {
-		 	echo 'hayo gagal ya';
+		 		echo '<script type="text/javascript">'; 
+				echo 'alert("Gagal mengunduh File, Hak akses anda kurang");'; 
+				echo 'window.location.href = "download";';
+				echo '</script>';
 		 }
 		 else
 		 {
@@ -169,8 +172,7 @@ class Home extends CI_Controller {
 	{
 		$data['menu'] = $this->m_admin->detail_profil();
 		$this->load->view('template_frontend/header',$data);
-        $data['guru'] =$this->m_pelatihan->pelatihan_guru();
-        $data['siswa'] =$this->m_pelatihan->pelatihan_siswa();
+        $data['program_kerja'] =$this->m_pelatihan->program_kerja();
         $data['title'] = "Program Kerja JST";
 		$this->load->view('frontend/program_kerja', $data);
 	}
@@ -336,6 +338,24 @@ class Home extends CI_Controller {
 	       	$data['title'] = "Detail Program";
 	       	$this->load->vars('b', $program);  
 	        $this->load->view('frontend/detail_program',$data);
+        }
+	}
+
+	public function detail_pelatihan($id)
+	{   
+        if ($id == NULL) {
+        	redirect('/home/index/'); 
+        }
+        else
+        {
+        	$data['menu'] = $this->m_admin->detail_profil();
+			$this->load->view('template_frontend/header',$data);
+        	$pelatihan = $this->m_pelatihan->detailPelatihanByID($id);
+        	$data['staf'] = $this->m_pelatihan->detailPelatihanByStaf($id);
+        	$this->load->vars('b', $pelatihan); 
+	       	$data['title'] = "Detail Pelatihan";
+	       	//$this->load->vars('b', $pelatihan);  
+	        $this->load->view('frontend/detail_pelatihan',$data);
         }
 	}
 

@@ -4,7 +4,11 @@ $this->load->view('template_frontend/header');
 
 ?>
 <div id="content">
-
+<?php 
+	if ($b->num_rows() == 0) {
+		redirect('home/index');
+	}
+?>
 			<!-- Page Banner -->
 			<div class="page-banner">
 				<div class="container">

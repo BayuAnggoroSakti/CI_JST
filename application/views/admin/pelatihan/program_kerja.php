@@ -38,6 +38,11 @@ $this->load->view('template_admin/sidebar');
                         <tr>
                             <th>No</th>
                             <th>Nama Program</th>
+                            <th>Biayaa</th>
+                            <th>Lokasi</th>
+                            <th>Durasi</th>
+                            <th>Fasilitas</th>
+                            <th>Keterangan</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -136,6 +141,11 @@ function edit_progam(id)
  
             $('[name="id_programKerja"]').val(data.id_programKerja);
             $('[name="nama_programKerja"]').val(data.nama_programKerja);
+            $('[name="biaya"]').val(data.biaya);
+            $('[name="lokasi"]').val(data.lokasi);
+            $('[name="keterangan"]').val(data.keterangan);
+            $('[name="fasilitas"]').val(data.fasilitas);
+            $('[name="durasi"]').val(data.durasi);
            
             $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
             $('.modal-title').text('Edit Person'); // Set title to Bootstrap modal title
@@ -246,6 +256,41 @@ function delete_program(id)
                             <label class="control-label col-md-3">Nama</label>
                             <div class="col-md-9">
                                 <input name="nama_programKerja" placeholder="Nama Program Kerja" class="form-control" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3">Biaya</label>
+                            <div class="col-md-9">
+                                <input name="biaya" placeholder="Nama Program Kerja" class="form-control" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3">Lokasi</label>
+                            <div class="col-md-9">
+                                 <textarea name="lokasi" class="form-control" placeholder="Lokasi"></textarea>
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3">Durasi</label>
+                            <div class="col-md-9">
+                                <input name="durasi" placeholder="Durasi waktu" class="form-control" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                            <div class="form-group">
+                            <label class="control-label col-md-3">Fasilitas</label>
+                            <div class="col-md-9">
+                                <input name="fasilitas" placeholder="Pisahkan dengan koma" class="form-control" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                            <div class="form-group">
+                            <label class="control-label col-md-3">Keterangan</label>
+                            <div class="col-md-9">
+                                <textarea name="keterangan" class="form-control" placeholder="Keterangan Tambahan"></textarea>
                                 <span class="help-block"></span>
                             </div>
                         </div>

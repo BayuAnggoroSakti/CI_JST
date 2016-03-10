@@ -94,6 +94,7 @@
 			});
 	</script>
 	<script>
+	
 		jQuery(function(){ 
 			DevSolutionSkill.init('circle'); 
 			DevSolutionSkill.init('circle2'); 

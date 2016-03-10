@@ -3,12 +3,11 @@ $this->load->view('template_frontend/head');
 $this->load->view('template_frontend/header');
 
 ?>
-  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+ 
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" />
  <script>
-  $(function() {
-    $( "#tabs" ).tabs();
-  });
+
 
   function validasi_input(form){ 
     if (form.kategori_to.value =="")
@@ -57,45 +56,47 @@ $this->load->view('template_frontend/header');
 					</div>
 				</div>
  
-  <div class="col-md-8" id="tabs-2">
+  				<div class="col-md-8" id="tabs-2">
 					<div class="panel panel-default">
 					  <div class="panel-heading">
 					    <h3 class="panel-title">Profil Saya</h3>
 					  </div>
 					  <div class="panel-body">
-					    <table class="table" cellpadding="100" cellspacing="100">
+					    <table class="table" cellpadding="100" cellspacing="100" id="table">
 					    	<tr>
 					    		<th>Nama</th>
 					    		<th>:</th>
 					    		<th></th>
-					    		<td><?php echo $this->session->userdata('nama_lengkap'); ?></td>
+					    		<td><?php echo $profil->nama_lengkap ?></td>
 					    	</tr>
 					    	<tr>
 					    		<th>Username</th>
 					    		<th>:</th>
 					    		<th></th>
-					    		<td><?php echo $this->session->userdata('username'); ?></td>
+					    		<td><?php echo $profil->username ?></td>
 					    	</tr>
 					    	<tr>
 					    		<th>Email</th>
 					    		<th>:</th>
 					    		<th></th>
-					    		<td><?php echo $this->session->userdata('email'); ?></td>
+					    		<td><?php echo $profil->email ?></td>
 					    	</tr>
 					    	<tr>
 					    		<th>Alamat</th>
 					    		<th>:</th>
 					    		<th></th>
-					    		<td><?php echo $this->session->userdata('alamat'); ?></td>
+					    		<td><?php echo $profil->alamat ?></td>
 					    	</tr>
 					    	<tr>
 					    		<th>Asal Sekolah</th>
 					    		<th>:</th>
 					    		<th></th>
-					    		<td><?php echo $this->session->userdata('asal_sekolah'); ?></td>
+					    		<td><?php echo $profil->asal_sekolah ?></td>
 					    	</tr>
 					    	
 					    </table>
+					      <a class="btn btn-info" href="javascript:void()" onclick="edit_profil(<?php echo $this->session->userdata('id_user');?>)" title="Edit Profil">Edit Profil</a>
+					    <a class="btn btn-success" href="javascript:void()" onclick="edit_password(<?php echo $this->session->userdata('id_user');?>)" title="Ganti Password">Ganti Password</a>
 					  </div>
 					</div>
 				</div>
@@ -212,9 +213,263 @@ $this->load->view('template_frontend/header');
 			
 
 		</div>
+		
+<script type="text/javascript">
+   $("input").change(function(){
+        $(this).parent().parent().removeClass('has-error');
+        $(this).next().empty();
+    });
+    $("textarea").change(function(){
+        $(this).parent().parent().removeClass('has-error');
+        $(this).next().empty();
+    });
+    $("select").change(function(){
+        $(this).parent().parent().removeClass('has-error');
+        $(this).next().empty();
+    });
+ var table;
+var save_method;
+  $(function() {
+    $( "#tabs" ).tabs();
+  });
+
+function save()
+{
+    $('#btnSave').text('saving...'); //change button text
+    $('#btnSave').attr('disabled',true); //set button disable
+    var url;
+ 
+        url = "<?php echo site_url('member/home/ajax_update_profil')?>";
+ 
+    // ajax adding data to database
+    $.ajax({
+        url : url,
+        type: "POST",
+        data: $('#form').serialize(),
+        dataType: "JSON",
+        success: function(data)
+        {
+ 
+            if(data.status) //if success close modal and reload ajax table
+            {
+                $('#modal_form').modal('hide');
+                alert("SELAMAT, anda berhasil mengganti profil anda");
+                window.location.reload();
+                /*var base = "<?php echo base_url(); ?>";
+                window.location = base+"/admin/pelatihan/tambah_pelatihan/"+id;*/
+            }
+            else
+            {
+                for (var i = 0; i < data.inputerror.length; i++)
+                {
+                    $('[name="'+data.inputerror[i]+'"]').parent().parent().addClass('has-error'); //select parent twice to select div form-group class and add has-error class
+                    $('[name="'+data.inputerror[i]+'"]').next().text(data.error_string[i]); //select span help-block class set text error string
+                }
+            }
+            $('#btnSave').text('save'); //change button text
+            $('#btnSave').attr('disabled',false); //set button enable
+ 
+ 
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+            alert('Error adding / update data');
+            $('#btnSave').text('save'); //change button text
+            $('#btnSave').attr('disabled',false); //set button enable
+ 
+        }
+    });
+}
+function save2()
+{
+    $('#btnSave').text('saving...'); //change button text
+    $('#btnSave').attr('disabled',true); //set button disable
+    var url;
+ 
+        url = "<?php echo site_url('member/home/ajax_update_password')?>";
+ 
+    // ajax adding data to database
+    $.ajax({
+        url : url,
+        type: "POST",
+        data: $('#form2').serialize(),
+        dataType: "JSON",
+        success: function(data)
+        {
+ 
+            if(data.status) //if success close modal and reload ajax table
+            {
+                $('#modal_form2').modal('hide');
+                alert("SELAMAT, anda berhasil mengganti Password Anda");
+                window.location.reload();
+                /*var base = "<?php echo base_url(); ?>";
+                window.location = base+"/admin/pelatihan/tambah_pelatihan/"+id;*/
+            }
+            else
+            {
+                for (var i = 0; i < data.inputerror.length; i++)
+                {
+                    $('[name="'+data.inputerror[i]+'"]').parent().parent().addClass('has-error'); //select parent twice to select div form-group class and add has-error class
+                    $('[name="'+data.inputerror[i]+'"]').next().text(data.error_string[i]); //select span help-block class set text error string
+                }
+            }
+            $('#btnSave').text('save'); //change button text
+            $('#btnSave').attr('disabled',false); //set button enable
+ 
+ 
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+            alert('Error adding / update data');
+            $('#btnSave').text('save'); //change button text
+            $('#btnSave').attr('disabled',false); //set button enable
+ 
+        }
+    });
+}
+function edit_profil(id)
+{
+    save_method = 'update';
+    $('#form')[0].reset(); // reset form on modals
+    $('.form-group').removeClass('has-error'); // clear error class
+    $('.help-block').empty(); // clear error string
+ 
+    //Ajax Load data from ajax
+    $.ajax({
+        url : "<?php echo site_url('member/home/ajax_edit_profil/')?>/" + id,
+        type: "GET",
+        dataType: "JSON",
+        success: function(data)
+        {
+ 
+            $('[name="id_user"]').val(data.id_user);
+            $('[name="nama_lengkap"]').val(data.nama_lengkap);
+            $('[name="username"]').val(data.username);
+            $('[name="alamat"]').val(data.alamat);
+            $('[name="asal_sekolah"]').val(data.asal_sekolah);
+            $('[name="email"]').val(data.email);
+            $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
+            $('.modal-title').text('Edit User'); // Set title to Bootstrap modal title
+ 
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+            alert('Error get data from ajax');
+        }
+    });
+}
+
+function edit_password()
+{
+  $('#modal_form2').modal('show'); 
+  $('.modal-title').text('Ganti Password');
+}
+</script>
+<div class="modal fade" id="modal_form" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title">Edit Profil</h3>
+            </div>
+            <div class="modal-body form">
+                <form action="#" id="form" class="form-horizontal">
+                    <input type="hidden" name="id_user"/>
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Nama Lengkap</label>
+                            <div class="col-md-9">
+                                <input name="nama_lengkap" placeholder="Nama lengkap" class="form-control" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Username</label>
+                            <div class="col-md-9">
+                                <input name="username" disabled placeholder="Username" class="form-control" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                    
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Alamat</label>
+                            <div class="col-md-9">
+                                <textarea name="alamat" placeholder="Address" rows="3" class="form-control"></textarea>
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                
+                         <div class="form-group">
+                            <label class="control-label col-md-3">Email</label>
+                            <div class="col-md-9">
+                                <input name="email" id="tags_1" placeholder="contoh : Modul, Penginapan, dll" class="form-control tags"  type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                         <div class="form-group">
+                            <label class="control-label col-md-3">Asal Sekolah</label>
+                            <div class="col-md-9">
+                               <input name="asal_sekolah" id="tags_1" placeholder="Asal Sekolah" class="form-control tags"  type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnSave" onclick="save()" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="modal_form2" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title">Ganti Password</h3>
+            </div>
+            <div class="modal-body form">
+                <form action="#" id="form2" class="form-horizontal">
+                    <input type="hidden" name="id_user" value="<?php echo $profil->id_user ?>" />
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Password Lama</label>
+                            <div class="col-md-9">
+                                <input name="password_lama" placeholder="Password Lama" class="form-control" type="password">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Password Baru</label>
+                            <div class="col-md-9">
+                                <input name="password_baru" placeholder="Password Baru Anda" class="form-control" type="password">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                    
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Konfirmasi Password</label>
+                            <div class="col-md-9">
+                                 <input name="konfirmasi_password" placeholder="Konfirmasi Password Anda" class="form-control" type="password">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnSave" onclick="save2()" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 <?php		
 $this->load->view('template_frontend/footer');
 $this->load->view('template_frontend/foot');
-
+$this->load->view('template_frontend/js');
 ?>

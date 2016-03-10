@@ -74,6 +74,9 @@ $this->load->view('template_frontend/slider');
 						<div class="col-md-9 blog-side">
 							<?php 
 							$gambar = base_url('assets/images/');
+							if ($data== NULL) {
+								echo "Tidak ada Berita";
+							}
 							foreach ($data as $row) {
 							
 							?>
@@ -139,6 +142,11 @@ $this->load->view('template_frontend/slider');
 										<ul class="post-recent">
 												<?php
 												$gambar = base_url('assets/images/');
+												if ($data_get_recent == NULL) {
+													echo "Belum ada berita terbaru";
+												}
+												else
+												{
 												foreach ($data_get_recent as $berita) {
 													?>
 												<li>
@@ -147,6 +155,7 @@ $this->load->view('template_frontend/slider');
 												</li>
 											<?php		
 												}
+											}
 											?>
 											</ul>
 										</div>

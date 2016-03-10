@@ -22,7 +22,14 @@
 /*-------------------------------------------------------*/
 /* 1. Isotope filtering
 /*-------------------------------------------------------*/
-
+#owl-demo .item{
+  margin: 3px;
+}
+#owl-demo .item img{
+  display: block;
+  width: 10%;
+  height: auto;
+}
 .isotope-item {
     z-index: 2;
 }

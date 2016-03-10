@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  
 class M_soal extends CI_Model {
  	var $table = 'soal';
-    var $column = array('kode_soal','id_katTO','soal_des','gambar','bobot','opsi_a','opsi_b','opsi_c','opsi_d','opsi_e','uraian','kunci','pembahasan','status'); //set column field database for order and search
+    var $column = array('kode_soal','soal.id_katTO','soal_des','kunci','soal.status','nama'); //set column field database for order and search
     var $order = array('kode_soal' => 'desc'); // default order
  
     public function __construct()
@@ -24,9 +24,9 @@ class M_soal extends CI_Model {
    }
     private function _get_datatables_query()
     {
-         
+        $this->db->select('soal.kode_soal as kode_soal, soal.id_katTO as id_katTO, soal.soal_des as soal_des, soal.kunci as kunci, soal.status as status, kategori_to.nama as nama');
         $this->db->from($this->table);
- 
+        $this->db->join('kategori_to', 'kategori_to.id_katTO = soal.id_katTO');
         $i = 0;
      
         foreach ($this->column as $item) // loop column
@@ -116,4 +116,5 @@ class M_soal extends CI_Model {
         $this->db->update($this->table, $data, $where);
         return $this->db->affected_rows();
     }
+   
 }

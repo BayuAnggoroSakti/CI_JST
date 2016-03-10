@@ -137,6 +137,7 @@ class Soal extends CI_Controller {
             $no++;
             $row = array();
             $row[] = $no;
+            $row[] = $soal->nama;
             $row[] = $soal->soal_des;
             $row[] = $soal->kunci;
             $row[] = $status;
@@ -245,4 +246,6 @@ class Soal extends CI_Controller {
         $this->soal->update(array('kode_soal' => $this->input->post('kode_soal')), $data);
         echo json_encode(array("status" => TRUE));
     }
+
+    //INI
 }

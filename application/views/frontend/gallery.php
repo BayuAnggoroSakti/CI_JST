@@ -20,6 +20,15 @@ $this->load->view('template_frontend/header');
 				<div class="container">
 					<div class="portfolio-container">
 					<?php 
+					if ($data_get == null) {
+						echo '<div class="alert alert-danger alert-dismissable">
+				                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+				                    <h4><i class="icon fa fa-info"></i> Peringatan!</h4>
+				                    Belum ada gallery !
+				                 </div>';
+					}
+					else
+					{
 						foreach ($data_get as $data) { 
 							$nama = $data->nama;
 				
@@ -37,6 +46,7 @@ $this->load->view('template_frontend/header');
 
 					<?php
 						}
+					}
 					?>
 								
 				</div>

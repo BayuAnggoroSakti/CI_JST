@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  
 class M_pelatihan extends CI_Model {
  	var $table = 'pelatihan';
-    var $column = array('id_programKerja','nama_pelatihan','biaya','lokasi','waktu_mulai','waktu_selesai','fasilitas','keterangan'); //set column field database for order and search
+    var $column = array('id_programKerja','nama_pelatihan','lokasi','waktu_mulai','waktu_selesai','keterangan'); //set column field database for order and search
     var $order = array('id_pelatihan' => 'desc'); // default order
  
     public function __construct()
@@ -15,6 +15,39 @@ class M_pelatihan extends CI_Model {
     function list_gallery_guru()
     {
         $ambil = $this->db->query('SELECT f.alamat_foto as url, pk.nama_programKerja as nama_program, p.nama_pelatihan as nama_pelatihan from program_kerja pk, pelatihan p, gallery g, foto f where pk.id_programKerja = p.id_programKerja and p.id_pelatihan = g.id_pelatihan and g.id_gallery = f.id_gallery and pk.nama_programKerja like "%guru%" group by p.nama_pelatihan limit 4');
+          if ($ambil->num_rows() > 0) {
+          foreach ($ambil->result() as $data) 
+          {
+            $hasil[] = $data;
+           }
+            return $hasil;
+          }
+    }
+      function pelatihan()
+    {
+        $ambil = $this->db->query('SELECT p.nama_pelatihan as nama_pelatihan, p.lokasi as lokasi, sp.nama_lengkap, p.keterangan as keterangan,p.id_pelatihan as id, p.nama_pelatihan as nama,p.waktu_mulai as waktu_mulai, p.waktu_selesai as waktu_selesai, f.alamat_foto as url, pk.nama_programKerja as nama_program from gallery g, pelatihan p, program_kerja pk, foto f, pelatihan_staf ps, staf_pengajar sp where g.id_pelatihan = p.id_pelatihan and pk.id_programKerja = p.id_programKerja and g.id_gallery = f.id_gallery and p.id_pelatihan = ps.id_pelatihan and ps.id_staf = sp.id_staf group by p.id_pelatihan');
+          if ($ambil->num_rows() > 0) {
+          foreach ($ambil->result() as $data) 
+          {
+            $hasil[] = $data;
+           }
+            return $hasil;
+          }
+    }
+     function detailPelatihanByID($id)
+    {
+        $ambil = $this->db->query("SELECT p.lokasi as lokasi, sp.nama_lengkap, p.keterangan as keterangan,p.id_pelatihan as id, p.nama_pelatihan as nama,p.waktu_mulai as waktu_mulai, p.waktu_selesai as waktu_selesai, f.alamat_foto as url, pk.nama_programKerja as nama_program from gallery g, pelatihan p, program_kerja pk, foto f, pelatihan_staf ps, staf_pengajar sp where g.id_pelatihan = p.id_pelatihan and pk.id_programKerja = p.id_programKerja and g.id_gallery = f.id_gallery and p.id_pelatihan = ps.id_pelatihan and ps.id_staf = sp.id_staf and p.id_pelatihan = '$id'");
+           return $ambil;
+    }
+     function detailPelatihanByStaf($id)
+    {
+        $ambil = $this->db->query("SELECT p.lokasi as lokasi, sp.bidang as bidang, sp.nama_lengkap, p.keterangan as keterangan,p.id_pelatihan as id, p.nama_pelatihan as nama,p.waktu_mulai as waktu_mulai, p.waktu_selesai as waktu_selesai, f.alamat_foto as url, pk.nama_programKerja as nama_program from gallery g, pelatihan p, program_kerja pk, foto f, pelatihan_staf ps, staf_pengajar sp where g.id_pelatihan = p.id_pelatihan and pk.id_programKerja = p.id_programKerja and g.id_gallery = f.id_gallery and p.id_pelatihan = ps.id_pelatihan and ps.id_staf = sp.id_staf and p.id_pelatihan = '$id'");
+           return $ambil;
+    }
+
+      function program_kerja()
+    {
+        $ambil = $this->db->query('SELECT * from program_kerja order by nama_programKerja');
           if ($ambil->num_rows() > 0) {
           foreach ($ambil->result() as $data) 
           {

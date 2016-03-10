@@ -6,6 +6,7 @@ class Pelatihan extends CI_Controller {
 		parent::__construct();
         $this->load->helper('text');
         $this->load->model('m_pelatihan','pelatihan');
+        $this->load->model('m_staf','staf');
         $this->load->model('m_program_kerja','progam_kerja');
 		 if ($this->session->userdata('level')=="admin") 
          {
@@ -42,34 +43,54 @@ class Pelatihan extends CI_Controller {
 
      public function act_simpan()
      {
-       
+
         $id_programKerja = $this->input->post('id_programKerja');
         $nama_pelatihan = $this->input->post('nama_pelatihan');
-        $biaya = $this->input->post('biaya');
+       
         $lokasi = $this->input->post('lokasi');
         $waktu_mulai = $this->input->post('waktu_mulai');
         $waktu_selesai = $this->input->post('waktu_selesai');
-        $fasilitas = $this->input->post('fasilitas');
         $keterangan = $this->input->post('keterangan');
         $data = array(
                             'id_programKerja' => $id_programKerja,
                             'nama_pelatihan' => $nama_pelatihan,
-                            'biaya' => $biaya,
                             'lokasi' => $lokasi,
                             'waktu_mulai' => $waktu_mulai,
                             'waktu_selesai' => $waktu_selesai,
-                            'fasilitas' => $fasilitas,
                             'keterangan' => $keterangan,
                          );
         $this->db->insert('pelatihan', $data);
         $data['username'] = $this->session->userdata('username');
         $data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
         $data['level'] = $this->session->userdata('level');
+        $data['staf'] = $this->staf->list_staf();
         $data['title'] = "Tambah Gallery Pelatihan || Jogja Science Training";
-        $data['data'] = $this->db->query("SELECT id_pelatihan, nama_pelatihan from pelatihan where nama_pelatihan = '$nama_pelatihan' and biaya = '$biaya' and lokasi = '$lokasi' and fasilitas = '$fasilitas' and keterangan = '$keterangan' and waktu_mulai = '$waktu_mulai' and waktu_selesai = '$waktu_selesai'");
-        $this->load->view('admin/pelatihan/tambah_gallery',$data);
+        $data['data'] = $this->db->query("SELECT id_pelatihan, nama_pelatihan from pelatihan where nama_pelatihan = '$nama_pelatihan' and lokasi = '$lokasi' and keterangan = '$keterangan' and waktu_mulai = '$waktu_mulai' and waktu_selesai = '$waktu_selesai'");
+        $this->load->view('admin/pelatihan/tambah_staf',$data);
                     //redirect(base_url().'admin/pelatihan/tambah_gallery/'.$id->row('id_pelatihan'),$nama->row('nama_pelatihan'));
      }
+
+     public function act_simpan2()
+     {
+    $cpt = count ($this->input->post('staf_nama'));
+    $id_pelatihan = $this->input->post('id_pelatihan');
+      
+    for($i = 0; $i < $cpt; $i++) {
+        $data_staf = array(
+                            'id_staf' => $this->input->post('staf_nama')[$i],
+                            'id_pelatihan' => $id_pelatihan,
+                    );
+        $this->db->insert('pelatihan_staf', $data_staf);
+    }
+        $data['username'] = $this->session->userdata('username');
+        $data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
+        $data['level'] = $this->session->userdata('level');
+        $data['staf'] = $this->staf->list_staf();
+        $data['title'] = "Tambah Gallery Pelatihan || Jogja Science Training";
+        $data['data'] = $this->db->query("SELECT id_pelatihan, nama_pelatihan from pelatihan where id_pelatihan = '$id_pelatihan'");
+        $this->load->view('admin/pelatihan/tambah_gallery',$data);
+     }
+
 
     public function tambah_gallery($id)
     {
@@ -88,6 +109,7 @@ class Pelatihan extends CI_Controller {
         $data['title'] = "Pelatihan || Jogja Science Training";
         $data['level'] = $this->session->userdata('level');
         $data['data_get'] = $this->m_admin->program_kerja();
+        
         $this->load->view('admin/pelatihan/tambah_pelatihan', $data);
     }
      public function progam_kerja()
@@ -110,9 +132,7 @@ class Pelatihan extends CI_Controller {
             $row = array();
             $row[] = $no;
             $row[] = $pelatihan->nama_pelatihan;
-            $row[] = "Rp ".$pelatihan->biaya;
             $row[] = $pelatihan->lokasi;
-            $row[] = $pelatihan->fasilitas;
             $row[] = $pelatihan->keterangan;
  
             //add html for action
@@ -141,6 +161,12 @@ class Pelatihan extends CI_Controller {
             $row = array();
             $row[] = $no;
             $row[] = $progam_kerja->nama_programKerja;
+            $row[] = $progam_kerja->biaya;
+            $row[] = $progam_kerja->lokasi;
+            $row[] = $progam_kerja->durasi;
+            $row[] = $progam_kerja->fasilitas;
+            $row[] = $progam_kerja->keterangan;
+
             //add html for action
             $row[] = '<a class="btn btn-sm btn-primary" href="javascript:void()" title="Edit" onclick="edit_progam('."'".$progam_kerja->id_programKerja."'".')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
                   <a class="btn btn-sm btn-danger" href="javascript:void()" title="Hapus" onclick="delete_program('."'".$progam_kerja->id_programKerja."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
@@ -254,6 +280,11 @@ private function set_upload_options() {
         $this->_validate_program();
         $data = array(
                 'nama_programKerja' => $this->input->post('nama_programKerja'),
+                'biaya' => $this->input->post('biaya'),
+                'lokasi' => $this->input->post('lokasi'),
+                'durasi' => $this->input->post('durasi'),
+                'keterangan' => $this->input->post('keterangan'),
+                'fasilitas' => $this->input->post('fasilitas'),
             );
         $insert = $this->progam_kerja->save($data);
         echo json_encode(array("status" => TRUE),$data);
@@ -281,6 +312,11 @@ private function set_upload_options() {
         $this->_validate_program();
         $data = array(
                 'nama_programKerja' => $this->input->post('nama_programKerja'),
+                'biaya' => $this->input->post('biaya'),
+                'lokasi' => $this->input->post('lokasi'),
+                'durasi' => $this->input->post('durasi'),
+                'keterangan' => $this->input->post('keterangan'),
+                'fasilitas' => $this->input->post('fasilitas'),
             );
         $this->progam_kerja->update(array('id_programKerja' => $this->input->post('id_programKerja')), $data);
         echo json_encode(array("status" => TRUE));
@@ -385,6 +421,36 @@ private function set_upload_options() {
         {
             $data['inputerror'][] = 'nama_programKerja';
             $data['error_string'][] = 'Nama Program Kerja is required';
+            $data['status'] = FALSE;
+        }
+         if($this->input->post('biaya') == '')
+        {
+            $data['inputerror'][] = 'biaya';
+            $data['error_string'][] = 'Biaya is required';
+            $data['status'] = FALSE;
+        }
+         if($this->input->post('fasilitas') == '')
+        {
+            $data['inputerror'][] = 'fasilitas';
+            $data['error_string'][] = 'Fasilitas is required';
+            $data['status'] = FALSE;
+        }
+         if($this->input->post('durasi') == '')
+        {
+            $data['inputerror'][] = 'durasi';
+            $data['error_string'][] = 'Durasi is required';
+            $data['status'] = FALSE;
+        }
+         if($this->input->post('lokasi') == '')
+        {
+            $data['inputerror'][] = 'lokasi';
+            $data['error_string'][] = 'Lokasi is required';
+            $data['status'] = FALSE;
+        }
+         if($this->input->post('keterangan') == '')
+        {
+            $data['inputerror'][] = 'keterangan';
+            $data['error_string'][] = 'Keterangan is required';
             $data['status'] = FALSE;
         }
  

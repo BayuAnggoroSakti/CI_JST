@@ -46,12 +46,6 @@ $this->load->view('template_admin/sidebar');
                                 <span class="help-block"></span>
                             </div>
                         </div>
-                    <div class="form-group">
-                      <label for="inputEmail3" class="col-sm-2 control-label">Biaya (Rp.)</label>
-                      <div class="col-sm-10">
-                        <input type="number" name="biaya" class="form-control" id="judul" placeholder="Masukkan Biaya Pelatihan" required/>
-                      </div>
-                    </div>
                      <div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">Lokasi</label>
                       <div class="col-sm-10">
@@ -60,29 +54,24 @@ $this->load->view('template_admin/sidebar');
                     </div>
                      <div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">Waktu Mulai</label>
-                      <div class="col-sm-10">
+                      <div class="col-sm-5">
                         <input type="date" name="waktu_mulai" class="form-control" id="waktu_mulai" placeholder="Masukkan Waktu Mulai" required/>
                       </div>
                     </div>
                      <div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">Waktu Selesai</label>
-                      <div class="col-sm-10">
+                      <div class="col-sm-5">
                         <input type="date" name="waktu_selesai" class="form-control" colspan="1" id="waktu_selesai" placeholder="Masukkan Waktu Selesai" required/>
                       </div>
                     </div> 
-                    <div class="form-group">
-                            <label class="col-sm-2 control-label">Fasilitas</label>
-                            <div class="col-sm-10">
-                                <input name="fasilitas" id="tags_1" placeholder="contoh : Modul, Penginapan, dll" class="form-control tags"  type="text">
-                                <span class="help-block"></span>
-                            </div>
-                        </div>
                     <div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">Keterangan</label>
                       <div class="col-sm-10">
                         <textarea name="keterangan" class="form-control" rows="4" required></textarea>
                       </div>
                     </div> 
+                       
+
                     <input style="margin-left:185px" type="submit" name="uploud" class="btn btn-info">
                   </div><!-- /.box-body -->
 
@@ -109,21 +98,7 @@ $this->load->view('template_admin/sidebar');
     return (true);  
         } 
 
-        function onAddTag(tag) {
-            alert("Tambahkan Fasilitas: " + tag);
-        }
-        function onRemoveTag(tag) {
-            alert("Removed a tag: " + tag);
-        }
-
-        function onChangeTag(input,tag) {
-            alert("Changed a tag: " + tag);
-        }
-
-        $(function() {
-
-            $('#tags_1').tagsInput({width:'auto'});
-        });
+    
  
 </script>
  

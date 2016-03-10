@@ -8,6 +8,7 @@ class M_captcha extends CI_Model{
 	function make_captcha(){
 		$this->load->helper('captcha');
 		$vals = array(
+		'word' => rand(00,9999),
 		'img_path'=>'./assets/images/captcha/',
 		'img_url'=> base_url().'/assets/images/captcha/',
 		'img_width' => 200,

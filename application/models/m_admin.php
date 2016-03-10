@@ -137,7 +137,7 @@
 	}
 	 function detail_programByID($id) 
 	{
-		 $query = $this->db->query("SELECT distinct p.fasilitas as fasilitas, p.waktu_mulai as waktu_mulai, p.waktu_selesai as waktu_selesai,p.nama_pelatihan as nama, p.biaya as biaya, p.lokasi as lokasi, p.fasilitas as fasilitas, p.keterangan as keterangan, f.alamat_foto as url, pk.nama_programKerja as nama_program from gallery g, pelatihan p, program_kerja pk, foto f where g.id_pelatihan = p.id_pelatihan and pk.id_programKerja = p.id_programKerja and g.id_gallery = f.id_gallery and p.id_pelatihan = '$id' group by p.nama_pelatihan");
+		 $query = $this->db->query("SELECT * from program_kerja where id_programKerja = '$id'");
         return $query;
 	}
 
@@ -273,7 +273,8 @@
 	}
  
  	function lihat_materi($num,$offset){
- 		$query = $this->db->get('materi',$num,$offset);
+ 		$query = $this->db->query("SELECT * from materi order by tanggal desc limit $num offset $offset ");
+ 		//$query = $this->db->get('materi',$num,$offset);
 	 return $query->result();
 	}
  

@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  
 class m_program_kerja extends CI_Model {
  	var $table = 'program_kerja';
-    var $column = array('id_programKerja','nama_progamKerja'); //set column field database for order and search
+    var $column = array('nama_programKerja', 'biaya', 'lokasi','durasi','fasilitas','keterangan'); //set column field database for order and search
     var $order = array('id_programKerja' => 'desc'); // default order
  
     public function __construct()

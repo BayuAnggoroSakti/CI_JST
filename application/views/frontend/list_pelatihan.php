@@ -1,71 +1,55 @@
 <div class="recent-works">
 				<div class="container">
-					<h3>Pelatihan Jogja Science Training</h3>
-					<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+					<h3><b>Pelatihan Jogja Science Training</b></h3>
+					<div id="owl-demo" class="owl-carousel owl-theme">
 
-						<!-- Wrapper for slides -->
-						<div class="carousel-inner">
-
-							<div class="item active">
-								<div class="row">
-									<?php 
-									foreach ($gallery_g as $data) { ?>
-										<div class="col-md-3">
-											<div class="work-post">
-												<div class="work-post-gal">
-													<img alt="" src="<?php echo base_url('assets/images/pelatihan').'/'.$data->url ?>" width="250px" height="200px">
-													<div class="hover-box">
-														<a class="zoom" href="<?php echo base_url('assets/images/pelatihan').'/'.$data->url ?>"></a>
-														
-													</div>
-												</div>
-												<div class="work-post-content">
-													<h5><?php echo $data->nama_pelatihan ?></h5>
-													<span><?php echo $data->nama_program ?></span>
-												</div>
-											</div>
-										</div>
-									<?php
-										} ?>
-									
-
-								</div>
-							</div>
-
-							<div class="item">
-								<div class="row">
-
-									<?php 
-									foreach ($gallery_s as $data) { ?>
-										<div class="col-md-3">
-											<div class="work-post">
-												<div class="work-post-gal">
-													<img alt="" src="<?php echo base_url('assets/images/pelatihan').'/'.$data->url ?>" width="250px" height="200px">
-													<div class="hover-box">
-														<a class="zoom" href="<?php echo base_url('assets/images/pelatihan').'/'.$data->url ?>"></a>
-														
-													</div>
-												</div>
-												<div class="work-post-content">
-													<h5><?php echo $data->nama_pelatihan ?></h5>
-													<span><?php echo $data->nama_program ?></span>
-												</div>
-											</div>
-										</div>
-									<?php
-										} ?>
-									
-
-								</div>
-
-							</div>
-							
-
-						</div>
-
-						<!-- Controls -->
-						<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev"></a>
-						<a class="right carousel-control" href="#carousel-example-generic" data-slide="next"></a>
+          <?php
+          if ($pelatihan== NULL) {
+           echo 'belum ada pelatihan';
+          }
+          else
+          {
+            foreach ($pelatihan as $data) { ?>
+                <a href="<?php echo site_url('home/detail_pelatihan'.'/'.$data->id) ?>"><div class="item" style="background: white;">
+                <img src="<?php echo base_url('assets/images/pelatihan'.'/'.$data->url) ?>" style=" display: block;width: 100%; height: 200px;" width="100px" height="100px">
+                  <h5 align="center"><b><?php echo $data->nama ?> </b></h5>
+                </div>
+                </a>
+            <?php
+            }
+          }
+           ?>
+				
 					</div>
+					 
 				</div>
 			</div>
+			<script>
+				$(document).ready(function() {
+ 
+  var owl = $("#owl-demo");
+ 
+  owl.owlCarousel({
+      items : 10, //10 items above 1000px browser width
+      itemsDesktop : [1000,5], //5 items between 1000px and 901px
+      itemsDesktopSmall : [900,3], // betweem 900px and 601px
+      itemsTablet: [600,2], //2 items between 600 and 0
+      itemsMobile : false // itemsMobile disabled - inherit from itemsTablet option
+  });
+ 
+  // Custom Navigation Events
+  $(".next").click(function(){
+    owl.trigger('owl.next');
+  })
+  $(".prev").click(function(){
+    owl.trigger('owl.prev');
+  })
+  $(".play").click(function(){
+    owl.trigger('owl.play',1000); //owl.play event accept autoPlay speed as second parameter
+  })
+  $(".stop").click(function(){
+    owl.trigger('owl.stop');
+  })
+ 
+});
+			</script>

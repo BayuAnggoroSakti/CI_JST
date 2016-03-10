@@ -28,14 +28,15 @@
 
 
             <div class="login-logo">
-               <img src="<?php echo base_url('assets/images/gambarTeksWarnaBGTerang.png') ?>" width="200px" height="90px">
+               <img src="<?php echo base_url('assets/images/gambarTeksWarnaBGTerang.png') ?>" width="250px" height="90px">
             </div><!-- /.login-logo -->
-<div class="panel panel-default top150">
+        <div class="panel panel-default top150">
             <div class="panel-heading"><h4 style="margin: 5px"><i class="glyphicon glyphicon-user"></i> Silakan login</h4></div>
             <div class="login-box-body">
 
                 <p class="login-box-msg">Masukkan username dan password</p>
-                <?php echo form_open("jst_admin/cek_login"); ?>
+                <span><?php echo $captcha_return?></span>
+                <?php echo form_open("jst_admin"); ?>
                     <div class="form-group has-feedback">  
                         <input type="text" class="form-control" name="username" placeholder="username"/>
                         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -46,10 +47,20 @@
                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>                      
                             <?php echo form_error('password'); ?>              
                     </div>
+                   <div class="textfield">
+                    <h3>Ketik Captcha di bawah ini :</h3>
+                        <span class="input-group-addon">
+                             <?php echo $cap_img; ?>
+                        </span>
+                      
+                        <input type="text" name="captcha" class="form-control" placeholder="Masukkan Captcha" />
+                    </div>
+                        <?php echo form_error('captcha'); ?>
+                        <br>
                     <div class="row">
                        
                         <div class="col-xs-4">
-                            <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                           <input type="submit"  class="btn btn-success" value="Sign in" name="submit"/>
                         </div><!-- /.col -->
                     </div>
                 <?php echo form_close(); ?>

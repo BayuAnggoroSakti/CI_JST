@@ -146,7 +146,7 @@ function add_person()
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
     $('#modal_form').modal('show'); // show bootstrap modal
-    $('.modal-title').text('Add Pelatihan'); // Set Title to Bootstrap modal title
+    $('.modal-title').text('Add User'); // Set Title to Bootstrap modal title
 }
  
 function edit_user(id)
