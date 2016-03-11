@@ -112,8 +112,10 @@ function save()
  
             if(data.status) //if success close modal and reload ajax table
             {
-                $('#modal_form').modal('hide');
-                window.location.reload();
+                $('#modal_form').modal('toggle');
+                
+                
+
                 /*var base = "<?php echo base_url(); ?>";
                 window.location = base+"/admin/pelatihan/tambah_pelatihan/"+id;*/
             }
@@ -125,8 +127,11 @@ function save()
                     $('[name="'+data.inputerror[i]+'"]').next().text(data.error_string[i]); //select span help-block class set text error string
                 }
             }
+            alert('Berhasil melakukan update');
+            window.location.reload();
             $('#btnSave').text('save'); //change button text
             $('#btnSave').attr('disabled',false); //set button enable
+
  
  
         },
@@ -171,6 +176,7 @@ function save()
     });
 }
 </script>
+
 <div class="modal fade" id="modal_form" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -192,7 +198,7 @@ function save()
                         <div class="form-group">
                             <label class="control-label col-md-3">Username</label>
                             <div class="col-md-9">
-                                <input name="username" placeholder="Username" class="form-control" type="text">
+                                <input name="username" placeholder="Username" class="form-control" disabled type="text">
                                 <span class="help-block"></span>
                             </div>
                         </div>

@@ -34,6 +34,7 @@ class Profil extends CI_Controller {
 	public function proses_tambah_profil() {
 		
 		$this->m_admin->tambah_profil();
+		$this->session->set_flashdata('item', array('message' => '<strong>Berhasil</strong> menambahkan profil baru','class' => 'alert alert-success'));
 		redirect('admin/profil/index');
 	}
 
@@ -48,6 +49,7 @@ class Profil extends CI_Controller {
 				$id = $this->input->post('id_profil');
 		        $this->db->where('id_profil', $id);
 		        $this->db->update('profil_perusahaan', $data);
+		        $this->session->set_flashdata('item', array('message' => '<strong>Berhasil</strong> mengubah data profil JST','class' => 'alert alert-success'));
 				redirect(base_url().'admin/profil/index');
 		}
 	public function edit_profil($id)
@@ -67,7 +69,7 @@ class Profil extends CI_Controller {
 		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
 		$data['level'] = $this->session->userdata('level');
         $profil = $this->m_admin->hapus_profil($id);
-     
+     	$this->session->set_flashdata('item', array('message' => '<strong>Berhasil</strong> menghapus profil','class' => 'alert alert-success'));
         redirect(base_url().'admin/profil/index');
 	}
 	public function isi_profil() {

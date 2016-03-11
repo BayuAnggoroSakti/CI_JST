@@ -9,6 +9,37 @@ $this->load->view('template_admin/sidebar');
 ?>
   <link rel="stylesheet" href="<?php echo base_url('assets/assets/bootstrap/css/bootstrap.min.css') ?>"/>
   <link rel="stylesheet" href="<?php echo base_url('assets/assets/datatables/dataTables.bootstrap.css') ?>"/>
+  <script>
+  function reload_table()
+{
+    mytable.ajax.reload(null,false); //reload datatable ajax
+}
+   function hapus(id)
+{
+    if(confirm('Are you sure delete this data?'))
+    {
+        // ajax delete data to database
+        $.ajax({
+            url : "<?php echo site_url('admin/materi/hapus_materi')?>/"+id,
+            type: "POST",
+            dataType: "JSON",
+            success: function(data)
+            {
+                //if success reload ajax table
+                reload_table();
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                alert('berhasil menghapus data');
+                var base = "<?php echo base_url(); ?>";
+                window.location = base+"/admin/materi";
+            }
+        });
+ 
+    }
+}
+
+  </script>
     
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -29,6 +60,16 @@ $this->load->view('template_admin/sidebar');
     <!-- Default box -->
    <div class="box">
                 <div class="box-header">
+                   <div class="col-md-12">
+                       <?php
+            if($this->session->flashdata('item')) {
+            $message = $this->session->flashdata('item'); ?>
+            <div class="row">
+             <div class="<?php echo $message['class'] ?>"><?php echo $message['message'] ?></div>
+             </div>
+         <?php    
+          }?>
+         </div>
                    <div class="row">
                     <div class="col-md-2">
                       <a href="<?php echo site_url('admin/materi/tambah_materi') ?>"><button class="btn btn-block btn-info btn-lg">Tambah Materi</button></a>
@@ -56,6 +97,7 @@ $this->load->view('template_admin/sidebar');
   <script src="<?php echo base_url('assets/assets/datatables/jquery.dataTables.js') ?>"></script>
   <script src="<?php echo base_url('assets/assets/datatables/dataTables.bootstrap.js') ?>"></script>
      <script type="text/javascript">
+
             $(document).ready(function () {
  
                 $.fn.dataTableExt.oApi.fnPagingInfo = function (oSettings)
@@ -103,6 +145,8 @@ $this->load->view('template_admin/sidebar');
                     }
                 });
             });
+
+
         </script>
 
 <?php 

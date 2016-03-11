@@ -132,6 +132,7 @@ function DateToIndo($date) { // fungsi atau method untuk mengubah tanggal ke for
         $data = array();
         $no = $_POST['start'];
         foreach ($list as $berita) {
+
             $no++;
             $row = array();
             $row[] = $no;
@@ -196,6 +197,7 @@ function DateToIndo($date) { // fungsi atau method untuk mengubah tanggal ke for
 				$id = $this->input->post('id_berita');
 		        $this->db->where('id_berita', $id);
 		        $this->db->update('berita', $data);
+		        $this->session->set_flashdata('item', array('message' => '<strong>Berhasil</strong> mengubah data berita','class' => 'alert alert-success'));
 				redirect(base_url().'admin/berita');
 				}
 				 else{
@@ -213,6 +215,7 @@ function DateToIndo($date) { // fungsi atau method untuk mengubah tanggal ke for
 				$id = $this->input->post('id_berita');
 		        $this->db->where('id_berita', $id);
 		        $this->db->update('berita', $data);
+		        $this->session->set_flashdata('item', array('message' => '<strong>Berhasil</strong> mengubah data berita','class' => 'alert alert-success'));
 				redirect(base_url().'admin/berita');
 
 				}    
@@ -237,7 +240,7 @@ function DateToIndo($date) { // fungsi atau method untuk mengubah tanggal ke for
 		$this->db->where('id_berita', $id);
 		$this->db->update('berita', $data);
 
-
+		$this->session->set_flashdata('item', array('message' => '<strong>Berhasil</strong> memindahkan berita ke trash/sampah','class' => 'alert alert-success'));
     	redirect('admin/berita/ListBerita2');
 
     }
@@ -286,6 +289,7 @@ function DateToIndo($date) { // fungsi atau method untuk mengubah tanggal ke for
 				$id = $this->input->post('id_katBer');
 		        $this->db->where('id_katBer', $id);
 		        $this->db->update('kategori_berita', $data);
+		        $this->session->set_flashdata('item', array('message' => '<strong>Berhasil</strong> mengubah kategori berita','class' => 'alert alert-success'));
 				redirect(base_url().'admin/berita/tambah_kategori_berita');
 
 		}
@@ -306,6 +310,7 @@ function DateToIndo($date) { // fungsi atau method untuk mengubah tanggal ke for
 		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
 		$data['level'] = $this->session->userdata('level');
         $this->m_admin->tambah_kategori_berita();
+        $this->session->set_flashdata('item', array('message' => '<strong>Berhasil</strong> menambahkan kategori berita baru','class' => 'alert alert-success'));
         redirect('admin/berita/tambah_kategori_berita');
 	}
 	public function index()
@@ -375,6 +380,7 @@ function DateToIndo($date) { // fungsi atau method untuk mengubah tanggal ke for
 							'id_kateBer' => $id_k,
 					);
 					$this->m_admin->get_insert($data); 
+					$this->session->set_flashdata('item', array('message' => '<strong>Berhasil</strong> menambahkan berita','class' => 'alert alert-success'));
 					redirect(base_url().'admin/berita');
 				}    
 		}

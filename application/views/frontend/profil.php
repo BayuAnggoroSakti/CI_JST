@@ -16,7 +16,11 @@ $this->load->view('template_frontend/header');
 					</ul>
 				</div>
 			</div>
-
+<?php 
+	if ($b->row('deskripsi') == "") {
+		redirect('home');
+	}
+?>
 			<div class="about-box">
 				<div class="container">
 					<div class="row">

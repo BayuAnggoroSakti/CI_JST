@@ -277,6 +277,18 @@
  		//$query = $this->db->get('materi',$num,$offset);
 	 return $query->result();
 	}
+
+	function lihat_histori($num,$offset,$id){
+ 		$query = $this->db->query("select distinct kt.nama as nama, t.waktu as waktu, t.nilai as nilai
+from tryout t, kategori_to kt, soal s, detail d
+where t.id_to = d.id_to
+and d.kode_soal = s.kode_soal
+and s.id_katTO = kt.id_katTO
+and id_user = '$id'
+order by waktu desc limit $num offset $offset ");
+ 		//$query = $this->db->get('materi',$num,$offset);
+	 return $query->result();
+	}
  
 	function jumlah_berita(){
 		return $this->db->get('berita')->num_rows();

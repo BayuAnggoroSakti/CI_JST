@@ -24,6 +24,16 @@ $this->load->view('template_admin/sidebar');
 
     <!-- Default box -->
     <div class="box">
+     <div class="col-md-12">
+                       <?php
+            if($this->session->flashdata('item')) {
+            $message = $this->session->flashdata('item'); ?>
+            <div class="row">
+             <div class="<?php echo $message['class'] ?>"><?php echo $message['message'] ?></div>
+             </div>
+         <?php    
+          }?>
+         </div>
         <div class="box-header with-border">
             <div class="row">
                     <div class="col-md-2">

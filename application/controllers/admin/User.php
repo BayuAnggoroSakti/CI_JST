@@ -33,16 +33,36 @@ class User extends CI_Controller {
         $list = $this->user->get_datatables();
         $data = array();
         $no = $_POST['start'];
+        $url=site_url('admin/user/');
         foreach ($list as $user) {
             if ($user->status==1) {
-               $status = '<small class="label pull-right bg-green">Active</small>';
+                if ($user->password=="") {
+                   $status = '<small class="label pull-right bg-green">Active</small><a href="'.$url.'/buat_password/'."".$user->id_user."".'">Buat password</a>';
+                }
+                else
+                {
+                  $status = '<small class="label pull-right bg-green">Active</small>';
+                }       
             }
             elseif ($user->status==0) {
-                $status = '<small class="label pull-right bg-red">Not Active</small>';
+                 if ($user->password=="") {
+                   $status = '<small class="label pull-right bg-red">Not Active</small><a href="'.$url.'/buat_password/'."".$user->id_user."".'">Buat password</a>';
+                }
+                else
+                {
+                  $status = '<small class="label pull-right bg-red">Not Active</small>';
+                }      
             }
             else
             {
-                $status = '<small class="label pull-right bg-yellow">Pending</small><br>';
+                  if ($user->password=="") {
+                   $status = '<small class="label pull-right bg-yellow">Pending</small><a href="'.$url.'/buat_password/'."".$user->id_user."".'">Buat password</a>';
+                }
+                else
+                {
+                  $status = '<small class="label pull-right bg-yellow">Pending</small><br>';
+                }      
+               
             }
             $no++;
             $row = array();
@@ -86,6 +106,52 @@ class User extends CI_Controller {
     {
         $data = $this->user->get_by_id($id);
         echo json_encode($data);
+    }
+
+    public function buat_password($id)
+    {
+        if ($id == "") {
+            redirect('admin/user');
+        }
+
+        $this->load->library('form_validation');
+        $data['username'] = $this->session->userdata('username');
+        $data['title'] = "Edit Password || Jogja Science Training";
+        $data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
+        $data['level'] = $this->session->userdata('level');
+        $data['id_user'] = $id;
+        $data['return'] ='';
+         if ($this->input->post('submit')) {
+            $this->form_validation->set_rules('password_baru', 'Password', 'trim|required|min_length[5]|max_length[35]|matches[passconf]');
+            $this->form_validation->set_rules('passconf', 'Confirm Password', 'trim|required|min_length[5]|max_length[35]');
+            $this->form_validation->set_error_delimiters('<div style="color:red;">', '</div>');
+            if ($this->form_validation->run() == FALSE) {
+                 $this->load->view('admin/user/buat_password', $data);
+            }
+            else{
+                $password_baru = $this->input->post('password_baru');
+                $passconf = $this->input->post('passconf');
+                $pass = md5($password_baru);
+                   $data = array(
+                            'password' => $pass,
+                    );
+                   $this->db->where('id_user', $id);
+                   if ($this->db->update('user', $data)) {
+                       echo '<script type="text/javascript">'; 
+                                echo 'alert("Selamat anda telah berhasil menambahkan password");'; 
+                                echo 'window.location.href = "../index";';
+                                echo '</script>';
+                   }
+                   else
+                   {
+                    echo "error query";
+                   }
+            }
+       }
+       else
+       {
+         $this->load->view('admin/user/buat_password', $data);
+       }
     }
 
      public function program_kerja()
@@ -153,49 +219,49 @@ class User extends CI_Controller {
         if($this->input->post('username') == '')
         {
             $data['inputerror'][] = 'username';
-            $data['error_string'][] = 'Nama Pelatihan is required';
+            $data['error_string'][] = 'Username is required';
             $data['status'] = FALSE;
         }
  
         if($this->input->post('level') == '')
         {
             $data['inputerror'][] = 'level';
-            $data['error_string'][] = 'Biaya is required';
+            $data['error_string'][] = 'Level is required';
             $data['status'] = FALSE;
         }
  
         if($this->input->post('nama_lengkap') == '')
         {
             $data['inputerror'][] = 'nama_lengkap';
-            $data['error_string'][] = 'Lokasi is required';
+            $data['error_string'][] = 'Nama Lengkap is required';
             $data['status'] = FALSE;
         }
 
          if($this->input->post('email') == '')
         {
             $data['inputerror'][] = 'email';
-            $data['error_string'][] = 'Fasilitas is required';
+            $data['error_string'][] = 'Email is required';
             $data['status'] = FALSE;
         }
 
         if($this->input->post('alamat') == '')
         {
             $data['inputerror'][] = 'alamat';
-            $data['error_string'][] = 'Keterangan is required';
+            $data['error_string'][] = 'Alamat is required';
             $data['status'] = FALSE;
         }
  
         if($this->input->post('asal_sekolah') == '')
         {
             $data['inputerror'][] = 'asal_sekolah';
-            $data['error_string'][] = 'Please select program kerja';
+            $data['error_string'][] = 'Asal Sekolah is required';
             $data['status'] = FALSE;
         }
  
         if($this->input->post('status') == '')
         {
             $data['inputerror'][] = 'status';
-            $data['error_string'][] = 'Waktu Mulai is required';
+            $data['error_string'][] = 'Status is required';
             $data['status'] = FALSE;
         }
 

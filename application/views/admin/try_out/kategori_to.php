@@ -31,6 +31,16 @@ $this->load->view('template_admin/sidebar');
                     <p>- Jika sudah yakin menambah soal pada setiap kategori, silahkan edit, kemudian aktifkan</p>
                     <p>- Pastikan mengaktifkan kategori jika sudah dirasa sudah siap</p>
                   </div>
+                    <div class="col-md-12">
+                       <?php
+            if($this->session->flashdata('item')) {
+            $message = $this->session->flashdata('item'); ?>
+            <div class="row">
+             <div class="<?php echo $message['class'] ?>"><?php echo $message['message'] ?></div>
+             </div>
+         <?php    
+          }?>
+         </div>
                    <div class="row">
                         <div class="col-md-2">
                             <button class="btn btn-block btn-info btn-lg" onclick="add_person()"><i class="glyphicon glyphicon-plus"></i> Tambah</button> 
@@ -210,6 +220,7 @@ function save()
             if(data.status) //if success close modal and reload ajax table
             {
                 $('#modal_form').modal('hide');
+                alert('Berhasil menambah atau mengubah data bidang');
                 reload_table();
             }
             else
@@ -220,6 +231,7 @@ function save()
                     $('[name="'+data.inputerror[i]+'"]').next().text(data.error_string[i]); //select span help-block class set text error string
                 }
             }
+
             $('#btnSave').text('save'); //change button text
             $('#btnSave').attr('disabled',false); //set button enable
  

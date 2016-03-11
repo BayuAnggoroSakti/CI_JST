@@ -148,7 +148,6 @@ class My_profil extends CI_Controller {
         $data = array(
                 'nama_lengkap' => $this->input->post('nama_lengkap'),
                 'alamat' => $this->input->post('alamat'),
-                'username' => $this->input->post('username'),
                 'email' => $this->input->post('email'),
                 'asal_sekolah' => $this->input->post('asal_sekolah'),
             );
@@ -167,12 +166,6 @@ class My_profil extends CI_Controller {
         {
             $data['inputerror'][] = 'nama_lengkap';
             $data['error_string'][] = 'nama lengkap Kerja is required';
-            $data['status'] = FALSE;
-        }
-        if($this->input->post('username') == '')
-        {
-            $data['inputerror'][] = 'username';
-            $data['error_string'][] = 'Username is required';
             $data['status'] = FALSE;
         }
         if($this->input->post('alamat') == '')

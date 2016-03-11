@@ -45,7 +45,8 @@ class Materi extends CI_Controller {
 		$this->load->view('admin/materi/tambah_materi', $data);
 	}
 
-	public function act_edit($id){
+	public function act_edit(){
+		$id = $this->input->post('id');
     	$data['username'] = $this->session->userdata('username');
     	$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
 		$data['level'] = $this->session->userdata('level');
@@ -59,40 +60,47 @@ class Materi extends CI_Controller {
 			 	{
 			 		$config['upload_path']    = "./assets/materi/member";
 			 	}
-				 $config['allowed_types']  = 'pdf|rar|doc|zip';
+				 $config['allowed_types']  = 'pdf|doc|docx|ppt|pptx|xls|xlsx';
 				 $config['max_size']       = '10000';
 				 $config['file_name']      = $nama_materi.'-'.trim(str_replace(" ","",date('dmYHis')));
 				 $this->load->library('upload', $config);
 					
 				if (!$this->upload->do_upload('materi')) {
+					$materi = $this->m_admin->edit_materi($id);
+					if ($materi->row('jenis') != $jenis) {
+			 		$base_url = "./assets/materi";
+			 		copy($base_url.'/'.$materi->row('jenis').'/'.$materi->row('file'), $base_url.'/'.$jenis.'/'.$materi->row('file') );
+			 		unlink($base_url.'/'.$materi->row('jenis').'/'.$materi->row('file'));
+				 	}
+
 					$tgl = date('Y-m-d H:i:s');
 					$file = $this->upload->file_name;
-					$type = substr($file, -3);
+					$type = substr($file, -4);
 					$data = array(
 							'nama_materi' => $nama_materi,
 							'jenis' => $jenis,
 							'tanggal' => $tgl,
-							'type' => $type,
 					);
 					$id = $this->input->post('id_materi');
 			        $this->db->where('id_materi', $id);
 			        $this->db->update('materi', $data);
+			        $this->session->set_flashdata('item', array('message' => '<strong>Berhasil</strong> mengubah data materi','class' => 'alert alert-success'));
 					redirect(base_url().'admin/materi/');
 				}
 				 else{
 				 	$materi = $this->m_admin->edit_materi($id);
 	    			
-	    			if ($jenis == 'free') {
+	    			if ($materi->row('jenis') == 'free') {
 			 		$base_url = "./assets/materi/free";
 				 	}
 				 	else
 				 	{
-				 		$base_url = "./assets/materi/member";
+				 	$base_url = "./assets/materi/member";
 				 	}
 					unlink($base_url.'/'.$materi->row('file'));
 					$tgl = date('Y-m-d H:i:s');
 					$file = $this->upload->file_name;
-					$type = substr($file, -3);
+					$type = substr($file, -4);
 					$data = array(
 							'nama_materi' => $nama_materi,
 							'jenis' => $jenis,
@@ -103,6 +111,7 @@ class Materi extends CI_Controller {
 					$id = $this->input->post('id_materi');
 			        $this->db->where('id_materi', $id);
 			        $this->db->update('materi', $data);
+			        $this->session->set_flashdata('item', array('message' => '<strong>Berhasil</strong> mengubah data materi','class' => 'alert alert-success'));
 					redirect(base_url().'admin/materi/');
 
 				}    
@@ -125,7 +134,7 @@ class Materi extends CI_Controller {
 			 	{
 			 		$config['upload_path']    = "./assets/materi/member";
 			 	}
-				 $config['allowed_types']  = 'pdf|rar|doc|zip|docx|ppt|pptx|xls|xlsx';
+				 $config['allowed_types']  = 'pdf|doc|docx|ppt|pptx|xls|xlsx';
 				 $config['max_size']       = '10000';
 				 $config['file_name']      = $nama_materi.'-'.trim(str_replace(" ","",date('dmYHis')));
 				 $this->load->library('upload', $config);
@@ -146,7 +155,7 @@ class Materi extends CI_Controller {
 				} else{
 					$tgl = date('Y-m-d H:i:s');
 					$file = $this->upload->file_name;
-					$type = substr($file, -4);
+					$type = substr($file, -3);
 					$data = array(
 							'nama_materi' => $nama_materi,
 							'jenis' => $jenis,
@@ -155,6 +164,7 @@ class Materi extends CI_Controller {
 							'type' => $type,
 					);
 					$this->m_admin->get_insert_materi($data); 
+					$this->session->set_flashdata('item', array('message' => '<strong>Berhasil</strong> menambahkan materi baru','class' => 'alert alert-success'));
 					redirect(base_url().'admin/materi');
 				}    
 		}
@@ -182,7 +192,6 @@ class Materi extends CI_Controller {
             // The `db` parameter represents the column name in the database, while the `dt`
             // parameter represents the DataTables column identifier. In this case simple
             // indexes
- 
             $columns = array(
                 array('db' => 'id_materi', 'dt' => 'DT_RowId'),
                 array('db' => 'nama_materi', 'dt' => 'nama_materi'),
@@ -195,7 +204,7 @@ class Materi extends CI_Controller {
                     'db' => 'id_materi',
                     'dt' => 'aksi',
                     'formatter' => function( $d ) {
-                        return '<a href="' . site_url('admin/materi/edit_materi/' . $d) . '">Edit</a> | <a href="' . site_url('admin/materi/hapus_materi/' . $d) . '">Delete</a>';
+                        return '<a href="' . site_url('admin/materi/edit_materi/' . $d) . '">Edit</a> | <a href="javascript:void()" onclick="hapus('."'".$d."'".')">Delete</a>';
                     }
                 ),
             );
@@ -221,7 +230,7 @@ class Materi extends CI_Controller {
 		$data['level'] = $this->session->userdata('level');
         $materi = $this->m_admin->edit_materi($id);
         $data['title'] = "Edit Materi || Jogja Science Training";
-
+        $data['id'] = $id;
         $this->load->vars('b', $materi);
         //echo $b->row('nama_materi');
         $this->load->view('admin/materi/edit_materi',$data);
@@ -242,7 +251,9 @@ class Materi extends CI_Controller {
     	echo $hapus_file->row('file');
         
         $materi = $this->m_admin->hapus_materi($id);
+        $this->session->set_flashdata('item', array('message' => '<strong>Berhasil</strong> menghapus materi','class' => 'alert alert-success'));
         redirect(base_url().'admin/materi');
+       
 	}
 
 

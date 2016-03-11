@@ -35,7 +35,7 @@ $this->load->view('template_admin/sidebar');
                
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" enctype="multipart/form-data" method="post" action="<?php echo base_url('admin/profil/proses_edit_profil'); ?>" onsubmit="return validasi_input(this)">
+                <form role="form" enctype="multipart/form-data" method="post" action="<?php echo base_url('admin/profil/proses_edit_profil'); ?>" class="form-horizontal" onsubmit="return validasi_input(this)">
               
                    <input type="hidden" name="id_profil" value="<?php echo $b->row('id_profil');?>">
                   <div class="box-body">

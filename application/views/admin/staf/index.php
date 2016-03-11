@@ -9,7 +9,32 @@ $this->load->view('template_admin/sidebar');
 ?>
   <link rel="stylesheet" href="<?php echo base_url('assets/assets/bootstrap/css/bootstrap.min.css') ?>"/>
   <link rel="stylesheet" href="<?php echo base_url('assets/assets/datatables/dataTables.bootstrap.css') ?>"/>
-    
+    <script>
+           function hapus(id)
+{
+    if(confirm('Are you sure delete this data?'))
+    {
+        // ajax delete data to database
+        $.ajax({
+            url : "<?php echo site_url('admin/staf/hapus_staf')?>/"+id,
+            type: "POST",
+            dataType: "JSON",
+            success: function(data)
+            {
+                //if success reload ajax table
+                reload_table();
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                alert('berhasil menghapus data');
+                var base = "<?php echo base_url(); ?>";
+                window.location = base+"/admin/staf";
+            }
+        });
+ 
+    }
+}
+    </script>
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
@@ -28,6 +53,16 @@ $this->load->view('template_admin/sidebar');
 
     <!-- Default box -->
    <div class="box">
+     <div class="col-md-12">
+                       <?php
+            if($this->session->flashdata('item')) {
+            $message = $this->session->flashdata('item'); ?>
+            <div class="row">
+             <div class="<?php echo $message['class'] ?>"><?php echo $message['message'] ?></div>
+             </div>
+         <?php    
+          }?>
+         </div>
                 <div class="box-header">
                    <div class="row">
                     <div class="col-md-2">

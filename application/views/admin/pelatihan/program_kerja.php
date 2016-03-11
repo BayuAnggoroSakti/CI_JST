@@ -187,6 +187,7 @@ function save()
             if(data.status) //if success close modal and reload ajax table
             {
                 $('#modal_form').modal('hide');
+                alert('Berhasil menambah atau mengubah data program kerja');
                 reload_table();
             }
             else
@@ -197,6 +198,7 @@ function save()
                     $('[name="'+data.inputerror[i]+'"]').next().text(data.error_string[i]); //select span help-block class set text error string
                 }
             }
+
             $('#btnSave').text('save'); //change button text
             $('#btnSave').attr('disabled',false); //set button enable
  

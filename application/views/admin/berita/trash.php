@@ -242,6 +242,7 @@ function delete_berita(id)
             {
                 //if success reload ajax table
                 $('#modal_form').modal('hide');
+                 alert('Selamat, anda berhasil menghapus berita ini');
                 reload_table();
             },
             error: function (jqXHR, textStatus, errorThrown)

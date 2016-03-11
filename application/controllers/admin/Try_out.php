@@ -14,7 +14,18 @@ class Try_out extends CI_Controller {
          }
 		$this->load->helper('text');
 		$this->load->model('m_kategori_to','kategori_to');
+        $this->load->model('m_tryout','tryout');
 	}
+
+    public function index()
+    {
+        $data['username'] = $this->session->userdata('username');
+        $data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
+        $data['title'] = "List Tryout || Jogja Science Training";
+        $data['level'] = $this->session->userdata('level');
+        $this->load->view('admin/try_out/index', $data);
+    }
+
 
 	public function kategori_to()
 	{
@@ -24,6 +35,33 @@ class Try_out extends CI_Controller {
 		$data['level'] = $this->session->userdata('level');
 		$this->load->view('admin/try_out/kategori_to', $data);
 	}
+
+    public function ajax_list_tryout()
+    {
+        $list = $this->tryout->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $tryout) {
+            $no++;
+            $row = array();
+            $row[] = $no;
+            $row[] = $tryout->nama;
+            $row[] = $tryout->waktu;
+            $row[] = $tryout->nilai;
+            //add html for action
+         
+            $data[] = $row;
+        }
+ 
+        $output = array(
+                        "draw" => $_POST['draw'],
+                        "recordsTotal" => $this->tryout->count_all(),
+                        "recordsFiltered" => $this->tryout->count_filtered(),
+                        "data" => $data,
+                );
+        //output to json format
+        echo json_encode($output);
+    }
 
 	public function ajax_add_katTO()
     {

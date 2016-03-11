@@ -35,6 +35,50 @@ class Home extends CI_Controller {
 		redirect('home/login');
 	}
 
+    public function history($offset=0,$id = 5)
+    {
+        $data['menu'] = $this->m_admin->detail_profil();
+        $this->load->view('template_frontend/header',$data);
+        //$data['materi'] = $this->m_admin->materi();   
+        $jml = $this->db->query("select distinct kt.nama as nama, t.waktu as waktu, t.nilai as nilai
+from tryout t, kategori_to kt, soal s, detail d
+where t.id_to = d.id_to
+and d.kode_soal = s.kode_soal
+and s.id_katTO = kt.id_katTO
+and id_user = '$id'
+order by waktu desc");
+    
+           $config['base_url'] = base_url().'member/home/history';
+           $config['total_rows'] = $jml->num_rows();
+           $config['per_page'] = 2; /*Jumlah data yang dipanggil perhalaman*/ 
+           $config['uri_segment'] = 4; /*data selanjutnya di parse diurisegmen 3*/
+           /*Class bootstrap pagination yang digunakan*/
+           $config['full_tag_open'] = "<ul class='pagination pagination-sm' style='position:relative; top:-25px;'>";
+           $config['full_tag_close'] ="</ul>";
+           $config['num_tag_open'] = '<li>';
+           $config['num_tag_close'] = '</li>';
+           $config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+           $config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+           $config['next_tag_open'] = "<li>";
+           $config['next_tagl_close'] = "</li>";
+           $config['prev_tag_open'] = "<li>";
+           $config['prev_tagl_close'] = "</li>";
+           $config['first_tag_open'] = "<li>";
+           $config['first_tagl_close'] = "</li>";
+           $config['last_tag_open'] = "<li>";
+           $config['last_tagl_close'] = "</li>";
+          
+           $this->pagination->initialize($config);
+           
+           $data['halaman'] = $this->pagination->create_links();
+           /*membuat variable halaman untuk dipanggil di view nantinya*/
+           $data['offset'] = $offset;
+
+           $data['histori'] = $this->m_admin->lihat_histori($config['per_page'], $offset, $id);
+           $data['title'] = "Download Materi";
+           $this->load->view('frontend/histori',$data);
+    }
+
 	 private function _validate_profil()
     {
         $data = array();

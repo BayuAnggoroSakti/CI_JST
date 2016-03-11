@@ -25,7 +25,7 @@ $this->load->view('template_admin/sidebar');
         var fup = document.getElementById('filename');
         var fileName = fup.value;
         var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
-        if(ext == "pdf" || ext == "doc" || ext == "rar" || ext == "zip" || ext == "")
+        if(ext == "pdf" || ext == "doc" || ext == "docx" || ext == "ppt" || ext == "xls" || ext == "xlsx" || ext == "pptx" || ext == "")
         {
             return true;
         } 
@@ -36,7 +36,7 @@ $this->load->view('template_admin/sidebar');
             return false;
         }*/else
         {
-            alert("Maaf file yang diperbolehkan adalah .pdf .rar .zip .doc!");
+            alert("Maaf file yang diperbolehkan adalah .pdf .docx .doc .ppt .pptx .xls .xlsx !");
             fup.focus();
             return false;
         }
@@ -63,9 +63,10 @@ $this->load->view('template_admin/sidebar');
                 </div><!-- /.box-header -->
                 <?php $id = $b->row('id_materi'); ?>
                 <!-- form start -->
-                <form action="<?php echo base_url('admin/materi/proses_edit_staf'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal" onsubmit="return Checkfiles();">
+                <form action="<?php echo base_url('admin/materi/act_edit'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal" onsubmit="return Checkfiles();">
                   <div class="box-body">
                     <div class="form-group">
+                    <input type="hidden" name="id" value="<?php echo $id ?>"></input>
                       <label for="inputEmail3" class="col-sm-2 control-label">Nama Materi</label>
                       <div class="col-sm-10">
                         <input type="text" value="<?php echo $b->row('nama_materi') ?>" name="nama_materi" class="form-control" id="judul" placeholder="Masukkan Nama Materi" required/>
@@ -112,7 +113,7 @@ $this->load->view('template_admin/sidebar');
                     </div>
                       
                      <div class="form-group" id="welcomeDiv" style="display:none;">
-                      <label for="inputPassword3" class="col-sm-2 control-label">Tambahkan Materi (pdf,doc,rar,zip)</label>
+                      <label for="inputPassword3" class="col-sm-2 control-label">Tambahkan Materi (.pdf .docx .doc .ppt .pptx .xls .xlsx)</label>
                       <div class="col-sm-10">
                         
                       </div>

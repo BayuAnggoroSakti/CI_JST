@@ -51,7 +51,7 @@ class Dashboard extends CI_Controller {
 		$base_url = './assets/images/';
 		unlink($base_url.'/'.$b->row('gambar'));
         $this->m_admin->hapus_slider($id);
-     
+     	$this->session->set_flashdata('item', array('message' => '<strong>Berhasil</strong> menghapus slider','class' => 'alert alert-success'));
         redirect(base_url().'admin/dashboard/slider');
 	}
 
@@ -59,11 +59,11 @@ class Dashboard extends CI_Controller {
 		$data['username'] = $this->session->userdata('username');
 		$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
 		$data['level'] = $this->session->userdata('level');
+		$data['title'] = "Tambah Slider";
 		$this->load->view('admin/tambah_slider',$data);
 	}
 
 	public function slider_simpan() {
-
 		if($this->input->post('uploud')){
 				 $config['upload_path']    = "./assets/images/";
 				 $config['allowed_types']  = 'gif|jpg|png|jpeg';
@@ -79,14 +79,15 @@ class Dashboard extends CI_Controller {
 					echo "confirmed = window.confirm('Ada kesalahan dalam upload gambar, Ingin diulangi kembali atau tidak?');";
 					echo "if (confirmed)";
 					echo "{";
-					echo "window.location = 'http://localhost/jst/admin/tambah_berita';";
+					echo "window.location = 'http://localhost/jst/admin/dashboard/tambah_slide';";
 					echo "}";
 					echo "else ";
 					echo "{";
-					echo "window.location = 'http://localhost/jst/admin/tambah_berita/ListBerita';";
+					echo "window.location = 'http://localhost/jst/admin/dashboard/slider';";
 					echo "}";
 					echo "</script>";
 				} else{
+
 					$deskripsi = $this->input->post('deskripsi');
 					$file = $this->upload->file_name;
 					$data = array(
@@ -94,6 +95,7 @@ class Dashboard extends CI_Controller {
 							'gambar' => $this->upload->file_name,
 					);
 					$this->m_admin->get_insert_slider($data); 
+					$this->session->set_flashdata('item', array('message' => '<strong>Berhasil</strong> menambahkan data','class' => 'alert alert-success'));
 					redirect(base_url().'admin/dashboard/slider');
 				}    
 		}

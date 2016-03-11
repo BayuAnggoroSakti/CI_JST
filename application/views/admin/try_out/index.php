@@ -12,12 +12,12 @@ $this->load->view('template_admin/sidebar');
 
  <section class="content-header">
     <h1>
-        List Soal Try Out
+        List Tryout
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Soal</a></li>
-        <li class="active">List Soal</li>
+        <li><a href="#">Tryout</a></li>
+        <li class="active">List Tryout</li>
     </ol>
 </section>
 
@@ -26,37 +26,17 @@ $this->load->view('template_admin/sidebar');
 
     <!-- Default box -->
    <div class="box">
-     <div class="col-md-12">
-                       <?php
-            if($this->session->flashdata('item')) {
-            $message = $this->session->flashdata('item'); ?>
-            <div class="row">
-             <div class="<?php echo $message['class'] ?>"><?php echo $message['message'] ?></div>
-             </div>
-         <?php    
-          }?>
-         </div>
                 <div class="box-header">
-                   <div class="row">
-                        <div class="col-md-2">
-                            <a href="<?php echo site_url('admin/soal/tambah_soal') ?>"><button class="btn btn-block btn-info btn-lg"><i class="glyphicon glyphicon-plus"></i> Tambah</button></a>
-                        </div>
-                           <div class="col-md-2">
-                             <button class="btn btn-block btn-default btn-lg" onclick="reload_table()"><i class="glyphicon glyphicon-refresh"></i> Reload</button>
-                        </div>
-                    
-                  </div>
+            
                 </div><!-- /.box-header -->
                 <div class="box-body">
                    <table class="table table-bordered table-hover" width="100%" id="table">
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Kategori</th>
-                            <th>Pertanyaan</th>
-                            <th>Kunci</th>
-                            <th>Status</th>
-                            <th>Action</th>
+                            <th>Bidang</th>
+                            <th>Waktu</th>
+                            <th>Nilai</th>
                         </tr>
                     </thead>
                 </table>
@@ -104,7 +84,7 @@ $(document).ready(function() {
         "sScrollXInner":  "100%",
         // Load data for the table's content from an Ajax source
         "ajax": {
-            "url": "<?php echo site_url('admin/soal/ajax_list_soal')?>",
+            "url": "<?php echo site_url('admin/try_out/ajax_list_tryout')?>",
             "type": "POST"
         },
  
@@ -448,65 +428,6 @@ function delete_soal(id)
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <!-- End Bootstrap modal -->
-<script type="text/javascript">
-     var staf = "<?php base_url('assets/images/no_pict.png') ?>";
-    function validate_file(obj){
-        var file_name = $(obj).val().replace('C:\\fakepath\\', '');
-        var file_name_attr = file_name.split('.');
-        file_name_attr[2] = obj.files[0].size/1024;
-        
-        if(file_name_attr[2] > 5000){
-            $(obj).wrap('<form>').closest('form').get(0).reset();
-            $(obj).unwrap();
-            $(obj).parent().parent().find('.text_file').val('');
-            readURL(obj, 'set');
-            alert('File must jpg and maximum file size under 5 mb!');
-        }
-        else{
-            $(obj).parent().parent().find('.text_file').val(file_name);
-            $('#thumb_delete').fadeIn();
-            readURL(obj);
-        }
-    }
-    
-    function readURL(input, type) {
-        if (type != 'set'){
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-        
-                reader.onload = function (e) {
-                    $('#thumb_image').attr('src', e.target.result);
-                }
-        
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-        else{
-            //$('#thumb_image').attr('src','jst/assets/images/no_pict.png');
-            $('#thumb_image').attr('src',staf);
-        }
-    }
-    
-    $(function(){
-        $('#thumb_delete').fadeOut();
-        
-        $('#thumb_delete').click(function(){
-            //$('#thumb_image').attr('src','jst/assets/images/no_pict.png');
-            $('#thumb_image').attr('src',staf);
-            var obj = $('#alkes_img');
-            
-            obj.wrap('<form>').closest('form').get(0).reset();
-            obj.unwrap();
-            obj.parent().parent().find('.text_file').val('');
-            $(this).fadeOut();
-        });
-        
-        $('#alkes_price').change(function(){
-            var value = $(this).autoNumeric('get');
-            $(this).parent().find('input[type="hidden"]').val(value);
-        });
-    });
-</script>
 <?php 
 $this->load->view('template_admin/js_tables');
 ?>

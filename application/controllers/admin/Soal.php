@@ -121,6 +121,7 @@ class Soal extends CI_Controller {
                             'status' => $status,
                     );
                     $this->db->insert('soal', $data);
+                    $this->session->set_flashdata('item', array('message' => '<strong>Berhasil</strong> menambahkan soal baru','class' => 'alert alert-success'));
                     redirect(base_url().'admin/soal/');
     }
 	public function ajax_list_soal()
@@ -203,6 +204,7 @@ class Soal extends CI_Controller {
                     $id = $this->input->post('kode_soal');
                     $this->db->where('kode_soal', $id);
                     $this->db->update('soal', $data);
+                    $this->session->set_flashdata('item', array('message' => '<strong>Berhasil</strong> mengubah data soal','class' => 'alert alert-success'));
                     redirect(base_url().'admin/soal/');
        
     }

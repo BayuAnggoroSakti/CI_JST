@@ -54,6 +54,16 @@ $this->load->view('template_admin/sidebar');
              <div class="col-md-6">
               <!-- Horizontal Form -->
               <div class="box box-info">
+                 <div class="col-md-12">
+                       <?php
+            if($this->session->flashdata('item')) {
+            $message = $this->session->flashdata('item'); ?>
+            <div class="row">
+             <div class="<?php echo $message['class'] ?>"><?php echo $message['message'] ?></div>
+             </div>
+         <?php    
+          }?>
+         </div>
                 <div class="box-header with-border">
                   <h3 class="box-title">List Kategori Berita</h3>
                 </div><!-- /.box-header -->

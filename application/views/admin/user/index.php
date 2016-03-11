@@ -170,6 +170,7 @@ function edit_user(id)
             $('[name="email"]').val(data.email);
             $('[name="alamat"]').val(data.alamat);
             $('[name="asal_sekolah"]').val(data.asal_sekolah);
+            $('[name="status"]').val(data.status);
        
             $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
             $('.modal-title').text('Edit User'); // Set title to Bootstrap modal title
@@ -211,6 +212,7 @@ function save()
             if(data.status) //if success close modal and reload ajax table
             {
                 $('#modal_form').modal('hide');
+                alert('Selamat, data berhasil ditambahkan/diubah');
                 reload_table();
             }
             else
@@ -283,9 +285,12 @@ function delete_user(id)
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-3">Level</label>
-                            <div class="col-md-9">
-                                <input name="level" placeholder="Level User" class="form-control" type="text">
-                                <span class="help-block"></span>
+                            <div class="col-md-3">
+                               <select name="level" class="form-control">
+                                   <option value="">Pilih</option>
+                                   <option value="admin">Admin</option>
+                                   <option value="member">Member</option>
+                               </select>
                             </div>
                         </div>
                       
@@ -307,9 +312,7 @@ function delete_user(id)
                         <div class="form-group">
                             <label class="control-label col-md-3">Alamat Lengkap</label>
                             <div class="col-md-9">
-                               <textarea name="alamat" class="form-control" rows="4">
-                                   
-                               </textarea>
+                               <textarea name="alamat" class="form-control" rows="4"></textarea>
                             </div>
                         </div>
                          <div class="form-group">
@@ -323,8 +326,10 @@ function delete_user(id)
                             <label class="control-label col-md-3">Status</label>
                             <div class="col-md-9">
                                 <select name="status" class="form-control" >
+                                    <option value="">Pilih</option>
                                     <option value="1">Aktif</option>
                                     <option value="0">Tidak</option>
+                                    <option value="2">Pending</option>
                                 </select>
                                 <span class="help-block"></span>
                             </div>
@@ -340,6 +345,7 @@ function delete_user(id)
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <!-- End Bootstrap modal -->
+
 
 <?php 
 $this->load->view('template_admin/js_tables');

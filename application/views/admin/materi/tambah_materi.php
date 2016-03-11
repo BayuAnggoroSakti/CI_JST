@@ -12,6 +12,28 @@ $this->load->view('template_admin/sidebar');
       { alert("Anda belum memilih Kategori!"); 
         return (false); } 
     return (true); } 
+
+     function Checkfiles()
+    {
+        var fup = document.getElementById('filename');
+        var fileName = fup.value;
+        var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
+        if(ext == "pdf" || ext == "doc" || ext == "docx" || ext == "ppt" || ext == "xls" || ext == "xlsx" || ext == "pptx")
+        {
+            return true;
+        } 
+/*        else if(ext=="")
+        {
+            alert("No file selected");
+            fup.focus();
+            return false;
+        }*/else
+        {
+            alert("Maaf file yang diperbolehkan adalah .pdf .docx .doc .ppt .pptx .xls .xlsx !");
+            fup.focus();
+            return false;
+        }
+    }
     </script>
     <script src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/dist/js/jquery-1.11.0.js')?>"></script>
   <script src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/plugins/ckeditor/ckeditor.js') ?>"></script>
@@ -31,7 +53,7 @@ $this->load->view('template_admin/sidebar');
                   <h3 class="box-title">Tambahkan Materi</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form action="<?php echo base_url('admin/materi/act_simpan'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+                <form action="<?php echo base_url('admin/materi/act_simpan'); ?>" onsubmit="return Checkfiles();" method="post" enctype="multipart/form-data" class="form-horizontal">
                   <div class="box-body">
                     <div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">Nama Materi</label>
@@ -49,9 +71,9 @@ $this->load->view('template_admin/sidebar');
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="inputPassword3" class="col-sm-2 control-label">Tambahkan Materi (pdf,doc,rar,zip)</label>
+                      <label for="inputPassword3" class="col-sm-2 control-label">Tambahkan Materi (.pdf .docx .doc .ppt .pptx .xls .xlsx)</label>
                       <div class="col-sm-10">
-                      	<input type="file" name="materi" class="form-control">
+                      	<input type="file" id="filename" name="materi" class="form-control">
                       </div>
                     </div>
                     <input style="margin-left:185px" type="submit" name="uploud" class="btn btn-info">

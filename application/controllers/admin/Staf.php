@@ -54,7 +54,7 @@ class Staf extends CI_Controller {
                     'db' => 'id_staf',
                     'dt' => 'aksi',
                     'formatter' => function( $d ) {
-                        return '<a href="' . site_url('admin/staf/edit_staf/' . $d) . '">Edit</a> | <a href="' . site_url('admin/staf/hapus_staf/' . $d) . '">Delete</a>';
+                        return '<a href="' . site_url('admin/staf/edit_staf/' . $d) . '">Edit</a> | <a href="javascript:void()" onclick="hapus('."'".$d."'".')">Delete</a>';
                     }
                 ),
             );
@@ -105,6 +105,7 @@ class Staf extends CI_Controller {
     	echo $hapus_file->row('file');
         
         $this->m_staf->hapus_staf($id);
+        $this->session->set_flashdata('item', array('message' => '<strong>Berhasil</strong> menghapus staf','class' => 'alert alert-success'));
         redirect(base_url().'admin/staf');
 	}
 	public function proses_edit_staf(){
@@ -133,6 +134,7 @@ class Staf extends CI_Controller {
 					$id = $this->input->post('id_staf');
 			        $this->db->where('id_staf', $id);
 			        $this->db->update('staf_pengajar', $data);
+			        $this->session->set_flashdata('item', array('message' => '<strong>Berhasil</strong> mengubah data staf','class' => 'alert alert-success'));
 					redirect(base_url().'admin/staf/');
 				} else{
 					$id = $this->input->post('id_staf');
@@ -158,6 +160,7 @@ class Staf extends CI_Controller {
 					
 			        $this->db->where('id_staf', $id);
 			        $this->db->update('staf_pengajar', $data);
+			        $this->session->set_flashdata('item', array('message' => '<strong>Berhasil</strong> mengubah data staf','class' => 'alert alert-success'));
 					redirect(base_url().'admin/staf/');
 				} 
 		
@@ -220,6 +223,7 @@ class Staf extends CI_Controller {
 					);
 					$this->load->model('m_staf');
 					$this->m_staf->tambah_staf($data); 
+					$this->session->set_flashdata('item', array('message' => '<strong>Berhasil</strong> menambah data staf pengajar','class' => 'alert alert-success'));
 					redirect(base_url().'admin/staf');
 				} 
 		}

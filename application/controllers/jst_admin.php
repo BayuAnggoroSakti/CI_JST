@@ -45,9 +45,10 @@ class Jst_admin extends CI_Controller {
 						}		
 					}
 					else {
+						$back = site_url('jst_admin');
 						echo '<script type="text/javascript">'; 
 						echo 'alert("Gagal login, Silahkan cek kembali username dan password anda");'; 
-						echo 'window.location.href = "cek_login";';
+						echo 'window.location.href = "'.$back.'";';
 						echo '</script>';
 					}
 						}
