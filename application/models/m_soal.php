@@ -22,6 +22,17 @@ class M_soal extends CI_Model {
             return $hasil;
           }
    }
+    function list_katTOs()
+   {
+      $ambil = $this->db->query('SELECT * FROM kategori_to');
+          if ($ambil->num_rows() > 0) {
+          foreach ($ambil->result() as $data) 
+          {
+            $hasil[] = $data;
+           }
+            return $hasil;
+          }
+   }
     private function _get_datatables_query()
     {
         $this->db->select('soal.kode_soal as kode_soal, soal.id_katTO as id_katTO, soal.soal_des as soal_des, soal.kunci as kunci, soal.status as status, kategori_to.nama as nama');

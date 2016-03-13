@@ -138,18 +138,19 @@ class Materi extends CI_Controller {
 				 $config['max_size']       = '10000';
 				 $config['file_name']      = $nama_materi.'-'.trim(str_replace(" ","",date('dmYHis')));
 				 $this->load->library('upload', $config);
-					
+				 $base_tambah = base_url('admin/staf/tambah_staf');
+				 $base_back = base_url('admin/staf');
 				if (!$this->upload->do_upload('materi')) {
 					echo "<script language=\"Javascript\">\n";
 					//Ada kesalahan dalam upload gambar, Ingin diulangi kembali atau tidak?'
 					echo "confirmed = window.confirm('Ada kesalahan dalam upload file, Ingin diulangi kembali atau tidak?');";
 					echo "if (confirmed)";
 					echo "{";
-					echo "window.location = 'http://localhost/jst/admin/materi/tambah_materi';";
+					echo "window.location = '".$base_tambah."';";
 					echo "}";
 					echo "else ";
 					echo "{";
-					echo "window.location = 'http://localhost/jst/admin/materi';";
+					echo "window.location = '".$base_back."';";
 					echo "}";
 					echo "</script>";
 				} else{

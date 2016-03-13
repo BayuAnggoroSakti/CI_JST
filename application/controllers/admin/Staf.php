@@ -109,6 +109,7 @@ class Staf extends CI_Controller {
         redirect(base_url().'admin/staf');
 	}
 	public function proses_edit_staf(){
+
 				 $config['upload_path']    = "./assets/staf/";
 				 $config['allowed_types']  = 'gif|jpg|png|jpeg';
 				 $config['max_size']       = '5000';
@@ -160,6 +161,7 @@ class Staf extends CI_Controller {
 					
 			        $this->db->where('id_staf', $id);
 			        $this->db->update('staf_pengajar', $data);
+			        $data['title'] = "Tambah Staf Pengajar || Jogja Science Training";
 			        $this->session->set_flashdata('item', array('message' => '<strong>Berhasil</strong> mengubah data staf','class' => 'alert alert-success'));
 					redirect(base_url().'admin/staf/');
 				} 
@@ -175,6 +177,7 @@ class Staf extends CI_Controller {
 		$this->form_validation->set_rules('tanggal_lahir','tanggal_lahir','trim|required|xss_clean');
 		$this->form_validation->set_rules('bidang','bidang','trim|required|xss_clean');
 		$this->form_validation->set_rules('deskripsi','deskripsi','trim|required|xss_clean');
+		$this->form_validation->set_error_delimiters('<div style="color:red;">', '</div>');
 
 		if ($this->form_validation->run() == FALSE) {
 			$data['username'] = $this->session->userdata('username');
@@ -192,17 +195,18 @@ class Staf extends CI_Controller {
 				 $config['max_height']     = '5000';
 				 $config['file_name']      = 'gambar-'.trim(str_replace(" ","",date('dmYHis')));
 				 $this->load->library('upload', $config);
-					
+				 $base_tambah = base_url('admin/staf/tambah_staf');
+				 $base_back = base_url('admin/staf');
 				if (!$this->upload->do_upload('foto')) {
 					echo "<script language=\"Javascript\">\n";
 					echo "confirmed = window.confirm('Ada kesalahan dalam upload gambar, Ingin diulangi kembali atau tidak?');";
 					echo "if (confirmed)";
 					echo "{";
-					echo "window.location = 'http://localhost/jst/admin/staf/tambah_staf';";
+					echo "window.location = '".$base_tambah."';";
 					echo "}";
 					echo "else ";
 					echo "{";
-					echo "window.location = 'http://localhost/jst/admin/staf';";
+					echo "window.location = '".$base_back."';";
 					echo "}";
 					echo "</script>";
 				} else{

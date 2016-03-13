@@ -121,7 +121,7 @@ function add_person()
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
     $('#modal_form').modal('show'); // show bootstrap modal
-    $('.modal-title').text('Add Pelatihan'); // Set Title to Bootstrap modal title
+    $('.modal-title').text('Add Program Kerja'); // Set Title to Bootstrap modal title
 }
  
 function edit_progam(id)
@@ -148,7 +148,7 @@ function edit_progam(id)
             $('[name="durasi"]').val(data.durasi);
            
             $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
-            $('.modal-title').text('Edit Person'); // Set title to Bootstrap modal title
+            $('.modal-title').text('Edit Program Kerja'); // Set title to Bootstrap modal title
  
         },
         error: function (jqXHR, textStatus, errorThrown)
@@ -206,9 +206,6 @@ function save()
         },
         error: function (jqXHR, textStatus, errorThrown)
         {
-             $('#modal_form').modal('hide');
-                reload_table();
-
             $('#btnSave').text('save'); //change button text
             $('#btnSave').attr('disabled',false); //set button enable
  

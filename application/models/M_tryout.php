@@ -3,15 +3,16 @@
 	class M_tryout extends CI_Model {
 
 	var $table = 'tryout t';
-    var $column = array('nama','t.waktu','nilai'); //set column field database for order and search
+    var $column = array('nama','nama_lengkap','t.waktu','nilai'); //set column field database for order and search
     var $order = array('waktu' => 'desc'); // default order
 
     private function _get_datatables_query()
     {
     	$this->db->distinct();
-        $this->db->select('kt.nama as nama, t.waktu as waktu, t.nilai as nilai');
+        $this->db->select('kt.nama as nama, u.nama_lengkap as nama_lengkap, t.waktu as waktu, t.nilai as nilai');
         $this->db->from($this->table);
-        $this->db->where('id_user != 0');
+        $this->db->where('t.id_user != 0');
+        $this->db->join('user u', 'u.id_user = t.id_user');
         $this->db->join('detail d', 'd.id_to = t.id_to');
         $this->db->join('soal s', 'd.kode_soal = s.kode_soal');
         $this->db->join('kategori_to kt', 's.id_katTO = kt.id_katTO');
@@ -74,7 +75,7 @@
 
 	public function list_soal($id_katTO, $limit) 
 		{
-			 $ambil = $this->db->query("SELECT * from soal where id_katTO = '$id_katTO' order by rand() limit $limit ");
+			 $ambil = $this->db->query("SELECT * from soal where id_katTO = '$id_katTO' and status = 'active' order by rand() limit $limit ");
 		  if ($ambil->num_rows() > 0) {
 		  foreach ($ambil->result() as $data) 
 		  {

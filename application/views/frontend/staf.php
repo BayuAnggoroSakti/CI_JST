@@ -43,7 +43,8 @@ $this->load->view('template_frontend/header');
 					<div class="row">
 					<?php 
 					$gambar = base_url('assets/staf/');
-						foreach ($data_get as $data) { ?>
+						foreach ($data_get as $data) { 
+					?>
 					
 						<div class="col-md-3">
 							<div class="staff-post">
@@ -63,13 +64,14 @@ $this->load->view('template_frontend/header');
 										
 									</ul>
 
-									<img alt="" width="170px" height="220px" src="<?php echo $gambar."/".$data->foto; ?>">
+									<img alt="" width="170px" style=" display: block;width: 100%; height: 100%;" height="220px" src="<?php echo $gambar."/".$data->foto; ?>">
 								</div>
 							</div>
 						</div>
 					<?php
 						}
 					?>
+
 						
 
 					</div>

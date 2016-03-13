@@ -45,7 +45,7 @@
 						<li><a class="<?php if ( $this->uri->uri_string() == 'home/index' ) { echo "active";} else { echo "";} ?>" href="<?php echo site_url('home/index'); ?>">Home</a>
 								
 							</li>
-							<li class="drop "><a href="#">Profil</a>
+							<li class="drop "><a href="#" <?php if ( $this->uri->uri_string() == 'home/detail_profil' || $this->uri->uri_string() == 'home/staf'  ) { echo "class='active'";} else { echo "";} ?>>Profil</a>
 								<ul class="drop-down">
 								<?php foreach ($menu as $data) { 
 									$nama = $data->nama_profil;

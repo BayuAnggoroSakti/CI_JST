@@ -8,11 +8,6 @@
 
 $(function () {
 
-  //Activate the iCheck Plugin
-  $('input[type="checkbox"]').iCheck({
-    checkboxClass: 'icheckbox_flat-blue',
-    radioClass: 'iradio_flat-blue'
-  });
   //Make the dashboard widgets sortable Using jquery UI
   $(".connectedSortable").sortable({
     placeholder: "sort-highlight",

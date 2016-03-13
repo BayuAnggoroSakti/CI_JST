@@ -42,7 +42,7 @@ $this->load->view('template_admin/sidebar');
                    <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Nama Profil</label>
                       <div class="col-sm-10">
-                      <input type="text" class="form-control" name="nama" value="<?php echo $b->row('nama_profil'); ?>" />
+                      <input type="text" class="form-control" required name="nama" value="<?php echo $b->row('nama_profil'); ?>" />
                    
                       </div>
                     </div>
@@ -51,9 +51,7 @@ $this->load->view('template_admin/sidebar');
                       <label for="inputPassword3" class="col-sm-2 control-label">Deskripsi</label>
                       <div class="col-sm-10">
                         
-                            <textarea id="editor1" name="deskripsi" rows="10" cols="80" required>
-                               <?php echo $b->row('deskripsi'); ?>
-                            </textarea>
+                            <textarea id="editor1" name="deskripsi" rows="10" cols="80" required><?php echo $b->row('deskripsi'); ?></textarea>
                             <script>
                                 // Replace the <textarea id="editor1"> with a CKEditor
                                 // instance, using default configuration.

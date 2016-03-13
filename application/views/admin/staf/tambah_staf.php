@@ -50,7 +50,7 @@ $this->load->view('template_admin/sidebar');
                     <div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">Nama Lengkap</label>
                       <div class="col-sm-10">
-                        <input type="text" name="nama_lengkap" class="form-control" id="judul" placeholder="Masukkan Nama Lengkap" required/>
+                        <input type="text" name="nama_lengkap" value="<?php echo set_value('nama_lengkap') ?>" class="form-control" id="judul" placeholder="Masukkan Nama Lengkap" required/>
                         <?php echo form_error('nama_lengkap'); ?>
                       </div>
                     </div>
@@ -58,14 +58,14 @@ $this->load->view('template_admin/sidebar');
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Alamat</label>
                       <div class="col-sm-10">
-                        <textarea class="form-control" name="alamat" rows="3" placeholder="Alamat Anda"></textarea>
+                        <textarea class="form-control" value="<?php echo set_value('alamat') ?>" name="alamat" rows="3" placeholder="Alamat Anda"></textarea>
                         <?php echo form_error('alamat'); ?>
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Tanggal Lahir</label>
                       <div class="col-sm-10">
-                      	<input type="date" name="tanggal_lahir" class="form-control">
+                      	<input type="date" name="tanggal_lahir" value="<?php echo set_value('tanggal_lahir') ?>" class="form-control">
                         <?php echo form_error('tanggal_lahir'); ?>
                       </div>
                     </div>
@@ -88,14 +88,14 @@ $this->load->view('template_admin/sidebar');
                      <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Bidang</label>
                       <div class="col-sm-10">
-                        <input type="text" name="bidang" class="form-control">
+                        <input type="text" name="bidang" value="<?php echo set_value('bidang') ?>" class="form-control">
                         <?php echo form_error('bidang'); ?>
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">Deskripsi</label>
                       <div class="col-sm-10">
-                        <textarea id="editor1" name="deskripsi" rows="10" cols="80" required>
+                        <textarea id="editor1" name="deskripsi" value="<?php echo set_value('deskripsi') ?>"rows="10" cols="80" required>
                         </textarea>
                         <?php echo form_error('deskripsi'); ?>
                             <script>

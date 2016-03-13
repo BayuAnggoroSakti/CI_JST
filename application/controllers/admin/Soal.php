@@ -74,7 +74,7 @@ class Soal extends CI_Controller {
         $data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
         $data['title'] = "Tambah Soal Try Out || Jogja Science Training";
         $data['level'] = $this->session->userdata('level');
-        $data['kategori'] = $this->soal->list_katTO();
+        $data['kategori'] = $this->soal->list_katTOs();
         $this->load->view('admin/soal/tambah_soal', $data);
     }
     public function prosessimpan_soal()
@@ -214,7 +214,7 @@ class Soal extends CI_Controller {
         $data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
         $data['level'] = $this->session->userdata('level');
         $soal = $this->soal->edit_soal($id);
-        $data['kategori'] = $this->soal->list_katTO();
+        $data['kategori'] = $this->soal->list_katTOs();
         $data['title'] = "Edit Soal || Jogja Science Training";
 
         $this->load->vars('b', $soal);

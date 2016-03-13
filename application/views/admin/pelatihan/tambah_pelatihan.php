@@ -90,10 +90,10 @@ $this->load->view('template_admin/sidebar');
 <script type="text/javascript">
         function validasi_input(form){ 
           if (form.waktu_mulai.value > form.waktu_selesai.value)
-            { alert("Waktu selesai harus lebih besar dari waktu mulai!"); waktu_mulai.focus();
+            { alert("Waktu selesai harus lebih besar dari waktu mulai!"); 
               return (false); } 
-         if (form.id_programKerja.value =="")
-      { alert("Anda belum memilih Program Kerja!"); id_programKerja.focus(); 
+         else if (form.id_programKerja.value =="")
+      { alert("Anda belum memilih Program Kerja!"); 
         return (false); } 
     return (true);  
         } 

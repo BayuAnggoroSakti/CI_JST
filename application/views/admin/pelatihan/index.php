@@ -25,6 +25,16 @@ $this->load->view('template_admin/sidebar');
 
     <!-- Default box -->
    <div class="box">
+       <div class="col-md-12">
+                       <?php
+            if($this->session->flashdata('item')) {
+            $message = $this->session->flashdata('item'); ?>
+            <div class="row">
+             <div class="<?php echo $message['class'] ?>"><?php echo $message['message'] ?></div>
+             </div>
+         <?php    
+          }?>
+         </div>
                 <div class="box-header">
                    <div class="row">
                         <div class="col-md-2">
@@ -203,6 +213,7 @@ function save()
             if(data.status) //if success close modal and reload ajax table
             {
                 $('#modal_form').modal('hide');
+                alert('Berhasil mengubah data pelatihan');
                 reload_table();
                 /*var base = "<?php echo base_url(); ?>";
                 window.location = base+"/admin/pelatihan/tambah_pelatihan/"+id;*/

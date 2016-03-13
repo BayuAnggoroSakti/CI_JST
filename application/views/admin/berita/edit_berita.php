@@ -8,7 +8,7 @@ $this->load->view('template_admin/sidebar');
 ?>
 <script type="text/javascript"> 
   function validasi_input(form){ 
-    if (form.id_kateBer.value =="pilih")
+    if (form.id_kateBer.value =="")
       { alert("Anda belum memilih Kategori!"); 
         return (false); } 
     return (true); }
@@ -23,12 +23,12 @@ $this->load->view('template_admin/sidebar');
 <section class="content-header">
     <h1>
         Berita
-        <small>Form Tambah Berita</small>
+        <small>Form Edit Berita</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">Berita</a></li>
-        <li class="active">Tambahkan berita</li>
+        <li class="active">Edit berita</li>
     </ol>
 <div class="box box-info">
                 <div class="box-header with-border">

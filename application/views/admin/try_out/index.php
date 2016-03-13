@@ -34,6 +34,7 @@ $this->load->view('template_admin/sidebar');
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>Nama Peserta</th>
                             <th>Bidang</th>
                             <th>Waktu</th>
                             <th>Nilai</th>

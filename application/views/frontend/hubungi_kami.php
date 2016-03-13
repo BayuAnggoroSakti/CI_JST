@@ -9,10 +9,10 @@ $this->load->view('template_frontend/header');
 			<!-- Page Banner -->
 			<div class="page-banner">
 				<div class="container">
-					<h2>Contact Us</h2>
+					<h2>Hubungi Kami</h2>
 					<ul class="page-tree">
 						<li><a href="#">Home</a></li>
-						<li><a href="#">Contact</a></li>
+						<li><a href="#">Kontak</a></li>
 					</ul>		
 				</div>
 			</div>
@@ -26,53 +26,36 @@ $this->load->view('template_frontend/header');
 			<div class="contact-box">
 				<div class="container">
 					<div class="row">
+					<div class="col-md-6">
+							<div class="contact-information">
+								<h3>Jogja Science Training</h3>
+								<img style=" display: block;width: 100%; height: 200px;" src="<?php echo base_url('assets/images/gambarTeksWarnaBGTerang.png') ?>">
+								<span>Jogja science Training (JST) merupakan lembaga pendidikan yang bergerak dalam pembinaan olimpiade sains dan berpusat di Yogyakarta . Pembinaan meliputi 9 bidang olimpiade sains, yakni Matematika, Fisika, Kimia, Biologi, geografi, Kebumian, Astronoli, Komouter, dan Ekonomi</span>
 
+							</div>
+						</div>
 						<div class="col-md-3">
 							<div class="contact-information">
 								<h3>Contact info</h3>
 								<ul class="contact-information-list">
-									<li><span><i class="fa fa-home"></i>lorem ipsum street</span></li>
-									<li><span><i class="fa fa-phone"></i>9930 1234 5679</span></li>
-									<li><a href="#"><i class="fa fa-envelope"></i>info@orbit7.com</a></li>
+									<li><span><i class="fa fa-home"></i>Karangkajen MG III//911 Yogyakarta</span></li>
+									<li><span><i class="fa fa-phone"></i>Anif (081328399110)</span></li>
+									<li><span><i class="fa fa-phone"></i>Rifqi (08562886649)</span></li>
+									<li><a href="#"><i class="fa fa-envelope"></i>jogjasciencetraining@gmail.com</a></li>
 								</ul>
 							</div>
 						</div>
 
 						<div class="col-md-3">
 							<div class="contact-information">
-								<h3>Working hours</h3>
-								<p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit duis set odio sit amet nibh vulputate cursus </p>
-								<p class="work-time"><span>Mon - Fri</span> : 10 AM to 5 PM</p>
-								<p class="work-time"><span>Sat - Sun</span> : 10 AM to 2 PM</p>
+								<h3>Kami Lebih Profesional</h3>
+								<p>JST memiliki pengajar yang merupakan dosen dari universitas ternama dengan pengalaman yang banyak dalam mengajar olimpiade sains
+
+Selain itu juga memadukan pengetahuan serta pengalaman dosen bersama dengan mahasiswa alumni OSN dalam pengajarannya</p>
 							</div>
 						</div>
 
-						<div class="col-md-6">
-							<h3>Send us a message</h3>
-							<form id="contact-form" class="contact-work-form2">
 
-								<div class="text-input">
-									<div class="float-input">
-										<input name="name" id="name2" type="text" placeholder="name">
-										<span><i class="fa fa-user"></i></span>
-									</div>
-
-									<div class="float-input2">
-										<input name="mail" id="mail2" type="text" placeholder="email">
-										<span><i class="fa fa-envelope"></i></span>
-									</div>
-								</div>
-
-								<div class="textarea-input">
-									<textarea name="comment" id="comment2" placeholder="message"></textarea>
-									<span><i class="fa fa-comment"></i></span>
-								</div>
-
-								<div class="msg2 message"></div>
-								<input type="submit" name="mailing-submit" class="submit_contact main-form" value="Send Message">
-
-							</form>
-						</div>
 
 					</div>
 				</div>

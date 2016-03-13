@@ -76,31 +76,31 @@ $this->load->view('template_admin/sidebar');
                      <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Opsi A</label>
                       <div class="col-sm-10">
-                          <input type="text" name="opsi_a" class="form-control" value="<?php echo $b->row('opsi_a'); ?>">
+                          <input type="text" name="opsi_a" id="opsi_a" class="form-control" value="<?php echo $b->row('opsi_a'); ?>">
                       </div>
                     </div>
                      <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Opsi B</label>
                       <div class="col-sm-10">
-                          <input type="text" name="opsi_b" class="form-control" value="<?php echo $b->row('opsi_b'); ?>">
+                          <input type="text" name="opsi_b" id="opsi_b" class="form-control" value="<?php echo $b->row('opsi_b'); ?>">
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Opsi C</label>
                       <div class="col-sm-10">
-                          <input type="text" name="opsi_c" class="form-control" value="<?php echo $b->row('opsi_c'); ?>">
+                          <input type="text" name="opsi_c" id="opsi_c" class="form-control" value="<?php echo $b->row('opsi_c'); ?>">
                       </div>
                     </div>
                      <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Opsi D</label>
                       <div class="col-sm-10">
-                          <input type="text" name="opsi_d" class="form-control" value="<?php echo $b->row('opsi_d'); ?>">
+                          <input type="text" name="opsi_d" id="opsi_d" class="form-control" value="<?php echo $b->row('opsi_d'); ?>">
                       </div>
                     </div>
                      <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Opsi E</label>
                       <div class="col-sm-10">
-                          <input type="text" name="opsi_e" class="form-control" value="<?php echo $b->row('opsi_e'); ?>">
+                          <input type="text" name="opsi_e" id="opsi_e" class="form-control" value="<?php echo $b->row('opsi_e'); ?>">
                       </div>
                     </div>
                      <div class="form-group">
@@ -173,63 +173,39 @@ $this->load->view('template_admin/sidebar');
                 </form>
               </div><!-- /.box -->
 <script>
-  var staf = "<?php base_url('assets/images/no_pict.png') ?>";
-    function validate_file(obj){
-        var file_name = $(obj).val().replace('C:\\fakepath\\', '');
-        var file_name_attr = file_name.split('.');
-        file_name_attr[2] = obj.files[0].size/1024;
-        
-        if(file_name_attr[2] > 5000){
-            $(obj).wrap('<form>').closest('form').get(0).reset();
-            $(obj).unwrap();
-            $(obj).parent().parent().find('.text_file').val('');
-            readURL(obj, 'set');
-            alert('File must jpg and maximum file size under 5 mb!');
-        }
-        else{
-            $(obj).parent().parent().find('.text_file').val(file_name);
-            $('#thumb_delete').fadeIn();
-            readURL(obj);
-        }
-    }
-    
-    function readURL(input, type) {
-        if (type != 'set'){
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-        
-                reader.onload = function (e) {
-                    $('#thumb_image').attr('src', e.target.result);
-                }
-        
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-        else{
-            //$('#thumb_image').attr('src','jst/assets/images/no_pict.png');
-            $('#thumb_image').attr('src',staf);
-        }
-    }
-    
-    $(function(){
-        $('#thumb_delete').fadeOut();
-        
-        $('#thumb_delete').click(function(){
-            //$('#thumb_image').attr('src','jst/assets/images/no_pict.png');
-            $('#thumb_image').attr('src',staf);
-            var obj = $('#alkes_img');
-            
-            obj.wrap('<form>').closest('form').get(0).reset();
-            obj.unwrap();
-            obj.parent().parent().find('.text_file').val('');
-            $(this).fadeOut();
-        });
-        
-        $('#alkes_price').change(function(){
-            var value = $(this).autoNumeric('get');
-            $(this).parent().find('input[type="hidden"]').val(value);
-        });
-    });
+  function validasi_input(form){ 
+var a = document.getElementById("opsi_a").value;
+var b = document.getElementById("opsi_b").value;
+var c = document.getElementById("opsi_c").value;
+var d = document.getElementById("opsi_d").value;
+var e = document.getElementById("opsi_e").value;
+    if (form.kunci.value =="")
+      { alert("Anda belum memilih Kunci!"); 
+        return (false); } 
+         if (form.id_katTO.value =="")
+      { alert("Anda belum memilih kategori!"); 
+        return (false); } 
+         if (form.status.value =="")
+      { alert("Anda belum memilih status!"); 
+        return (false); } 
+         if (a == b || a == c || a==d || a==e)
+      { alert("Opsi jawaban tidak boleh sama, silahkan periksa kembali!"); 
+        return (false); }
+         if (b == c || b == d || b==e)
+      { alert("Opsi jawaban tidak boleh sama, silahkan periksa kembali!"); 
+        return (false); }
+         if (c == d || c == e)
+      { alert("Opsi jawaban tidak boleh sama, silahkan periksa kembali!"); 
+        return (false); }
+         if (d == e)
+      { alert("Opsi jawaban tidak boleh sama, silahkan periksa kembali!"); 
+        return (false); }
+    return (true); }
+
+
+function showDiv() {
+   document.getElementById('welcomeDiv').style.display = "block";
+} 
 </script>
 <?php 
 $this->load->view('template_admin/js');

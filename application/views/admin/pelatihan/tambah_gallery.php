@@ -29,8 +29,8 @@ $this->load->view('template_admin/sidebar');
                 <!-- form start -->
                <form action="<?php echo site_url('admin/pelatihan/act_simpan_gallery') ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
                   <div class="box-body">
-                     <input type="text" name="judul" class="form-control" placeholder="Masukkan Judul Gallery">
-                     <textarea class="form-control" name="deskripsi" placeholder="Deskripsi Gallery"></textarea> 
+                     <input type="text" name="judul" required class="form-control" placeholder="Masukkan Judul Gallery">
+                     <textarea class="form-control" required name="deskripsi" placeholder="Deskripsi Gallery"></textarea> 
                     <table class="table">
                       <tr>
                         <th>Upload</th>
@@ -39,9 +39,9 @@ $this->load->view('template_admin/sidebar');
                      <input type="hidden" name="id_pelatihan" value="<?php echo $data->row('id_pelatihan'); ?>">
                       <tbody id="itemlist">
                        <tr>
-                        <td><input type="file" name="gambar[0]" class="form-control" placeholder="Masukkan Judul Gambar"></td>
+                        <td><input type="file" name="gambar[0]" required class="form-control" placeholder="Masukkan Judul Gambar"></td>
                         <td>
-                          <input type="text" name="nama_foto[0]" class="form-control" placeholder="Masukkan Nama Foto">
+                          <input type="text" name="nama_foto[0]" required class="form-control" placeholder="Masukkan Nama Foto">
                         </td>
                       </tr>
                      </tbody>

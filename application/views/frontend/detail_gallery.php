@@ -23,7 +23,11 @@ function DateToIndo($date) { // fungsi atau method untuk mengubah tanggal ke for
 		return($result);
 	}
 ?>
-
+<?php 
+	if ($gallery->row('judul') == "") {
+		redirect('home/gallery');
+	}
+?>
 			<!-- Page Banner -->
 			<div class="page-banner">
 				<div class="container">

@@ -225,6 +225,7 @@ class Pelatihan extends CI_Controller {
                     );
         $this->db->insert('foto', $data_foto);
     }
+    $this->session->set_flashdata('item', array('message' => '<strong>Berhasil</strong> menambahkan pelatihan baru','class' => 'alert alert-success'));
        redirect(site_url('admin/pelatihan/index'));
 }
 private function set_upload_options() {
@@ -287,7 +288,7 @@ private function set_upload_options() {
                 'fasilitas' => $this->input->post('fasilitas'),
             );
         $insert = $this->progam_kerja->save($data);
-        echo json_encode(array("status" => TRUE),$data);
+        echo json_encode(array("status" => TRUE));
        // $this->load->view('admin/pelatihan/tambah_pelatihan');
     }
  
@@ -296,12 +297,10 @@ private function set_upload_options() {
         $this->_validate();
         $data = array(
                 'nama_pelatihan' => $this->input->post('nama_pelatihan'),
-                'biaya' => $this->input->post('biaya'),
                 'id_programKerja' => $this->input->post('id_programKerja'),
-                'lokasi' => $this->input->post('lokasi'),
                 'waktu_mulai' => $this->input->post('waktu_mulai'),
                 'waktu_selesai' => $this->input->post('waktu_selesai'),
-                'fasilitas' => $this->input->post('fasilitas'),
+                'lokasi' => $this->input->post('lokasi'),
                 'keterangan' => $this->input->post('keterangan'),
             );
         $this->pelatihan->update(array('id_pelatihan' => $this->input->post('id_pelatihan')), $data);
@@ -348,24 +347,10 @@ private function set_upload_options() {
             $data['status'] = FALSE;
         }
  
-        if($this->input->post('biaya') == '')
-        {
-            $data['inputerror'][] = 'biaya';
-            $data['error_string'][] = 'Biaya is required';
-            $data['status'] = FALSE;
-        }
- 
         if($this->input->post('lokasi') == '')
         {
             $data['inputerror'][] = 'lokasi';
             $data['error_string'][] = 'Lokasi is required';
-            $data['status'] = FALSE;
-        }
-
-         if($this->input->post('fasilitas') == '')
-        {
-            $data['inputerror'][] = 'fasilitas';
-            $data['error_string'][] = 'Fasilitas is required';
             $data['status'] = FALSE;
         }
 

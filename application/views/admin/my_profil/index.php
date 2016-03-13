@@ -113,9 +113,9 @@ function save()
             if(data.status) //if success close modal and reload ajax table
             {
                 $('#modal_form').modal('toggle');
+                alert('Berhasil melakukan update');
+                window.location.reload();
                 
-                
-
                 /*var base = "<?php echo base_url(); ?>";
                 window.location = base+"/admin/pelatihan/tambah_pelatihan/"+id;*/
             }
@@ -127,8 +127,8 @@ function save()
                     $('[name="'+data.inputerror[i]+'"]').next().text(data.error_string[i]); //select span help-block class set text error string
                 }
             }
-            alert('Berhasil melakukan update');
-            window.location.reload();
+            
+            
             $('#btnSave').text('save'); //change button text
             $('#btnSave').attr('disabled',false); //set button enable
 

@@ -63,6 +63,19 @@ $this->load->view('template_admin/sidebar');
 <script type="text/javascript">
 $('#pre-selected-options').multiSelect();
 
+    function validasi_input(form)
+    { 
+     if (form.pre-selected-options.value =="")
+      { 
+        alert("Anda belum memilih Program Kerja!"); 
+        return (false); 
+      } 
+        return (true);  
+    } 
+
+    
+ 
+
       
 </script>
  

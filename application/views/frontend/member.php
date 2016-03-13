@@ -4,8 +4,10 @@ $this->load->view('template_frontend/header');
 
 ?>
  
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" />
+<!--   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script> -->
+  <script type="text/javascript" src="<?php echo base_url('assets/js/jquery-ui.js') ?>"></script>
+  <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.min.js') ?>"></script>
+<!--   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" /> -->
  <script>
 
 

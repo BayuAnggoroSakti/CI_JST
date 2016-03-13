@@ -45,6 +45,7 @@ class Try_out extends CI_Controller {
             $no++;
             $row = array();
             $row[] = $no;
+            $row[] = $tryout->nama_lengkap;
             $row[] = $tryout->nama;
             $row[] = $tryout->waktu;
             $row[] = $tryout->nilai;

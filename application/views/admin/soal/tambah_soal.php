@@ -38,11 +38,11 @@ var e = document.getElementById("opsi_e").value;
     return (true); }
 
 
-    function showDiv() {
+function showDiv() {
    document.getElementById('welcomeDiv').style.display = "block";
 } 
     </script>
-     <script src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/dist/js/jquery-1.11.0.js')?>"></script>
+  <script src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/dist/js/jquery-1.11.0.js')?>"></script>
   <script src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/plugins/ckeditor/ckeditor.js') ?>"></script>
  
 <!-- Content Header (Page header) -->

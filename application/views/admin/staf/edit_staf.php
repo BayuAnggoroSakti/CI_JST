@@ -59,14 +59,14 @@ $this->load->view('template_admin/sidebar');
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Alamat</label>
                       <div class="col-sm-10">
-                        <textarea  class="form-control" name="alamat" rows="3" placeholder="Alamat Anda"><?php echo $b->row('alamat'); ?></textarea>
+                        <textarea  class="form-control" required name="alamat" rows="3" placeholder="Alamat Anda"><?php echo $b->row('alamat'); ?></textarea>
                         <?php echo form_error('alamat'); ?>
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Tanggal Lahir</label>
                       <div class="col-sm-10">
-                      	<input type="date" value="<?php echo $b->row('tanggal_lahir'); ?>" name="tanggal_lahir" class="form-control">
+                      	<input type="date" required value="<?php echo $b->row('tanggal_lahir'); ?>" name="tanggal_lahir" class="form-control">
                         <?php echo form_error('tanggal_lahir'); ?>
                       </div>
                     </div>
@@ -81,7 +81,7 @@ $this->load->view('template_admin/sidebar');
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label"></label>
                       <div class="col-sm-5">
-                      <input rel="tooltip" title="Browse File" class="btn btn-primary" type="button" value="Browse ..." onclick="$(this).parent().find('input[type=file]').click();">
+                      <input rel="tooltip" required title="Browse File" class="btn btn-primary" type="button" value="Browse ..." onclick="$(this).parent().find('input[type=file]').click();">
                        <input type="file" style="visibility:hidden; width: 1px; height: 1px;" id="alkes_img" name="foto" onchange="validate_file(this)">
                     <?php echo form_error('foto'); ?>
                    </div>
@@ -89,7 +89,7 @@ $this->load->view('template_admin/sidebar');
                      <div class="form-group">
                       <label for="inputPassword3"  class="col-sm-2 control-label">Bidang</label>
                       <div class="col-sm-10">
-                        <input type="text" value="<?php echo $b->row('bidang'); ?>" name="bidang" class="form-control">
+                        <input type="text" required value="<?php echo $b->row('bidang'); ?>" name="bidang" class="form-control">
                         <?php echo form_error('bidang'); ?>
                       </div>
                     </div>
@@ -97,7 +97,7 @@ $this->load->view('template_admin/sidebar');
                       <label for="inputEmail3" class="col-sm-2 control-label">Deskripsi</label>
                       <div class="col-sm-10">
                         <textarea id="editor1" name="deskripsi" rows="10" cols="80" required>
-                        <?php echo $b->row('nama_lengkap'); ?>
+                        <?php echo $b->row('deskripsi'); ?>
                         </textarea>
                         <?php echo form_error('deskripsi'); ?>
                             <script>
