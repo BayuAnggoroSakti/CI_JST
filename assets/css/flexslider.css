@@ -116,9 +116,9 @@ html[xmlns] .slides {display: block;}
 /* Control Nav */
 .flex-control-nav {min-width:100px; position: absolute; bottom: 30px; left: 50%; margin-left: -70px;}
 .flex-control-nav li {margin: 0 7px; display: inline-block; zoom: 1; *display: inline;}
-.flex-control-paging li a {width: 33px; height: 13px; display: block; background: url(../images/bullet.png) center no-repeat; cursor: pointer; text-indent: -9999px; }
+/*.flex-control-paging li a {width: 33px; height: 13px; display: block; background: url(../images/bullet.png) center no-repeat; cursor: pointer; text-indent: -9999px; } */
 .flex-control-paging li a:hover { opacity:0.9; }
-.flex-control-paging li a.flex-active {background: url(../images/bullet-active.png); cursor: default; }
+/*.flex-control-paging li a.flex-active {background: url(../images/bullet-active.png); cursor: default; }*/
 
 .flex-control-thumbs {margin: 5px 0 0; position: static; overflow: hidden;}
 .flex-control-thumbs li {width: 25%; float: left; margin: 0;}

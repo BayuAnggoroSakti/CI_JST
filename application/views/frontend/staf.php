@@ -64,7 +64,7 @@ $this->load->view('template_frontend/header');
 										
 									</ul>
 
-									<img alt="" width="170px" style=" display: block;width: 100%; height: 100%;" height="220px" src="<?php echo $gambar."/".$data->foto; ?>">
+									<img alt="" width="170px" style=" display: block" height="240px" src="<?php echo $gambar."/".$data->foto; ?>">
 								</div>
 							</div>
 						</div>

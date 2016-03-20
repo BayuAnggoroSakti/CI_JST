@@ -20,7 +20,18 @@
             return $hasil;
           }
   }
-
+ function hapus_foto($id)
+    {
+      
+      $this->db->where('id_gallery', $id);
+      $this->db->delete('foto');
+    }
+     function hapus_gallery($id)
+    {
+      
+      $this->db->where('id_gallery', $id);
+      $this->db->delete('gallery');
+    }
   function list_foto($id)
   {
      $ambil = $this->db->query("SELECT * from foto where id_gallery = '$id'");

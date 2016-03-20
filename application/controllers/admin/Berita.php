@@ -249,9 +249,13 @@ function DateToIndo($date) { // fungsi atau method untuk mengubah tanggal ke for
     	$data['username'] = $this->session->userdata('username');
     	$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
 		$data['level'] = $this->session->userdata('level');
-    	
+    	$kat_berita = $this->m_admin->hapus_ber_kat($id);
+	 	 foreach ($kat_berita as $gambar) {
+	 	 	$base="./assets/images/";
+	 	 	unlink($base.$gambar->gambar);
+	 	 }
     	$berita = $this->m_admin->hapus_katBer($id);
-    
+    	$this->session->set_flashdata('item', array('message' => '<strong>Berhasil</strong> menghapus kategori berita','class' => 'alert alert-success'));
     	redirect('admin/berita/tambah_kategori_berita');
 
     }
@@ -279,7 +283,13 @@ function DateToIndo($date) { // fungsi atau method untuk mengubah tanggal ke for
      
         $this->load->view('admin/berita/edit_katBer',$data);
     }
-     public function proses_edit_katBer(){
+
+    public function hapus_kateBer($id) {
+	 	 $kat_berita = $this->m_admin->hapus_ber_kat($id);
+	 	 echo $kat_berita->row('gambar');
+    }
+
+    public function proses_edit_katBer(){
     	$data['username'] = $this->session->userdata('username');
     	$data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
 		$data['level'] = $this->session->userdata('level');

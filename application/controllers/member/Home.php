@@ -35,7 +35,9 @@ class Home extends CI_Controller {
 		redirect('home/login');
 	}
 
-    public function history($offset=0,$id = 5)
+ 
+
+    public function history($offset=0,$id)
     {
         $data['menu'] = $this->m_admin->detail_profil();
         $this->load->view('template_frontend/header',$data);
@@ -75,7 +77,7 @@ order by waktu desc");
            $data['offset'] = $offset;
 
            $data['histori'] = $this->m_admin->lihat_histori($config['per_page'], $offset, $id);
-           $data['title'] = "Download Materi";
+           $data['title'] = "Histori tryout";
            $this->load->view('frontend/histori',$data);
     }
 

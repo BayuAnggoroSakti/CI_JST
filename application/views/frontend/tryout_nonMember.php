@@ -29,6 +29,18 @@ $this->load->view('template_frontend/header');
 				<div class="col-md-5">
 		<?php 
 			if ($this->session->userdata('level') == "member") { ?>
+			<?php 
+				if ($katTO == null) {
+					echo '	<div class="alert alert-danger alert-dismissable">
+			       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+			        <h4><i class="icon fa fa-info"></i> Belum Tersedia!</h4>
+			           Maaf, JST saat ini sedang mengembangkan fitur tryout agar lebih baik       
+			 </div>';
+				}
+				else
+				{
+					
+			?>
 			<div class="panel panel-default">
 					  <div class="panel-heading">
 					    <h3 class="panel-title">Try Out</h3>
@@ -70,6 +82,7 @@ $this->load->view('template_frontend/header');
 					  </div>
 					</div>
 		<?php
+	}
 			}
 			else
 			{ ?>
@@ -84,6 +97,18 @@ $this->load->view('template_frontend/header');
 			           	Tryout untuk Member dan non Member berbeda, silahkan melakukan registrasi untuk mendapatkan fitur penuh dari Tryout kami          
 			 </div>
 			<div class="panel-body">
+			<?php 
+				if ($katTO == null) {
+					echo '	<div class="alert alert-danger alert-dismissable">
+			       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+			        <h4><i class="icon fa fa-info"></i> Belum Tersedia!</h4>
+			           Maaf, JST saat ini sedang mengembangkan fitur tryout agar lebih baik       
+			 </div>';
+				}
+				else
+				{
+					
+			?>
 				<form role="form" action="<?php echo site_url('try_out/persiapan') ?>"  onsubmit="return validasi_input(this)" method="post" enctype="multipart/form-data" class="form-horizontal">
 					 <div class="form-group">
                       <label for="inputEmail3" class="col-sm-4 control-label">Nama Lengkap</label>
@@ -109,6 +134,9 @@ $this->load->view('template_frontend/header');
 					<?php echo form_hidden($this->security->get_csrf_token_name(), $this->security->get_csrf_hash()); ?>
 					
 				</form>
+				<?php 
+					}
+				?>
 			</div>
 				<div class="alert alert-success alert-dismissable">
 			       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>

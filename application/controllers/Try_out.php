@@ -65,12 +65,12 @@ class Try_out extends CI_Controller {
 			$data['jum_soal'] = $jum_soal;
 			$tgl = date('Y-m-d H:i:s');
 			$tryout = array(
-							'id_user' => 0,
+							'id_user' => -1,
 							'waktu' => $tgl,
 							'nilai' => 0,
 					);
 			$this->m_tryout->insert_tryout($tryout);
-			$data['id_to'] = $this->m_tryout->id_tryout(0,$tgl); 
+			$data['id_to'] = $this->m_tryout->id_tryout(-1,$tgl); 
 			$this->load->view('frontend/try_out',$data);
 		}
 		else

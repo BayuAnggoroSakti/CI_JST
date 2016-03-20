@@ -110,6 +110,18 @@ $this->load->view('template_frontend/header');
 					  <div class="panel-body">
 					   <div class="row">
 					   	<div class="col-md-8">
+                        <?php 
+                            if ($katTO == null) {
+                                echo '  <div class="alert alert-danger alert-dismissable">
+                               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <h4><i class="icon fa fa-info"></i> Belum Tersedia!</h4>
+                                   Maaf, JST saat ini sedang mengembangkan fitur tryout agar lebih baik       
+                         </div>';
+                            }
+                            else
+                            {
+                                
+                        ?>
 					   		<div class="form-group">
 						   		<table class="table">
 						   		<form onsubmit="return validasi_input(this)" action="<?php echo site_url('try_out/persiapan') ?>" method="POST">
@@ -139,6 +151,9 @@ $this->load->view('template_frontend/header');
 						   			</tr>
 						   		</table>
 					   		</div>
+                            <?php 
+                                }
+                            ?>
 					   	</div>
 					   </div>
 					  </div>
@@ -163,7 +178,11 @@ $this->load->view('template_frontend/header');
 						  	
 						  			<?php 
 						  			$no = 1;
-						  			foreach ($history_to as $data) { ?>
+						  			foreach ($history_to as $data) {  
+                                        for ($i=0; $i < 5 ; $i++) { 
+                                           
+                                        ?>
+                                        
 						  		<tr>
 						  			<td><?php echo $no ?></td>
 						  			<td><?php echo $data->nama ?></td>
@@ -173,13 +192,22 @@ $this->load->view('template_frontend/header');
 						  			<?php
 						  			$no++;
 						  			} 
+                                }
 
 						  			?>
 						  		
 						  	</table>
 						  	<?php 
-						  }
+						  
+                        }
 						  	?>
+                            <?php 
+                                if ($no >= 5) { ?>
+                                   <a href="<?php echo site_url('member/home/history').'/'.'1'.'/'.$this->session->userdata('id_user') ?>"><h3>Lihat selengkapnya. .</h3></a>
+                            <?php
+                                }
+                            ?>
+                           
 						</div>
 					</div>
 				</div>

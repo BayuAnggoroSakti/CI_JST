@@ -33,8 +33,23 @@ class Gallery extends CI_Controller {
         $data['level'] = $this->session->userdata('level');
         $data['title'] = "Tambah Gallery Pelatihan || Jogja Science Training";
         $data['data'] = $this->db->query("SELECT * from gallery where id_gallery = '$id' ");
+       
         $this->load->view('admin/gallery/tambah_foto',$data);
     }
+
+     public function hapus_gallery($id)
+     {
+        $list = $this->gallery->list_foto($id);
+        $base = './assets/images/pelatihan';
+        foreach ($list as $data) {
+           $this->gallery->hapus_foto($id);
+           $this->gallery->hapus_gallery($id);
+           unlink($base.'/'.$data->alamat_foto);
+        }
+        $this->session->set_flashdata('item', array('message' => '<strong>Berhasil</strong> menghapus Gallery beserta foto - foto di dalamnya','class' => 'alert alert-info'));
+        redirect('admin/gallery');
+     }
+
      public function ajax_update_foto()
     {
         $this->_validate_foto();
@@ -76,10 +91,55 @@ class Gallery extends CI_Controller {
     {
         $this->hapus_foto($id);
         $this->gallery->delete_foto_by_id($id);
+        $this->session->set_flashdata('item', array('message' => '<strong>Berhasil</strong> menghapus foto','class' => 'alert alert-success'));
         echo json_encode(array("status" => TRUE));
         
         
     }
+    function act_simpan_gallery() {
+    $files = $_FILES;
+    $this->load->library('upload');
+    $cpt = count ( $_FILES ['gambar'] ['name'] );
+    $nama_foto = $this->input->post('nama_foto');
+
+    //input ke gallery
+    $judul = $this->input->post('judul');
+    $deskripsi = $this->input->post('deskripsi');
+    $id_pelatihan = $this->input->post('id_pelatihan');
+    $tgl = date('Y-m-d');
+    $data_gallery = array(
+                            'id_pelatihan' => $id_pelatihan,
+                            'judul' => $judul,
+                            'deskripsi' => $deskripsi,
+                            'tanggal' => $tgl
+                    );
+    $this->db->insert('gallery', $data_gallery);
+    $query = $this->db->query("SELECT id_gallery from gallery where judul = '$judul' and deskripsi = '$deskripsi' and tanggal = '$tgl' and id_pelatihan = '$id_pelatihan'");  
+      
+    for($i = 0; $i < $cpt; $i++) {
+
+        $_FILES ['gambar'] ['name'] = $files ['gambar'] ['name'] [$i];
+        $_FILES ['gambar'] ['type'] = $files ['gambar'] ['type'] [$i];
+        $_FILES ['gambar'] ['tmp_name'] = $files ['gambar'] ['tmp_name'] [$i];
+        $_FILES ['gambar'] ['error'] = $files ['gambar'] ['error'] [$i];
+        $_FILES ['gambar'] ['size'] = $files ['gambar'] ['size'] [$i];
+        $config ['upload_path'] = './assets/images/pelatihan';
+        $config ['allowed_types'] = 'gif|jpg|png';
+        $config ['encrypt_name'] = FALSE;
+        $config['file_name']     = $judul[$i];
+        $this->upload->initialize ( $config );
+        $this->upload->do_upload ('gambar');
+        $nma= $this->upload->file_name;
+        $data_foto = array(
+                            'id_gallery' => $query->row('id_gallery'),
+                            'alamat_foto' => $nma,
+                            'nama_foto' => $nama_foto[$i],
+                    );
+        $this->db->insert('foto', $data_foto);
+    }
+    $this->session->set_flashdata('item', array('message' => '<strong>Berhasil</strong> menambahkan gallery baru','class' => 'alert alert-info'));
+       redirect(site_url('admin/gallery/index'));
+}
      function act_simpan_foto() {
     $files = $_FILES;
     $this->load->library('upload');
@@ -108,6 +168,7 @@ class Gallery extends CI_Controller {
                     );
         $this->db->insert('foto', $data_foto);
     }
+    $this->session->set_flashdata('item', array('message' => '<strong>Berhasil</strong> menambahkan foto baru','class' => 'alert alert-success'));
        redirect(site_url('admin/gallery/detail_gallery')."/".$id_gallery);
 }
 

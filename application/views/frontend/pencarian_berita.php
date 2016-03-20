@@ -1,7 +1,6 @@
 <?php
 $this->load->view('template_frontend/head');
 $this->load->view('template_frontend/header');
-$this->load->view('template_frontend/slider');
 ?>
 
 
@@ -9,57 +8,9 @@ $this->load->view('template_frontend/slider');
 			================================================== -->
 		<div id="content">
 			<!-- welcome-box -->
-			<div class="welcome-box" style="background:#FFEB3B">
-				<div class="container">
-					<h1><span>JST</span> Jogja Science Training </h1>
-					<p>"Lembaga pelatihan yang membina siswa untuk mempersiapkan diri menghadapi olimpiade sains dari tingkat Kabupaten, Propinsi, dan Nasional."</p>
-				</div>
-			</div>
-
-			<!-- services-box -->
-			<div class="services-box">
-				<div class="container">
-					<div class="row">
-
-						<div class="col-md-4">
-							<div class="services-post">
-								<a class="services-icon1" href="#"><i class="fa fa-user"></i></a>
-								<div class="services-post-content">
-									<h4>Pelatihan</h4>
-									<p style="color:grey">JST melatih dan membina siswa dan guru yang akan menghadapi olimpiade</p>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-md-4">
-							<div class="services-post">
-								<a class="services-icon2" href="#"><i class="fa fa-desktop"></i></a>
-								<div class="services-post-content">
-									<h4>Try Out</h4>
-									<p style="color:grey">JST membantu dalam pelaksanaan persiapan awal menghadapi SK dan membantu proses seleksi siswa</p>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-md-4">
-							<div class="services-post">
-								<a class="services-icon3" href="<?php echo site_url('home/download') ?>"><i class="fa fa-book"></i></a>
-								<div class="services-post-content">
-									<h4>Materi </h4>
-									<p style="color:grey">JST menyediakan materi olimpiade yang bisa di unduh gratis</p>
-								</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-			</div>
-			<?php
-			$this->load->view('frontend/list_pelatihan',$data);
-			?>
+		
 			<!-- recent-works-box -->
 			
-			<br>
 			<div class="title-section">
 					<h1>Berita Terbaru</h1>
 					<p>Menampilkan berita terbaru seputar pendidikan </p>
@@ -75,11 +26,24 @@ $this->load->view('template_frontend/slider');
 							<?php 
 							$gambar = base_url('assets/images/');
 							if ($data== NULL) {
-								echo "Tidak ada Berita";
+								echo '<div class="alert alert-danger alert-dismissable">
+				                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+				                    <h4><i class="icon fa fa-info"></i> Maaf berita yang anda cari tidak ditemukan!</h4>
+				                    
+				                 </div><br><a href="'.site_url('home').'"><button class="btn btn-success">Kembali</button>';
 							}
+							else{
+
+
+							echo '<div class="alert alert-success alert-dismissable">
+				                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+				                    <h4><i class="icon fa fa-info"></i> Berhasil menemukan berita yang terkait</h4>
+				                    
+				                 </div>';
 							foreach ($data as $row) {
 							
 							?>
+							
 							<div class="item news-item">
 								
 									<div class="list-group-item" style="background:#dddddd"> 
@@ -111,25 +75,17 @@ $this->load->view('template_frontend/slider');
 										</div>
 							<?php
 								}
+							}
 							?>
 
 
         
-        				<ul class="pagination-list">
-								 <?php echo $halaman ?> <!--Memanggil variable pagination-->	
-							</ul>
+        			
 						</div>
 
 						<div class="col-md-3 sidebar">
 							<div class="sidebar-widgets">
-								<div class="search-widget widget">
-									<form action="<?php echo site_url('home/pencarian_berita') ?>" method="post">
-										<input type="search" name="cari" placeholder="Search here..."/>
-										<button type="submit">
-											<i class="fa fa-search"></i>
-										</button>
-									</form>
-								</div>
+							
 
 								<div class="tabs-widget widget">
 									<ul class="tab-links">

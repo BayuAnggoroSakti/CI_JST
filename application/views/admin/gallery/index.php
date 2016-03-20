@@ -22,6 +22,16 @@ $this->load->view('template_admin/sidebar');
     <div class="box">
         <div class="box-header with-border">
                 <div class="row">
+                 <div class="col-md-12">
+                       <?php
+            if($this->session->flashdata('item')) {
+            $message = $this->session->flashdata('item'); ?>
+            <div class="row">
+             <div class="<?php echo $message['class'] ?>"><?php echo $message['message'] ?></div>
+             </div>
+         <?php    
+          }?>
+         </div>
                 <div class="col-md-12">
                     <div class="callout callout-success">
                     <h4>Gallery Pelatihan Jogja Science Training</h4>
@@ -53,12 +63,11 @@ $this->load->view('template_admin/sidebar');
                        <div style="background:#38d7ff;margin-top:-20px">
                        <h3 align="center" style="padding:15px;color:white"> <?php echo $gambar->judul_gallery ?></h3>
                        </div>
-                      <a target="_blank" href="img_fjords.jpg">
                         <img src="<?php echo $base.'/'.$gambar->foto?>" alt="Trolltunga Norway" width="300" height="200">
-                      </a>
                       <div class="desc">
                           <a href="<?php echo site_url('admin/gallery/detail_gallery')."/".$gambar->id_gallery ?>"><button class="btn btn-success">View</button></a>
-                          <button class="btn btn-danger">Hapus</button>
+                         
+                          <a href="<?php echo site_url('admin/gallery/hapus_gallery'."/".$gambar->id_gallery) ?>"onclick="return confirm('Yakin Menghapus Gallery ini ?')" > <button class="btn btn-danger">Hapus</button></a>
                       </div>
                     </div>  
 

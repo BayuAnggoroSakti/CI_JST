@@ -22,13 +22,17 @@ $this->load->view('template_admin/sidebar');
             success: function(data)
             {
                 //if success reload ajax table
-                reload_table();
+                alert('berhasil menghapus data');
+                 var base = "<?php echo base_url(); ?>";
+                window.location = base+"/admin/staf";
+                
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
-                alert('berhasil menghapus data');
+                alert('gagal');
+                /*alert('berhasil menghapus data');
                 var base = "<?php echo base_url(); ?>";
-                window.location = base+"/admin/staf";
+                window.location = base+"/admin/staf";*/
             }
         });
  

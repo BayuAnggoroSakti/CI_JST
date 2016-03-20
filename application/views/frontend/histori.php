@@ -1,5 +1,38 @@
+<?php
+$this->load->view('template_frontend/head');
+$this->load->view('template_frontend/header');
 
-								  <!-- Table -->
+?>
+
+								 <div id="content">
+			<!-- Page Banner -->
+			<div class="page-banner">
+				<div class="container">
+					<h2>Materi</h2>
+					<ul class="page-tree">
+						<li><a href="#">Home</a></li>
+						<li><a href="#">Materi</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="about-box">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-1">
+						
+						</div>
+
+						<div class="col-md-10">
+							<div class="skills-progress">
+								<div class="panel panel-default">
+								  <!-- Default panel contents -->
+								  <div class="panel-heading"><h2>Informasi</h2></div>
+								  <div class="panel-body">
+								    <p>File materi yang dapat di download oleh non member dan member berbeda, silahkan mendaftar menjadi member kami untuk mendapatkan file unduhan yang lengkap</p>
+								  </div>
+
+								 <!-- Table -->
 								  <table class="table table-hover">
 								    <tr>
 										<th>No</th>
@@ -44,5 +77,27 @@
 								</div>
 							</div>
 							<?php echo $halaman;?>
+						</div>
+
+
+						<div class="col-md-1">
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- staff-box -->
+			
+
+			<!-- partners box -->
+			
+
+		</div>
 					
+  <?php		
+$this->load->view('template_frontend/footer');
+$this->load->view('template_frontend/foot');
+$this->load->view('template_frontend/js');
+?>
   

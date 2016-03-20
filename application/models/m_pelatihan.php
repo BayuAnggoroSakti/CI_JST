@@ -41,7 +41,7 @@ class M_pelatihan extends CI_Model {
     }
      function detailPelatihanByStaf($id)
     {
-        $ambil = $this->db->query("SELECT p.lokasi as lokasi, sp.bidang as bidang, sp.nama_lengkap, p.keterangan as keterangan,p.id_pelatihan as id, p.nama_pelatihan as nama,p.waktu_mulai as waktu_mulai, p.waktu_selesai as waktu_selesai, f.alamat_foto as url, pk.nama_programKerja as nama_program from gallery g, pelatihan p, program_kerja pk, foto f, pelatihan_staf ps, staf_pengajar sp where g.id_pelatihan = p.id_pelatihan and pk.id_programKerja = p.id_programKerja and g.id_gallery = f.id_gallery and p.id_pelatihan = ps.id_pelatihan and ps.id_staf = sp.id_staf and p.id_pelatihan = '$id'");
+        $ambil = $this->db->query("SELECT p.lokasi as lokasi, sp.bidang as bidang, sp.nama_lengkap, p.keterangan as keterangan,p.id_pelatihan as id, p.nama_pelatihan as nama,p.waktu_mulai as waktu_mulai, p.waktu_selesai as waktu_selesai, f.alamat_foto as url, pk.nama_programKerja as nama_program from gallery g, pelatihan p, program_kerja pk, foto f, pelatihan_staf ps, staf_pengajar sp where g.id_pelatihan = p.id_pelatihan and pk.id_programKerja = p.id_programKerja and g.id_gallery = f.id_gallery and p.id_pelatihan = ps.id_pelatihan and ps.id_staf = sp.id_staf and p.id_pelatihan = '$id' group by sp.nama_lengkap");
            return $ambil;
     }
 

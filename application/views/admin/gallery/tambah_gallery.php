@@ -6,8 +6,14 @@ $this->load->view('template_admin/head');
 $this->load->view('template_admin/topbar');
 $this->load->view('template_admin/sidebar');
 ?>
-
- <script src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/plugins/jQuery/jquery-2.2.0.min.js') ?>"></script>
+<script type="text/javascript"> 
+  function validasi_input(form){ 
+    if (form.id_pelatihan.value =="pilih")
+      { alert("Anda belum memilih pelatihan!"); 
+        return (false); } 
+    return (true);
+  }
+</script>
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -37,7 +43,7 @@ $this->load->view('template_admin/sidebar');
                   
                 </div><!-- /.box-header -->
                 <!-- form start -->
-               <form class="form-horizontal" action="<?php echo site_url('admin/pelatihan/act_simpan_gallery') ?>" method="post" enctype="multipart/form-data">
+               <form class="form-horizontal" action="<?php echo site_url('admin/gallery/act_simpan_gallery') ?>" method="post" onsubmit="return validasi_input(this)" enctype="multipart/form-data">
                   <div class="box-body">
                         <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Pelatihan</label>
@@ -53,11 +59,11 @@ $this->load->view('template_admin/sidebar');
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Judul</label>
                       <div class="col-sm-6">
-                         <input type="text" name="judul" class="form-control" placeholder="Masukkan Judul Gallery">
+                         <input type="text" name="judul" required class="form-control" placeholder="Masukkan Judul Gallery">
                       </div>
                     </div>
                      <div class="form-group">
-                      <label for="inputPassword3" class="col-sm-2 control-label">Deskripsi</label>
+                      <label for="inputPassword3" required class="col-sm-2 control-label">Deskripsi</label>
                       <div class="col-sm-6">    
                      <textarea class="form-control" name="deskripsi" placeholder="Deskripsi Gallery"></textarea> 
                       </div>
@@ -72,9 +78,9 @@ $this->load->view('template_admin/sidebar');
         
                       <tbody id="itemlist">
                        <tr>
-                        <td><input type="file" name="gambar[0]" class="form-control" placeholder="Masukkan Judul Gambar"></td>
+                        <td><input type="file" name="gambar[0]" required class="form-control" placeholder="Masukkan Judul Gambar"></td>
                         <td>
-                          <input type="text" name="nama_foto[0]" class="form-control" placeholder="Masukkan Nama Foto">
+                          <input type="text" name="nama_foto[0]" required class="form-control" placeholder="Masukkan Nama Foto">
                         </td>
                       </tr>
                      </tbody>

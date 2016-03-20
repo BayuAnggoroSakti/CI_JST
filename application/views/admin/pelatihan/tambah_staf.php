@@ -57,7 +57,8 @@ $this->load->view('template_admin/sidebar');
                   </div><!-- /.box-footer -->
                 </form>
               </div><!-- /.box -->
-              <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+              <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.min.js') ?>"></script>
+              <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
  <script src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/plugins/jquery.multi-select.js') ?>"></script>
  
 <script type="text/javascript">

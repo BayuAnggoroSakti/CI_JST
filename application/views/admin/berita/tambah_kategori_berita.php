@@ -92,6 +92,9 @@ $this->load->view('template_admin/sidebar');
                      <a href="<?php echo base_url();?>admin/berita/edit_katBer/<?php echo $row->id_katBer; ?>">
                               <button type="button" class="btn btn-warning">Edit</button>
                           </a>
+                           <a href="<?php echo base_url();?>admin/berita/hapus_katBer/<?php echo $row->id_katBer; ?>" onclick="return confirm('Yakin Menghapus Kategori ini ?')">
+                              <button type="button" class="btn btn-danger">Hapus</button>
+                          </a>
                          
                       </td>
                     </tr>

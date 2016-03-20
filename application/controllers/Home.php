@@ -60,6 +60,26 @@ class Home extends CI_Controller {
 			$this->load->view('frontend/index',$data);
 	}
 
+	  public function pencarian_berita() 
+	  {
+		  if ($this->input->post('cari')) 
+		  {
+				$cari = $this->input->post('cari');
+				$data['data_get_recent'] = $this->m_admin->recent_berita();
+				$data['data_get_recent_materi'] = $this->m_admin->recent_materi();
+				$data['data_get_kategori'] = $this->m_admin->kategori_berita();
+	          	$data['menu'] = $this->m_admin->detail_profil();
+				$this->load->view('template_frontend/header',$data);
+				$data['data'] = $this->m_admin->cari_berita($cari);	
+				$data['title'] = "Pencarian Berita";
+				$this->load->view('frontend/pencarian_berita',$data);
+	      }  
+	      else
+	      {
+	      	redirect('home');
+	      }     
+    }
+
 	public function login()
 	{
 

@@ -362,6 +362,11 @@ order by waktu desc limit $num offset $offset ");
     	$this->db->where('id_katBer', $id);
         $this->db->delete('kategori_berita');
     }
+    function cari_berita($cari)
+    {
+    	$query = $this->db->query("SELECT distinct id_berita,judul_berita, isi_berita, tanggal_berita, status_terbit, kb.nama_katber as kategori, gambar, u.nama_lengkap as nama_lengkap FROM user u, berita b, kategori_berita kb where b.id_kateBer = kb.id_katBer and b.id_user = u.id_user and status_terbit like '%y%' and judul_berita like '%$cari%' or isi_berita like '%$cari%' or kb.nama_katber like '%$cari%' group by judul_berita");
+    	return $query->result();
+    }
     
 	function edit_katBer($id) {
         $this->db->where('id_katBer', $id);
@@ -372,6 +377,10 @@ order by waktu desc limit $num offset $offset ");
         $this->db->where('id_berita', $id);
         $query = $this->db->get('berita');
         return $query;
+    }
+    function hapus_ber_kat($id) {
+    	$query = $this->db->query("SELECT gambar from berita b, kategori_berita kb where b.id_kateBer = kb.id_katBer and kb.id_katBer = '$id'");
+        return $query->result();
     }
     function proses_edit_materi($id) {
         $this->db->where('id_materi', $id);

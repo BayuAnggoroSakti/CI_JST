@@ -106,7 +106,7 @@ class Staf extends CI_Controller {
         
         $this->m_staf->hapus_staf($id);
         $this->session->set_flashdata('item', array('message' => '<strong>Berhasil</strong> menghapus staf','class' => 'alert alert-success'));
-        redirect(base_url().'admin/staf');
+        echo json_encode(array("status" => TRUE));
 	}
 	public function proses_edit_staf(){
 

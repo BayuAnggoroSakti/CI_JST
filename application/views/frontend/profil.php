@@ -25,13 +25,12 @@ $this->load->view('template_frontend/header');
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12">
-							<div class="about-us-text">
-								<h1 style="color:#fe9900"><?php echo $b->row('nama_profil');?></h1>
-								<br>
-								<div class="innner-box">
-									<?php echo $b->row('deskripsi');?>					
-								</div>
+						<div class="single-post-content">
+								
+								<h1 align="center"><?php echo $b->row('nama_profil');?></h1>
+								<p><?php echo $b->row('deskripsi') ?></p>
 							</div>
+							
 						</div>
 
 						
