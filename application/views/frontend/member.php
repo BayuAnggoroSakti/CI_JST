@@ -179,7 +179,6 @@ $this->load->view('template_frontend/header');
 						  			<?php 
 						  			$no = 1;
 						  			foreach ($history_to as $data) {  
-                                        for ($i=0; $i < 5 ; $i++) { 
                                            
                                         ?>
                                         
@@ -191,7 +190,6 @@ $this->load->view('template_frontend/header');
 						  		</tr>
 						  			<?php
 						  			$no++;
-						  			} 
                                 }
 
 						  			?>
@@ -203,8 +201,12 @@ $this->load->view('template_frontend/header');
 						  	?>
                             <?php 
                                 if ($no >= 5) { ?>
-                                   <a href="<?php echo site_url('member/home/history').'/'.'1'.'/'.$this->session->userdata('id_user') ?>"><h3>Lihat selengkapnya. .</h3></a>
+                                   <a href="<?php echo site_url('member/home/history')?>"><h3>Lihat selengkapnya. .</h3></a>
                             <?php
+                                }
+                                else
+                                {
+
                                 }
                             ?>
                            

@@ -23,6 +23,7 @@ class Home extends CI_Controller {
 		$this->load->view('template_frontend/header',$data);
 		$data['title'] = "Halaman Member";
 		$data['katTO'] = $this->m_soal->list_katTO();
+        $data['no'] = 0;
 		$data['profil'] = $this->m_member->detail_profil($this->session->userdata('id_user'));
 		$data['history_to'] = $this->m_tryout->history_to($this->session->userdata('id_user'));
 		$this->load->view('frontend/member',$data);
@@ -37,22 +38,17 @@ class Home extends CI_Controller {
 
  
 
-    public function history($offset=0,$id)
+    public function history($offset=0)
     {
         $data['menu'] = $this->m_admin->detail_profil();
         $this->load->view('template_frontend/header',$data);
         //$data['materi'] = $this->m_admin->materi();   
-        $jml = $this->db->query("select distinct kt.nama as nama, t.waktu as waktu, t.nilai as nilai
-from tryout t, kategori_to kt, soal s, detail d
-where t.id_to = d.id_to
-and d.kode_soal = s.kode_soal
-and s.id_katTO = kt.id_katTO
-and id_user = '$id'
-order by waktu desc");
+        $id = $this->session->userdata('id_user');
+        $jml = $this->db->query("select distinct kt.nama as nama, t.waktu as waktu, t.nilai as nilai from tryout t, kategori_to kt, soal s, detail d where t.id_to = d.id_to and d.kode_soal = s.kode_soal and s.id_katTO = kt.id_katTO and id_user = '$id' order by waktu desc");
     
            $config['base_url'] = base_url().'member/home/history';
            $config['total_rows'] = $jml->num_rows();
-           $config['per_page'] = 2; /*Jumlah data yang dipanggil perhalaman*/ 
+           $config['per_page'] = 5; /*Jumlah data yang dipanggil perhalaman*/ 
            $config['uri_segment'] = 4; /*data selanjutnya di parse diurisegmen 3*/
            /*Class bootstrap pagination yang digunakan*/
            $config['full_tag_open'] = "<ul class='pagination pagination-sm' style='position:relative; top:-25px;'>";

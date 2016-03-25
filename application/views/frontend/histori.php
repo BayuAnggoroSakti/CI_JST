@@ -8,10 +8,10 @@ $this->load->view('template_frontend/header');
 			<!-- Page Banner -->
 			<div class="page-banner">
 				<div class="container">
-					<h2>Materi</h2>
+					<h2>Tryout</h2>
 					<ul class="page-tree">
 						<li><a href="#">Home</a></li>
-						<li><a href="#">Materi</a></li>
+						<li><a href="#">Tryout</a></li>
 					</ul>
 				</div>
 			</div>
@@ -29,14 +29,14 @@ $this->load->view('template_frontend/header');
 								  <!-- Default panel contents -->
 								  <div class="panel-heading"><h2>Informasi</h2></div>
 								  <div class="panel-body">
-								    <p>File materi yang dapat di download oleh non member dan member berbeda, silahkan mendaftar menjadi member kami untuk mendapatkan file unduhan yang lengkap</p>
+								    <p>Berikut ini adalah riwayat tryout yang pernah anda kerjakan</p>
 								  </div>
 
 								 <!-- Table -->
 								  <table class="table table-hover">
 								    <tr>
 										<th>No</th>
-										<th>Nama File</th>
+										<th>Bidang</th>
 										<th>Tanggal</th>
 										<th>Nilai</th>
 									</tr>

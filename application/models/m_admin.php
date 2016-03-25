@@ -279,7 +279,7 @@
 	}
 
 	function lihat_histori($num,$offset,$id){
- 		$query = $this->db->query("select distinct kt.nama as nama, t.waktu as waktu, t.nilai as nilai
+ 		$query = $this->db->query("SELECT distinct kt.nama as nama, t.waktu as waktu, t.nilai as nilai
 from tryout t, kategori_to kt, soal s, detail d
 where t.id_to = d.id_to
 and d.kode_soal = s.kode_soal
