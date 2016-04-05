@@ -74,8 +74,11 @@ $this->load->view('template_frontend/header');
 												<a class="accord-link" href="#"></a>
 											</div>
 											<div class="accord-content">
-											
-												<b><?php echo $b->row('durasi') ?></b>
+											<?php 
+												$durasi = $b->row('durasi');
+												$pisah = explode(',', $durasi);
+											?>
+												<b><?php echo $pisah[0] ?> hari, per hari <?php echo $pisah[1] ?> jam</b>
 											</div>
 										</div>
 										<div class="accord-elem">

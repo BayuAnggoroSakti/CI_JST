@@ -5,9 +5,6 @@ $this->load->view('template_admin/head');
 $this->load->view('template_admin/topbar');
 $this->load->view('template_admin/sidebar');
 ?>
- <link href="<?php echo base_url('assets/tags/jquery.tagsinput.css') ?>" rel="stylesheet" type="text/css" />
-
-
 
  <section class="content-header">
     <h1>
@@ -53,6 +50,7 @@ $this->load->view('template_admin/sidebar');
                             <th>No</th>
                             <th>Nama Pelatihan</th>
                             <th>Lokasi</th>
+                            <th>Staf Pengajar</th>
                             <th>Keterangan</th>
                             <th>Action</th>
                         </tr>
@@ -65,27 +63,12 @@ $this->load->view('template_admin/sidebar');
  <script src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/plugins/jQuery/jquery-2.2.0.min.js') ?>"></script>
  <script src="<?php echo base_url('assets/assets/datatables/jquery.dataTables.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/assets/datatables/dataTables.bootstrap.js') ?>"></script>
- <script src="<?php echo base_url('assets/tags/jquery.tagsinput.js')?>"></script>
 
- 
+
+
 <script type="text/javascript">
  
-        function onAddTag(tag) {
-            alert("Tambahkan Fasilitas: " + tag);
-        }
-        function onRemoveTag(tag) {
-            alert("Removed a tag: " + tag);
-        }
-
-        function onChangeTag(input,tag) {
-            alert("Changed a tag: " + tag);
-        }
-
-        $(function() {
-
-            $('#tags_1').tagsInput({width:'auto'});
-        });
-
+    
 
 var save_method; //for save method string
 var table;
@@ -264,9 +247,8 @@ function delete_pelatihan(id)
  
     }
 }
- 
 </script>
- 
+
 <!-- Bootstrap modal -->
 <div class="modal fade" id="modal_form" role="dialog">
     <div class="modal-dialog">
@@ -328,6 +310,22 @@ function delete_pelatihan(id)
                                 <span class="help-block"></span>
                             </div>
                         </div>
+                         <div class="form-group">
+                            <label class="control-label col-md-3">Staf Pengajar</label>
+                            <div class="col-md-9">
+                               <select multiple="multiple" name="staf[]" class="form-control">
+                                  <?php 
+                                    foreach ($staf as $data) { ?>
+                                    <option value="<?php echo $data->id_staf ?>"><?php echo $data->nama; ?></option>
+                                <?php
+                                    }
+                                  ?>
+                               </select>
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+
+                       
                     </div>
                 </form>
             </div>
@@ -340,10 +338,10 @@ function delete_pelatihan(id)
 </div><!-- /.modal -->
 <!-- End Bootstrap modal -->
 
+
+
+ 
 <?php 
 $this->load->view('template_admin/js_tables');
-?>
-
-<?php
 $this->load->view('template_admin/foot');
 ?>

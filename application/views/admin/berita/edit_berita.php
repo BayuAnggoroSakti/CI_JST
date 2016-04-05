@@ -109,8 +109,8 @@ $this->load->view('template_admin/sidebar');
                       <label for="inputPassword3" class="col-sm-2 control-label">Status Terbit</label>
                       <div class="col-sm-10">
                        <select class="form-control" name="status_terbit">
-                          <option>Y</option>
-                          <option>N</option>
+                          <option value="y">Terbit</option>
+                          <option value="n">Tidak Terbit</option>
                         </select>
                       </div>
                     </div>

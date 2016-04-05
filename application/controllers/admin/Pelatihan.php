@@ -29,6 +29,7 @@ class Pelatihan extends CI_Controller {
             $data['title'] = "Pelatihan || Jogja Science Training";
             $data['level'] = $this->session->userdata('level');
             $data['data_get'] = $this->m_admin->program_kerja();
+            /*$data['staf'] = $this->pelatihan->staf();*/
             $this->load->view('admin/pelatihan/index', $data);
             
             //echo $this->session->userdata('level');
@@ -39,6 +40,41 @@ class Pelatihan extends CI_Controller {
            $this->load->view('admin/login');
         }
         
+    }
+    public function staf_pelatihan($id)
+    {
+        $data['username'] = $this->session->userdata('username');
+        $data['nama_lengkap'] = $this->session->userdata('nama_lengkap');
+        $data['title'] = "Pelatihan || Jogja Science Training";
+        $data['staf'] = $this->pelatihan->staf($id);
+        $data['staf3'] = $this->pelatihan->staf3($id);
+        $data['judul'] = $this->pelatihan->judul($id);
+        $data['level'] = $this->session->userdata('level');
+        $this->load->view('admin/pelatihan/staf_pelatihan',$data);
+    }
+
+    public function hapus_staf_pelatihan($id, $segment)
+    {
+        $this->db->where('id',$id);
+        $this->db->delete('pelatihan_staf');
+        $this->session->set_flashdata('item', array('message' => '<strong>Berhasil</strong> menghapus staf pengajar pada pelatihan ini','class' => 'alert alert-danger'));
+        redirect('admin/pelatihan/staf_pelatihan'.'/'.$segment);
+
+    }
+
+    public function simpan_staf_pelatihan()
+    {
+       $count = count($this->input->post('staf'));
+       print_r($this->input->post('staf'));
+          for($i=0;$i < $count;$i++)
+          {
+            $data = array('id_pelatihan' => $this->input->post('id_pelatihan'),
+                          'id_staf'      => $this->input->post('staf')[$i]
+            );
+            $this->db->insert('pelatihan_staf',$data);
+          }
+           $this->session->set_flashdata('item', array('message' => '<strong>Berhasil</strong> menambahkan staf pengajar pada pelatihan ini','class' => 'alert alert-success'));
+          redirect('admin/pelatihan/staf_pelatihan'.'/'.$this->input->post('id_pelatihan'));
     }
 
      public function act_simpan()
@@ -127,12 +163,16 @@ class Pelatihan extends CI_Controller {
         $list = $this->pelatihan->get_datatables();
         $data = array();
         $no = $_POST['start'];
+        $url=site_url('admin/pelatihan/');
         foreach ($list as $pelatihan) {
+            $id_pelatihan = $pelatihan->id_pelatihan;
+            $staf = $this->pelatihan->staf($id_pelatihan);
             $no++;
             $row = array();
             $row[] = $no;
             $row[] = $pelatihan->nama_pelatihan;
             $row[] = $pelatihan->lokasi;
+            $row[] ='<a href="'.$url.'/staf_pelatihan/'."".$id_pelatihan."".'"><small class="label pull-right bg-yellow">Lihat Staf</small></a>';
             $row[] = $pelatihan->keterangan;
  
             //add html for action
@@ -157,6 +197,7 @@ class Pelatihan extends CI_Controller {
         $data = array();
         $no = $_POST['start'];
         foreach ($list as $progam_kerja) {
+
             $no++;
             $row = array();
             $row[] = $no;
@@ -216,16 +257,28 @@ class Pelatihan extends CI_Controller {
         $config ['encrypt_name'] = FALSE;
         $config['file_name']     = $judul[$i];
         $this->upload->initialize ( $config );
-        $this->upload->do_upload ('gambar');
-        $nma= $this->upload->file_name;
-        $data_foto = array(
-                            'id_gallery' => $query->row('id_gallery'),
-                            'alamat_foto' => $nma,
-                            'nama_foto' => $nama_foto[$i],
-                    );
-        $this->db->insert('foto', $data_foto);
+        if (!$this->upload->do_upload('gambar')) {
+            echo "<script language=\"Javascript\">\n";
+                    //Ada kesalahan dalam upload gambar, Ingin diulangi kembali atau tidak?'
+                    echo "alert('ada kesalahan dalam upload gambar')";
+            
+                    echo "</script>";
+                    //echo "gagal";
+        }
+        else
+        {
+            $nma= $this->upload->file_name;
+            $data_foto = array(
+                                'id_gallery' => $query->row('id_gallery'),
+                                'alamat_foto' => $nma,
+                                'nama_foto' => $nama_foto[$i],
+                        );
+            $this->db->insert('foto', $data_foto);
+        }
+       
+       
     }
-    $this->session->set_flashdata('item', array('message' => '<strong>Berhasil</strong> menambahkan pelatihan baru','class' => 'alert alert-success'));
+    $this->session->set_flashdata('item', array('message' => '<strong>Berhasil</strong> menambahkan pelatihan baru','class' => 'alert alert-info'));
        redirect(site_url('admin/pelatihan/index'));
 }
 private function set_upload_options() {
@@ -283,7 +336,7 @@ private function set_upload_options() {
                 'nama_programKerja' => $this->input->post('nama_programKerja'),
                 'biaya' => $this->input->post('biaya'),
                 'lokasi' => $this->input->post('lokasi'),
-                'durasi' => $this->input->post('durasi'),
+                'durasi' => $this->input->post('hari').",".$this->input->post('jam'),
                 'keterangan' => $this->input->post('keterangan'),
                 'fasilitas' => $this->input->post('fasilitas'),
             );
@@ -313,7 +366,7 @@ private function set_upload_options() {
                 'nama_programKerja' => $this->input->post('nama_programKerja'),
                 'biaya' => $this->input->post('biaya'),
                 'lokasi' => $this->input->post('lokasi'),
-                'durasi' => $this->input->post('durasi'),
+                'durasi' => $this->input->post('hari').",".$this->input->post('jam'),
                 'keterangan' => $this->input->post('keterangan'),
                 'fasilitas' => $this->input->post('fasilitas'),
             );
@@ -420,10 +473,16 @@ private function set_upload_options() {
             $data['error_string'][] = 'Fasilitas is required';
             $data['status'] = FALSE;
         }
-         if($this->input->post('durasi') == '')
+         if($this->input->post('hari') == '')
         {
-            $data['inputerror'][] = 'durasi';
-            $data['error_string'][] = 'Durasi is required';
+            $data['inputerror'][] = 'hari';
+            $data['error_string'][] = 'hari is required';
+            $data['status'] = FALSE;
+        }
+        if($this->input->post('jam') == '')
+        {
+            $data['inputerror'][] = 'jam';
+            $data['error_string'][] = 'jam is required';
             $data['status'] = FALSE;
         }
          if($this->input->post('lokasi') == '')

@@ -8,11 +8,24 @@ $this->load->view('template_admin/sidebar');
 ?>
 <script type="text/javascript"> 
   function validasi_input(form){ 
-    if (form.id_pelatihan.value =="pilih")
-      { alert("Anda belum memilih pelatihan!"); 
-        return (false); } 
-    return (true);
-  }
+        var fup = document.getElementById('filename');
+        var fileName = fup.value;
+        var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
+        if(form.id_pelatihan.value =="pilih")
+        {
+            alert("Anda belum memilih pelatihan!"); 
+            return false;
+        }
+        else if(ext == "png" || ext == "jpg" || ext == "jpeg" || ext == "gif")
+        {
+            return true;
+        }
+        else
+        {
+            alert("Anda salah dalam memasukkan format gambar"); 
+            return false;
+        }
+    }
 </script>
 
 <!-- Content Header (Page header) -->
@@ -78,7 +91,7 @@ $this->load->view('template_admin/sidebar');
         
                       <tbody id="itemlist">
                        <tr>
-                        <td><input type="file" name="gambar[0]" required class="form-control" placeholder="Masukkan Judul Gambar"></td>
+                        <td><input type="file" name="gambar[0]" id="filename" required class="form-control" placeholder="Masukkan Judul Gambar"></td>
                         <td>
                           <input type="text" name="nama_foto[0]" required class="form-control" placeholder="Masukkan Nama Foto">
                         </td>
@@ -115,12 +128,14 @@ $this->load->view('template_admin/sidebar');
                 var jenis_input = document.createElement('input');
                 jenis_input.setAttribute('name', 'gambar[' + i + ']');
                 jenis_input.setAttribute('class', 'form-control');
-                 jenis_input.setAttribute('type', 'file');
+                jenis_input.setAttribute('type', 'file');
+                jenis_input.setAttribute('required', '');
  
                 var jumlah_input = document.createElement('input');
                 jumlah_input.setAttribute('name', 'nama_foto[' + i + ']');
                 jumlah_input.setAttribute('class', 'form-control');
                 jumlah_input.setAttribute('placeholder', 'Masukkan Judul Gambar');
+                jumlah_input.setAttribute('required', '');
           
  
                 var hapus = document.createElement('span');

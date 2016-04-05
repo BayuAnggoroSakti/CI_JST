@@ -138,15 +138,18 @@ function edit_progam(id)
         dataType: "JSON",
         success: function(data)
         {
- 
+            var durasi = data.durasi;
+            var pisah = durasi.split(',');
+
             $('[name="id_programKerja"]').val(data.id_programKerja);
             $('[name="nama_programKerja"]').val(data.nama_programKerja);
             $('[name="biaya"]').val(data.biaya);
             $('[name="lokasi"]').val(data.lokasi);
             $('[name="keterangan"]').val(data.keterangan);
             $('[name="fasilitas"]').val(data.fasilitas);
-            $('[name="durasi"]').val(data.durasi);
-           
+            $('[name="hari"]').val(pisah[0]);
+            $('[name="jam"]').val(pisah[1]);
+            
             $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
             $('.modal-title').text('Edit Program Kerja'); // Set title to Bootstrap modal title
  
@@ -274,8 +277,12 @@ function delete_program(id)
                         </div>
                           <div class="form-group">
                             <label class="control-label col-md-3">Durasi</label>
-                            <div class="col-md-9">
-                                <input name="durasi" placeholder="Durasi waktu" class="form-control" type="text">
+                            <div class="col-md-3">
+                                <input name="hari" placeholder="Berapa hari" class="form-control" type="number">
+                                <span class="help-block"></span>
+                            </div>
+                             <div class="col-md-3">
+                                <input name="jam" placeholder="Berapa jam" class="form-control" type="number">
                                 <span class="help-block"></span>
                             </div>
                         </div>

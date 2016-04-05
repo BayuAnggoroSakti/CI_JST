@@ -75,6 +75,15 @@
         return $query->row();
     }
 
+     public function edit_slider($id)
+    {
+        $this->db->from('slider');
+        $this->db->where('id_slider',$id);
+        $query = $this->db->get();
+ 
+        return $query->row();
+    }
+
 	 function recent_berita() 
 	{
 		  $ambil = $this->db->query('SELECT id_berita,judul_berita, isi_berita, tanggal_berita, status_terbit, kb.nama_katber as kategori, gambar, u.nama_lengkap as nama_lengkap FROM user u, berita b, kategori_berita kb where b.id_kateBer = kb.id_katBer and status_terbit = "y" and b.id_user = u.id_user order by tanggal_berita desc limit 4');

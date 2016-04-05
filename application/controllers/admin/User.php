@@ -215,11 +215,21 @@ class User extends CI_Controller {
         $data['error_string'] = array();
         $data['inputerror'] = array();
         $data['status'] = TRUE;
- 
+
+        $this->load->model('m_register');
+        $cek = $this->m_register->check_query('user', $this->input->post('username'));
+
         if($this->input->post('username') == '')
         {
             $data['inputerror'][] = 'username';
             $data['error_string'][] = 'Username is required';
+            $data['status'] = FALSE;
+        }
+
+        if($cek == true)
+        {
+            $data['inputerror'][] = 'username';
+            $data['error_string'][] = 'Username anda sudah ada yang memakai, silahkan coba lagi';
             $data['status'] = FALSE;
         }
  

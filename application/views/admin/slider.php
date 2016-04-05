@@ -69,12 +69,16 @@ $this->load->view('template_admin/sidebar');
   ?>
         <tr>
           <td><?php echo $i++;?></td>
-          <td align="center"><img src="<?php echo $gambar.'/'.$row->gambar; ?>" width="100px" height="100px"> </td>
+          <td align="center"><img src="<?php echo $gambar.'/'.$row->gambar; ?>" width="200px" height="100px"> </td>
           <td><?php echo $row->deskripsi; ?></td>
           <td>
+           <a href="<?php echo base_url();?>admin/dashboard/edit_slider/<?php echo $row->id_slider; ?>">
+              <button type="button" class="btn btn-info">Edit</button>
+          </a>
           <a href="<?php echo base_url();?>admin/dashboard/hapus_slider/<?php echo $row->id_slider; ?>" onclick="return confirm('Menghapus Slider ini ?')">
               <button type="button" class="btn btn-danger">Delete</button>
           </a>
+
           </td>
       <?php
 

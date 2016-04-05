@@ -9,6 +9,17 @@ $this->load->view('template_admin/sidebar');
 
   <script src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/plugins/ckeditor/ckeditor.js') ?>"></script>
 <!-- Content Header (Page header) -->
+<script>
+  
+    function validasi_input(form){ 
+    var editor1 = CKEDITOR.instances.editor1.getData();
+
+    if (editor1 == "") {
+          alert("Anda belum memasukkan desskripsi profil");
+          return (false);
+        }
+    return (true); } 
+</script>
 <section class="content-header">
     <h1>
         Profil

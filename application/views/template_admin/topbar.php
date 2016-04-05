@@ -4,7 +4,7 @@
     <div class="wrapper">
 
         <header class="main-header">
-            <a href="#" class="logo"><b>Admin</b>JST</a>
+            <a href="#" class="logo"><b>Admin</b> JST</a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">
                 <!-- Sidebar toggle button-->
@@ -25,13 +25,13 @@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/dist/img/bayu.jpg') ?>" class="user-image" alt="User Image"/>
+                                <img src="<?php echo base_url('assets/images/gambarWarna.png') ?>" class="user-image" alt="User Image"/>
                                 <span class="hidden-xs"><?php echo $nama_lengkap ?></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
-                                    <img src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/dist/img/bayu.jpg') ?>" class="img-circle" alt="User Image" />
+                                    <img src="<?php echo base_url('assets/images/gambarWarna.png') ?>" class="img-circle" alt="User Image" />
                                     <p>
                                         <?php echo $nama_lengkap ?> <br>
                                         <b><?php echo strtoupper($level);?></b>

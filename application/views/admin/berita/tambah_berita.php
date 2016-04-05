@@ -8,9 +8,22 @@ $this->load->view('template_admin/sidebar');
 ?>
 <script type="text/javascript"> 
   function validasi_input(form){ 
+    var editor1 = CKEDITOR.instances.editor1.getData();
+    var fup = document.getElementById('alkes_img');
+    var fileName = fup.value;
+    var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
+
     if (form.id_kateBer.value =="pilih")
       { alert("Anda belum memilih Kategori!"); 
         return (false); } 
+    if (editor1 == "") {
+          alert("Anda belum memasukkan deskripsi berita");
+          return (false);
+        }
+    if (ext == "") {
+          alert("Anda belum memasukkan gambar");
+          return (false);
+        }
     return (true); } 
     </script>
   <script src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/dist/js/jquery-1.11.0.js')?>"></script>
@@ -85,8 +98,8 @@ $this->load->view('template_admin/sidebar');
                       <label for="inputPassword3" class="col-sm-2 control-label">Status Terbit</label>
                       <div class="col-sm-10">
                        <select class="form-control" name="status_terbit">
-                          <option>Y</option>
-                          <option>N</option>
+                          <option value="y">Terbit</option>
+                          <option value="n">Tidak Terbit</option>
                         </select>
                       </div>
                     </div>

@@ -31,6 +31,7 @@ $this->load->view('template_admin/sidebar');
                         <input type="text" name="nama_pelatihan" class="form-control" id="judul" placeholder="Masukkan Nama Pelatihan" required/>
                       </div>
                     </div>
+                    
                     <div class="form-group">
                             <label class="col-sm-2 control-label">Program Kerja</label>
                             <div class="col-sm-10">
@@ -84,22 +85,39 @@ $this->load->view('template_admin/sidebar');
  <script src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/plugins/jQuery/jquery-2.2.0.min.js') ?>"></script>
  <script src="<?php echo base_url('assets/assets/datatables/jquery.dataTables.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/assets/datatables/dataTables.bootstrap.js') ?>"></script>
- <script src="<?php echo base_url('assets/tags/jquery.tagsinput.js')?>"></script>
+ 
 
  
 <script type="text/javascript">
+dateVar = new Date();
+var tahun = dateVar.getYear() + 1900;
+var bulan =  dateVar.getMonth() + 1;
+if (dateVar.getMonth() + 1 >= 10) {
+   bulan = bulan;
+}
+else
+{
+   bulan = "0"+bulan;
+}
+var tanggal = dateVar.getDate();
+var date = tahun+"-"+bulan+"-"+tanggal;
+
         function validasi_input(form){ 
           if (form.waktu_mulai.value > form.waktu_selesai.value)
             { alert("Waktu selesai harus lebih besar dari waktu mulai!"); 
               return (false); } 
+        else if (form.waktu_mulai.value >= date)
+      { alert("Masukkan waktu mulai maksimal hari ini!"); 
+        return (false); } 
+         else if (form.waktu_selesai.value >= date)
+      { alert("Masukkan waktu selesai maksimal hari ini!"); 
+        return (false); } 
          else if (form.id_programKerja.value =="")
       { alert("Anda belum memilih Program Kerja!"); 
         return (false); } 
     return (true);  
-        } 
 
-    
- 
+        } 
 </script>
  
 <!-- End Bootstrap modal -->

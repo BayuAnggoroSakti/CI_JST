@@ -162,6 +162,29 @@ class M_pelatihan extends CI_Model {
  
         return $query->row();
     }
+
+    public function staf($id)
+    {
+     $query =  $this->db->query("select p.id_pelatihan as id_pelatihan, ps.id as id, p.nama_pelatihan as nama_pelatihan, s.bidang as bidang, s.id_staf as id_staf, s.nama_lengkap as nama from pelatihan p, staf_pengajar s, pelatihan_staf ps where p.id_pelatihan = ps.id_pelatihan and ps.id_staf = s.id_staf and ps.id_pelatihan = '$id' group by s.nama_lengkap");
+     return $query->result();
+    }
+
+    public function staf3($id)
+    {
+     $query =  $this->db->query("SELECT * FROM `staf_pengajar` where nama_lengkap not in (select s.nama_lengkap as nama from pelatihan p, staf_pengajar s, pelatihan_staf ps where p.id_pelatihan = ps.id_pelatihan and ps.id_staf = s.id_staf and ps.id_pelatihan = '$id' group by s.nama_lengkap) ");
+     return $query->result();
+    }
+    public function staf2()
+    {
+     $query =  $this->db->query("select p.id_pelatihan as id_pelatihan, p.nama_pelatihan as nama_pelatihan, s.bidang as bidang, s.id_staf as id_staf, s.nama_lengkap as nama from pelatihan p, staf_pengajar s, pelatihan_staf ps where p.id_pelatihan = ps.id_pelatihan and ps.id_staf = s.id_staf group by s.nama_lengkap");
+     return $query->result();
+    }
+
+     public function judul($id)
+    {
+     $query =  $this->db->query("select nama_pelatihan from pelatihan where id_pelatihan = '$id'");
+     return $query->result();
+    }
  
     public function save($data)
     {

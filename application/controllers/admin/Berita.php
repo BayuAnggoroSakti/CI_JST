@@ -359,16 +359,18 @@ function DateToIndo($date) { // fungsi atau method untuk mengubah tanggal ke for
 				 $this->load->library('upload', $config);
 					
 				if (!$this->upload->do_upload('gambar')) {
+					$base_ulang = base_url('admin/berita/tambah_berita');
+					$base_kembali = base_url('admin/berita');
 					echo "<script language=\"Javascript\">\n";
 					//Ada kesalahan dalam upload gambar, Ingin diulangi kembali atau tidak?'
 					echo "confirmed = window.confirm('Ada kesalahan dalam upload gambar, Ingin diulangi kembali atau tidak?');";
 					echo "if (confirmed)";
 					echo "{";
-					echo "window.location = 'http://localhost/jst/admin/berita/tambah_berita';";
+					echo "window.location = '".$base_ulang."';";
 					echo "}";
 					echo "else ";
 					echo "{";
-					echo "window.location = 'http://localhost/jst/admin/berita';";
+					echo "window.location = '".$base_kembali."';";
 					echo "}";
 					echo "</script>";
 				} else{

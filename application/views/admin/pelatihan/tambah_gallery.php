@@ -8,6 +8,29 @@ $this->load->view('template_admin/sidebar');
 ?>
 
  <script src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/plugins/jQuery/jquery-2.2.0.min.js') ?>"></script>
+ <script>
+    function Checkfiles()
+    {
+        var fup = document.getElementById('filename');
+        var fileName = fup.value;
+        var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
+        if(ext == "png" || ext == "jpg" || ext == "jpeg" || ext == "gif" || ext == "")
+        {
+            return true;
+        } 
+/*        else if(ext=="")
+        {
+            alert("No file selected");
+            fup.focus();
+            return false;
+        }*/else
+        {
+            alert("Maaf file yang diperbolehkan adalah .png .jpeg .jpg!");
+            fup.focus();
+            return false;
+        }
+    }
+ </script>
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -27,7 +50,7 @@ $this->load->view('template_admin/sidebar');
                   
                 </div><!-- /.box-header -->
                 <!-- form start -->
-               <form action="<?php echo site_url('admin/pelatihan/act_simpan_gallery') ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+               <form action="<?php echo site_url('admin/pelatihan/act_simpan_gallery') ?>" onsubmit="return Checkfiles();" method="post" enctype="multipart/form-data" class="form-horizontal">
                   <div class="box-body">
                      <input type="text" name="judul" required class="form-control" placeholder="Masukkan Judul Gallery">
                      <textarea class="form-control" required name="deskripsi" placeholder="Deskripsi Gallery"></textarea> 
@@ -39,7 +62,7 @@ $this->load->view('template_admin/sidebar');
                      <input type="hidden" name="id_pelatihan" value="<?php echo $data->row('id_pelatihan'); ?>">
                       <tbody id="itemlist">
                        <tr>
-                        <td><input type="file" name="gambar[0]" required class="form-control" placeholder="Masukkan Judul Gambar"></td>
+                        <td><input type="file" name="gambar[0]" id="filename" required class="form-control" placeholder="Masukkan Judul Gambar"></td>
                         <td>
                           <input type="text" name="nama_foto[0]" required class="form-control" placeholder="Masukkan Nama Foto">
                         </td>
@@ -76,7 +99,8 @@ $this->load->view('template_admin/sidebar');
                 var jenis_input = document.createElement('input');
                 jenis_input.setAttribute('name', 'gambar[' + i + ']');
                 jenis_input.setAttribute('class', 'form-control');
-                 jenis_input.setAttribute('type', 'file');
+                jenis_input.setAttribute('type', 'file');
+                jenis_input.setAttribute('id', 'filename');
  
                 var jumlah_input = document.createElement('input');
                 jumlah_input.setAttribute('name', 'nama_foto[' + i + ']');

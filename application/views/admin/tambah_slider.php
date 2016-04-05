@@ -9,6 +9,24 @@ $this->load->view('template_admin/sidebar');
   <script src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/dist/js/jquery-1.11.0.js')?>"></script>
   <script src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/plugins/ckeditor/ckeditor.js') ?>"></script>
 <!-- Content Header (Page header) -->
+<script>
+   function Checkfiles()
+    {
+        var fup = document.getElementById('alkes_img');
+        var fileName = fup.value;
+        var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
+        if(ext == "png" || ext == "jpeg" || ext == "jpg" || ext == "")
+        {
+            return true;
+        } 
+        else
+        {
+            alert("Maaf format gambar salah");
+            fup.focus();
+            return false;
+        }
+    }
+</script>
 <section class="content-header">
     <h1>
         Slider
@@ -24,7 +42,7 @@ $this->load->view('template_admin/sidebar');
                   <h3 class="box-title">Tambahkan Slider</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form action="<?php echo base_url('admin/dashboard/slider_simpan'); ?>" onsubmit="return validasi_input(this)" method="post" enctype="multipart/form-data" class="form-horizontal">
+                <form action="<?php echo base_url('admin/dashboard/slider_simpan'); ?>" onsubmit="return Checkfiles();" method="post" enctype="multipart/form-data" class="form-horizontal">
                   <div class="box-body">
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Silahkan Upload Gambar</label>

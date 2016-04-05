@@ -102,10 +102,23 @@ class Try_out extends CI_Controller {
             $data['error_string'][] = 'Jumlah soal harus genap';
             $data['status'] = FALSE;
         }
+
+         if($this->input->post('jum_soal') <= 0)
+        {
+            $data['inputerror'][] = 'jum_soal';
+            $data['error_string'][] = 'Terjadi kesalahan dalam input jumlah soal';
+            $data['status'] = FALSE;
+        }
          if($this->input->post('waktu') % 2 != 0)
         {
             $data['inputerror'][] = 'waktu';
             $data['error_string'][] = 'waktu soal harus genap';
+            $data['status'] = FALSE;
+        }
+          if($this->input->post('waktu') <= 0)
+        {
+            $data['inputerror'][] = 'waktu';
+            $data['error_string'][] = 'Terjadi kesalahan dalam input waktu';
             $data['status'] = FALSE;
         }
          if($this->input->post('waktu') == '')

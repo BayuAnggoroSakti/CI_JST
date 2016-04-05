@@ -6,7 +6,11 @@ $this->load->view('template_admin/head');
 $this->load->view('template_admin/topbar');
 $this->load->view('template_admin/sidebar');
 ?>
+ <script src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/dist/js/jquery-1.11.0.js')?>"></script>
+  <script src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/plugins/ckeditor/ckeditor.js') ?>"></script>
+
 <script type="text/javascript"> 
+
 
   function validasi_input(form){ 
 var a = document.getElementById("opsi_a").value;
@@ -14,6 +18,11 @@ var b = document.getElementById("opsi_b").value;
 var c = document.getElementById("opsi_c").value;
 var d = document.getElementById("opsi_d").value;
 var e = document.getElementById("opsi_e").value;
+var editor1 = CKEDITOR.instances.editor1.getData();
+//var descrip = document.getElementById("editor1").value;
+
+
+
     if (form.kunci.value =="")
       { alert("Anda belum memilih Kunci!"); 
         return (false); } 
@@ -35,6 +44,13 @@ var e = document.getElementById("opsi_e").value;
          if (d == e)
       { alert("Opsi jawaban tidak boleh sama, silahkan periksa kembali!"); 
         return (false); }
+         if (editor1 == "")
+      { alert("Pertanyaan tidak boleh kosong"); 
+        return (false); }
+
+        /* if (descrip == "")
+      { alert("tidak boleh kosong"); 
+        return (false); }*/
     return (true); }
 
 
@@ -42,8 +58,6 @@ function showDiv() {
    document.getElementById('welcomeDiv').style.display = "block";
 } 
     </script>
-  <script src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/dist/js/jquery-1.11.0.js')?>"></script>
-  <script src="<?php echo base_url('assets/admin/AdminLTE-2.0.5/plugins/ckeditor/ckeditor.js') ?>"></script>
  
 <!-- Content Header (Page header) -->
 <section class="content-header">

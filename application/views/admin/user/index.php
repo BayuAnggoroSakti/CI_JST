@@ -305,7 +305,7 @@ function delete_user(id)
                         <div class="form-group">
                             <label class="control-label col-md-3">Email</label>
                               <div class="col-md-9">
-                                <input name="email" placeholder="Email Anda" class="form-control" type="text">
+                                <input name="email" placeholder="Email Anda" class="form-control" type="email">
                                 <span class="help-block"></span>
                             </div>
                         </div>
